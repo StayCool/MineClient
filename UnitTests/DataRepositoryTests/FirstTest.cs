@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
+using DataRepository.Models;
 using NUnit.Framework;
+using DataRepository.DataAccess;
 
 namespace UnitTests.DataRepositoryTests
 {
@@ -10,8 +9,18 @@ namespace UnitTests.DataRepositoryTests
     public class FirstTest
     {
         [Test]
-        public void Test1() {
-            Console.WriteLine("Hello");
+        public void TestDb() {
+            //Database.SetInitializer<MineContext>(new MineDbInitializer());
+            
+            using (var context = new MineContext()) {
+                Assert.AreNotEqual(context, null);
+
+                Door door = context.Doors.First();
+
+                Assert.AreEqual(door.Id, 1);
+                Assert.AreEqual(door.DoorStateId, 1);
+                Assert.AreEqual(door.DoorStateId, 1);
+            } 
         }
     }
 }
