@@ -9,9 +9,9 @@ namespace DataRepository.DataAccess
 {
     public class MineContext : DbContext
     {
-        public DbSet<Door> Doors { get; set; }
-        public DbSet<DoorState> DoorStates { get; set; }
-        public DbSet<DoorType> DoorTypes { get; set; }
+        public IDbSet<Door> Doors { get; set; }
+        public IDbSet<DoorState> DoorStates { get; set; }
+        public IDbSet<DoorType> DoorTypes { get; set; }
 
         public MineContext()
             : base(GetConnectionName())
