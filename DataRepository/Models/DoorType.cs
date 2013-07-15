@@ -9,9 +9,7 @@ namespace DataRepository.Models
         public int Id { get; set; }
 
         [Column(TypeName = "varchar")]
-        [StringLength(25)]
+        [StringLength(30)]
         public string Type { get; set; }
-
-        public virtual ICollection<Door> Doors { get; set; }
     }
 }
