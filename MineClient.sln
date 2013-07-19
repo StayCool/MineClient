@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F9F964
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfClient", "WpfClient\WpfClient.csproj", "{37C742D9-ED91-4AF5-906C-1001E136B7CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLTcpServer", "CLTcpServer\CLTcpServer.csproj", "{54F202E1-4093-4C8E-B47A-81AA7E081729}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{13354F9A-97AC-48CD-9CA5-97548461FA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13354F9A-97AC-48CD-9CA5-97548461FA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13354F9A-97AC-48CD-9CA5-97548461FA5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37C742D9-ED91-4AF5-906C-1001E136B7CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C742D9-ED91-4AF5-906C-1001E136B7CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C742D9-ED91-4AF5-906C-1001E136B7CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C742D9-ED91-4AF5-906C-1001E136B7CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F202E1-4093-4C8E-B47A-81AA7E081729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F202E1-4093-4C8E-B47A-81AA7E081729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F202E1-4093-4C8E-B47A-81AA7E081729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F202E1-4093-4C8E-B47A-81AA7E081729}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

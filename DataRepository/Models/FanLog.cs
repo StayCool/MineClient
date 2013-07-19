@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DataRepository.DataAccess.GenericRepository;
 
 namespace DataRepository.Models
 {
-    public class FanLog
+    public class FanLog : IEntityId
     {
         public int Id { get; set; }
 

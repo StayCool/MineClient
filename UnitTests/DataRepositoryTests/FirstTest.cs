@@ -21,7 +21,7 @@ namespace UnitTests.DataRepositoryTests
             var mc = new MineContext();
             mc.Database.Initialize(true);
 
-            _uow = new UnitOfWork(mc);
+            _uow = new RepoUnit();
         }
 
         [TearDown]

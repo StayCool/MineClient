@@ -19,7 +19,7 @@ namespace DataRepository.DataAccess.GenericRepository
         void Delete(IQueryable<TEntity> entities);
         void Edit(TEntity entity);
 
-        int Save();
+        void Save(TEntity entity);
         int Count();
         void Refresh(TEntity entity);
     }

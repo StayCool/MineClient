@@ -49,10 +49,11 @@
   <ItemGroup>
     <Compile Include="DataAccess\GenericRepository\DataRepository.cs" />
     <Compile Include="DataAccess\GenericRepository\IDataRepository.cs" />
+    <Compile Include="DataAccess\GenericRepository\IEntityId.cs" />
     <Compile Include="DataAccess\MineContext.cs" />
     <Compile Include="DataAccess\MineDbInitializer.cs" />
     <Compile Include="DataAccess\UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="DataAccess\UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="DataAccess\UnitOfWork\RepoUnit.cs" />
     <Compile Include="Models\AnalogSignal.cs" />
     <Compile Include="Models\Door.cs" />
     <Compile Include="Models\DoorsLog.cs" />

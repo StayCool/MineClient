@@ -2,16 +2,26 @@
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using DataRepository.DataAccess.GenericRepository;
+using DataRepository.Models;
 
 namespace DataRepository.DataAccess.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class RepoUnit : IUnitOfWork
     {
-        private readonly DbContext _context;
+        private MineContext _context;
 
-        public UnitOfWork(DbContext context) {
-            _context = context;
+        private MineContext getContext()
+        {
+            return _context ?? (_context = new MineContext());
         }
+
+        private IDataRepository<FanLog> _fanLogRepo;
+
+        public IDataRepository<FanLog> FansLogRepo {
+            get { return _fanLogRepo ?? (_fanLogRepo = new DataRepository<FanLog>(getContext())); }
+        }
+
+
 
         public void Commit() {
             try {
@@ -34,7 +44,7 @@ namespace DataRepository.DataAccess.UnitOfWork
         }
 
         public IDataRepository<TEntity> GetRepository<TEntity>()
-            where TEntity : class 
+            where TEntity : class, IEntityId
         {
             return new DataRepository<TEntity>(_context);
         }

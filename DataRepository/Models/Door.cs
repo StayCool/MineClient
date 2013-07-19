@@ -1,8 +1,8 @@
-﻿using System;
+﻿using DataRepository.DataAccess.GenericRepository;
 
 namespace DataRepository.Models
 {
-    public class Door
+    public class Door : IEntityId 
     {
         public int Id { get; set; }
         

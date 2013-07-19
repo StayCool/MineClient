@@ -8,7 +8,7 @@ namespace DataRepository.DataAccess.GenericRepository
 {
 
     public class DataRepository<TEntity> : IDataRepository<TEntity> 
-        where TEntity : class
+        where TEntity : class, IEntityId
     {
         private readonly DbContext _context;
 
@@ -45,19 +45,14 @@ namespace DataRepository.DataAccess.GenericRepository
             _context.Entry(entity).State = System.Data.EntityState.Modified;
         }
 
-        public virtual int Save() {
-            try {
-                return _context.SaveChanges();
-            } catch (DbEntityValidationException dbEx) {
-                foreach (var validationErrors in dbEx.EntityValidationErrors) {
-                    foreach (var validationError in validationErrors.ValidationErrors) {
-                        Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
-                    }
-                }
-            } catch (Exception ex) {
-                Console.WriteLine("Save failed", ex);
+        public void Save(TEntity entity) {
+            if (entity.Id == 0) {
+                _context.Set<TEntity>().Add(entity);
+            } else {
+                _context.Entry(entity).State = System.Data.EntityState.Modified;
             }
-            return 0;
+
+            _context.SaveChanges();
         }
 
         public virtual TEntity Find(int id) {

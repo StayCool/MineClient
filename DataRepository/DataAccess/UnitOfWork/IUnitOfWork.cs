@@ -9,6 +9,6 @@ namespace DataRepository.DataAccess.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         void Commit();
-        IDataRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
+        IDataRepository<TEntity> GetRepository<TEntity>() where TEntity : class, IEntityId;
     }
 }
