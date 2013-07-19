@@ -13,41 +13,45 @@ namespace DataRepository.DataAccess
             if (context == null)
                 context = new MineContext();
 
-            //Инициализация таблицы состояния ляд
-            var states = new List<ObjectState>
-            {
-                new ObjectState { State = "открыт" },
-                new ObjectState { State = "закрыт" }
-            };
-            states.ForEach(s => context.ObjectStates.Add(s));
-            context.SaveChanges();
-
-            //Инициализация таблицы типов ляд
-            var types = new List<DoorType>
-            {
-                new DoorType { Type = "отсекающая 1" },
-                new DoorType { Type = "отсекающая 2" },
-                new DoorType { Type = "переключающая 1" },
-                new DoorType { Type = "переключающая 2" },
-                new DoorType { Type = "атмосферная" },
-                new DoorType { Type = "дифузорная" },
-                new DoorType { Type = "подводящего канал" },
-                new DoorType { Type = "Направляющий вентилятора 1" },
-                new DoorType { Type = "Напрявляющий вентилятора 2" }
-            };
-            types.ForEach(s => context.DoorTypes.Add(s));
-            context.SaveChanges();
-
             //Инициализация таблицы ляд
-            var doors = new List<Door>();
-            for (int i = 1; i <= types.Count; i++) {
-                doors.Add(new Door { DoorTypeId = i, DoorStateId = 1});
-                doors.Add(new Door { DoorTypeId = i, DoorStateId = 2});
-            }
+            var doors = new List<Door>
+            {
+                new Door { DoorType = "Ляда 1 отсекающая", DoorState = "открыта"},
+                new Door { DoorType = "Ляда 1 отсекающая", DoorState = "закрыта"},
+                new Door { DoorType = "Ляда 1 отсекающая", DoorState = "не определено"},
+
+                new Door { DoorType = "Ляда 1 переключающая", DoorState = "открыта"},
+                new Door { DoorType = "Ляда 1 переключающая", DoorState = "закрыта"},
+                new Door { DoorType = "Ляда 1 переключающая", DoorState = "не определено"},
+               
+                new Door { DoorType = "Ляда 2 отсекающая", DoorState = "открыта"},
+                new Door { DoorType = "Ляда 2 отсекающая", DoorState = "закрыта"},
+                new Door { DoorType = "Ляда 2 отсекающая", DoorState = "не определено"},
+
+                new Door { DoorType = "Ляда 2 переключающая", DoorState = "открыта"},
+                new Door { DoorType = "Ляда 2 переключающая", DoorState = "закрыта"},
+                new Door { DoorType = "Ляда 2 переключающая", DoorState = "не определено"},
+
+                new Door { DoorType = "Ляда атмосферная", DoorState = "открыта" },
+                new Door { DoorType = "Ляда атмосферная", DoorState = "закрыта" },
+                new Door { DoorType = "Ляда атмосферная", DoorState = "не определено" },
+
+                new Door { DoorType = "Ляда дифузорная", DoorState = "открыта" },
+                new Door { DoorType = "Ляда дифузорная", DoorState = "закрыта" },
+                new Door { DoorType = "Ляда дифузорная", DoorState = "не определено" },
+
+                new Door { DoorType = "Ляда подводящего канал", DoorState = "открыта" },
+                new Door { DoorType = "Ляда подводящего канал", DoorState = "закрыта" },
+                new Door { DoorType = "Ляда подводящего канал", DoorState = "не определено" },
+
+                new Door { DoorType = "Направляющий аппарата вентилятора 1", DoorState = "открыта" },
+                new Door { DoorType = "Направляющий аппарата вентилятора 1", DoorState = "закрыта" },
+
+                new Door { DoorType = "Направляющий аппарата вентилятора 2", DoorState = "открыта" },
+                new Door { DoorType = "Направляющий аппарата вентилятора 2", DoorState = "закрыта" },
+            };
             doors.ForEach(s => context.Doors.Add(s));
             context.SaveChanges();
-
-            CultureInfo ci = CultureInfo.CreateSpecificCulture("uk-UA");
         }
     }
 }

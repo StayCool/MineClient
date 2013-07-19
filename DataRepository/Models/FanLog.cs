@@ -11,8 +11,8 @@ namespace DataRepository.Models
         public int Id { get; set; }
 
         public int FanNumber { get; set; }
-        public int Fan1StateId { get; set; }
-        public int Fan2StateId { get; set; }
+        public int Fan1State { get; set; }
+        public int Fan2State { get; set; }
 
         public int DoorsLogId { get; set; }
         public int AnalogSignalsId { get; set; }

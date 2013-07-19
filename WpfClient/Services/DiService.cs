@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CLTcpServer;
+﻿using CLTcpServer;
 using CLTcpServer.Interfaces;
 using Ninject;
+using WpfClient.Model;
 using WpfClient.Model.Abstract;
 using WpfClient.Model.Concrete;
 
-namespace WpfClient.Model
+namespace WpfClient.Services
 {
     public class DiService 
     {
@@ -24,8 +21,8 @@ namespace WpfClient.Model
         {
             _kernel.Bind<IMsgParser>().To<MsgParser>();
             _kernel.Bind<IRemoteExchange>().To<TcpServer>();
-            _kernel.Bind<IDataService>().To<DatabaseService>().InSingletonScope();
-            _kernel.Bind<RemoteExchange>().ToSelf();
+            _kernel.Bind<DatabaseService>().ToSelf().InSingletonScope();
+            _kernel.Bind<RemoteService>().ToSelf();
         }
 
         public static TInterf Get<TInterf>()

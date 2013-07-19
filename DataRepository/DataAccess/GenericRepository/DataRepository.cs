@@ -59,6 +59,11 @@ namespace DataRepository.DataAccess.GenericRepository
             return _context.Set<TEntity>().Find(id);
         }
 
+        public IQueryable<TEntity> Load()
+        {
+            return _context.Set<TEntity>();
+        }
+
         public void Refresh(TEntity entity) {
             _context.Entry(entity).Reload();
         }

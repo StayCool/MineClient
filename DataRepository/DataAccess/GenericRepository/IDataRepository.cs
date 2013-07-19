@@ -14,6 +14,8 @@ namespace DataRepository.DataAccess.GenericRepository
         TEntity FindFirstBy(Expression<Func<TEntity, bool>> predicate);
         TEntity Find(int id);
 
+        IQueryable<TEntity> Load();
+
         void Add(TEntity entity);
         void Delete(TEntity entity);
         void Delete(IQueryable<TEntity> entities);

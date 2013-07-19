@@ -1,62 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows.Data;
+using System.Threading;
+using System.Windows;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight;
+using WpfClient.Services;
 
 namespace WpfClient.ViewModel
 {
     class ParametersVm : ViewModelBase
     {
-        public ObservableCollection<FanViewModel> Fans { get; set; }
+        public ObservableCollection<FanVm> Fans { get; set; }
+        public ObservableCollection<PropertyValueVm> PropertyValues { get; set; }
 
-        private ListView _listView;
-
-        private IList<FanProperty> FanPropertys { get; set; } 
+        private int _selectedIndex;
+        public int SelectedIndex {
+            set
+            {
+                _selectedIndex = value;
+                new Thread(updatePropertuValues).Start();
+            }
+            get { return _selectedIndex; }
+        }
 
         public ParametersVm()
         {
-            FanPropertys = new List<FanProperty>();
+            Fans = new ObservableCollection<FanVm>();
+            PropertyValues = new ObservableCollection<PropertyValueVm>();
+            SelectedIndex = _selectedIndex;
 
-            ListViewInit();
-            Fans = new ObservableCollection<FanViewModel>();
-            Fans.Add(new FanViewModel
+            Fans.Add(new FanVm {FanName = "Вентилятор 1"});
+            Fans.Add(new FanVm {FanName = "Вентилятор 2"});
+
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = new TimeSpan(0,0,10);
+            dispatcherTimer.Tick += (sender, e) => updatePropertuValues();
+            dispatcherTimer.Start();
+        }
+
+        private void updatePropertuValues()
+        {
+            var databaseService = DiService.Get<DatabaseService>();
+            var propertyList = databaseService.GetLastParameters(SelectedIndex + 1);
+
+            if (propertyList.Count > 0)
             {
-                FanName = "Fan1",
-                PropertyValues = new List<PropertyValue>() { new PropertyValue { Property = "Temperature", Value = 60 }, new PropertyValue { Property = "Scan", Value = 60 } }
-            });
-            Fans.Add(new FanViewModel {
-                FanName = "Fan1",
-                PropertyValues = new List<PropertyValue>() { new PropertyValue { Property = "Temperature", Value = 60 }, new PropertyValue { Property = "Scan", Value = 70 } }
-            });
-
+                Application.Current.Dispatcher.Invoke(
+                        (Action)(() =>
+                        {
+                            PropertyValues.Clear();
+                            propertyList.ForEach(n => PropertyValues.Add(n));
+                        }));
+            }
         }
-
-        private GridView GridViewInit()
-        {
-            var gridView = new GridView();
-            gridView.Columns.Add(new GridViewColumn() { Header = "Name", DisplayMemberBinding = new Binding("Name") });
-            gridView.Columns.Add(new GridViewColumn() { Header = "Value", DisplayMemberBinding = new Binding("Value") });
-            return gridView;
-        }
- 
-        private void ListViewInit()
-        {
-            _listView = new ListView();
-            _listView.View = GridViewInit();
-            _listView.ItemsSource = FanPropertys;
-        }
-    }
-
-
-
-
-    class FanProperty : ViewModelBase
-    {
-        public string MyName { get; set; }
-        public string Value { get; set; }
     }
 }

@@ -3,20 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewModels="clr-namespace:WpfClient.ViewModel"
+             xmlns:viewModels="clr-namespace:WpfClient.ViewModel" xmlns:view="clr-namespace:WpfClient.View"
              d:DataContext="{d:DesignInstance viewModels:ParametersVm}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <TabControl ItemsSource="{Binding Fans}">
+    <TabControl ItemsSource="{Binding Fans}" SelectedIndex="{Binding SelectedIndex}">
         <TabControl.ItemTemplate>
             <DataTemplate>
                 <TextBlock Text="{Binding FanName}"/>
             </DataTemplate>
         </TabControl.ItemTemplate>
+
         <TabControl.ContentTemplate>
-            <DataTemplate DataType="{x:Type viewModels:FanViewModel}">
-                <ListView ItemsSource="{Binding PropertyValues}">
+            <DataTemplate>
+                <ListView ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=view:ParametersView},
+                    Path=DataContext.PropertyValues}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Имя параметра" DisplayMemberBinding="{Binding Property}"/>
@@ -28,12 +30,3 @@
         </TabControl.ContentTemplate>
     </TabControl>
 </UserControl>
-
-<!--<ListView>
-    <ListView.View>
-        <GridView>
-            <GridViewColumn Header="Имя параметра" DisplayMemberBinding="{Binding}"/>
-            <GridViewColumn Header="Значение" DisplayMemberBinding="{Binding}"/>
-        </GridView>
-    </ListView.View>
-</ListView>!-->

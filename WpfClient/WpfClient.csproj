@@ -72,15 +72,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Abstract\IDataService.cs" />
     <Compile Include="Model\Abstract\IMsgParser.cs" />
     <Compile Include="Model\Concrete\MsgParser.cs" />
-    <Compile Include="Model\DatabaseService.cs" />
-    <Compile Include="Model\DiService.cs" />
-    <Compile Include="Model\RemoteExchange.cs" />
-    <Compile Include="ViewModel\FanViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="Services\DatabaseService.cs" />
+    <Compile Include="Services\DiService.cs" />
+    <Compile Include="Services\RemoteService.cs" />
+    <Compile Include="ViewModel\FanVm.cs" />
+    <Compile Include="ViewModel\MainVm.cs" />
     <Compile Include="ViewModel\ParametersVm.cs" />
+    <Compile Include="ViewModel\PropertyValueVm.cs" />
     <Compile Include="View\ParametersView.xaml.cs">
       <DependentUpon>ParametersView.xaml</DependentUpon>
     </Compile>

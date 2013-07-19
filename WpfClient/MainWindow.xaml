@@ -4,7 +4,7 @@
         xmlns:loc="clr-namespace:WpfClient.ViewModel" 
         xmlns:wpfApplication3="clr-namespace:WpfClient.View"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="600">
     <Grid Name="gridMain">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.DataContext>
-            <loc:MainViewModel/>
+            <loc:MainVm/>
         </Grid.DataContext>
 
 

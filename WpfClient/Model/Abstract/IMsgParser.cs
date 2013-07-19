@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using WpfClient.Services;
 
 namespace WpfClient.Model.Abstract
 {
     public interface IMsgParser
     {
-        Dictionary<string, int> Parse(string message);
+        Dictionary<DoorEnum, int> Parse(string message);
     }
 }

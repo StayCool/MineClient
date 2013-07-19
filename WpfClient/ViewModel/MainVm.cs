@@ -1,21 +1,20 @@
 using System;
-using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
-using WpfClient.View;
+using WpfClient.Services;
 
 namespace WpfClient.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainVm : ViewModelBase
     {
         private object _currentView;
 
         
-        public MainViewModel()
+        public MainVm()
         {
-            //var remoteExchange = DiService.Get<RemoteExchange>();
+            var remoteExchange = DiService.Get<RemoteService>();
         }
 
         public object CurrentView
@@ -38,7 +37,7 @@ namespace WpfClient.ViewModel
 
         private void MenuViewControl(object t)
         {
-            string menuStr = t as string;
+            var menuStr = t as string;
 
             if (menuStr.Equals("FanParams", StringComparison.InvariantCulture))
                 CurrentView = new ParametersVm();
