@@ -16,8 +16,8 @@ namespace DataRepository.Models
         public int DoorStateId { get; set; }
         public int FanLogId { get; set; }
 
-        public DoorType DoorType { get; set; }
-        public DoorState DoorState { get; set; }
-        public FanLog FanLog { get; set; }
+        public virtual DoorType DoorType { get; set; }
+        public virtual DoorState DoorState { get; set; }
+        public virtual FanLog FanLog { get; set; }
     }
 }

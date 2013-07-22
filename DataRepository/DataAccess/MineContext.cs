@@ -16,6 +16,7 @@ namespace DataRepository.DataAccess
         public IDbSet<AnalogSignalType> AnalogSignalType { get; set; }
 
         public IDbSet<DoorState> DoorState { get; set; }
+        public IDbSet<FanState> FanState { get; set; }
 
         public MineContext()
             : base(GetConnectionName())
@@ -24,6 +25,7 @@ namespace DataRepository.DataAccess
         }
 
         protected static string GetConnectionName() {
+            //return @"Data Source=.\SQLExpress;Database=MineDb;Trusted_Connection=True;";
             return @"Data Source=(localdb)\v11.0;Database=MineDb1;Trusted_Connection=True;";
         }
     }

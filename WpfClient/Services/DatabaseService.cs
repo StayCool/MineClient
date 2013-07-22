@@ -44,7 +44,6 @@ namespace WpfClient.Services
             
             using (var repoUnit = RepoUnit)
             {
-                var ff = MapToFanLog(paramsTable);
                 repoUnit.FansLogRepo.Save(MapToFanLog(paramsTable));
                 repoUnit.Commit();   
             }
@@ -61,7 +60,6 @@ namespace WpfClient.Services
             }
             return doorsLogs;
         }
-
         public List<AnalogSignalLog> MapToAnalogSignalLog(IDictionary<string, int> paramsTable)
         {
             var analogSignals = new List<AnalogSignalLog>(); 
@@ -71,13 +69,12 @@ namespace WpfClient.Services
             }
             return analogSignals;
         }
-
         public FanLog MapToFanLog(IDictionary<string, int> paramsTable) {
 
             return new FanLog {
                 FanNumber = paramsTable[FanEnum.fn.ToString()],
-                Fan1StateId = paramsTable[FanEnum.mb11.ToString()],
-                Fan2StateId = paramsTable[FanEnum.mb12.ToString()],
+                Fan1State_Id = paramsTable[FanEnum.mb11.ToString()],
+                Fan2State_Id = paramsTable[FanEnum.mb12.ToString()],
                 Date = DateTime.Now,
                 AnalogSignalLogs = MapToAnalogSignalLog(paramsTable),
                 DoorsLogs = MapToDoorsLog(paramsTable)
@@ -94,15 +91,14 @@ namespace WpfClient.Services
                 {
                     var fansLogRepo = repoUnit.FansLogRepo;
 
-                    var fansLog = fansLogRepo.Load().Last(n => n.FanNumber == fanNum);
-
-                    propertyList.Add(new PropertyValueVm { Property = "Вентилятор 1", Value = fansLog.Fan1State.State});
-                    propertyList.Add(new PropertyValueVm { Property = "Вентилятор 2", Value = fansLog.Fan1State.State});
+                    var fansLogId = fansLogRepo.Load().Where(n => n.FanNumber == fanNum).Max(n => n.Id);
+                    var fansLog = fansLogRepo.Find(fansLogId);
 
                     propertyList.Add(new PropertyValueVm {Property = "Время приема параметров", Value = fansLog.Date.ToString()});
+                    propertyList.Add(new PropertyValueVm { Property = "Вентилятор 1", Value = fansLog.Fan1State.State });
+                    propertyList.Add(new PropertyValueVm { Property = "Вентилятор 2", Value = fansLog.Fan2State.State });
 
                     propertyList.AddRange(fansLog.DoorsLogs.Select(doorLog => new PropertyValueVm {Property = doorLog.DoorType.Type, Value = doorLog.DoorState.State}));
-
                     propertyList.AddRange(fansLog.AnalogSignalLogs.Select(signal => new PropertyValueVm {Property = signal.SignalType.Type, Value = signal.SignalValue.ToString()}));
                 }
             }

@@ -60,6 +60,7 @@
     <Compile Include="Models\DoorType.cs" />
     <Compile Include="Models\FanLog.cs" />
     <Compile Include="Models\AnalogSignalType.cs" />
+    <Compile Include="Models\FanState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@ namespace WpfClient.Services
         }
 
 
-        private void onRecieve(string msg, int clientNum)
+        private void onRecieve(string msg)
         {
             _dataService.InsertRawData(msg);
         }

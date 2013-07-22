@@ -19,7 +19,6 @@ namespace DataRepository.DataAccess
                 new DoorType {Type = "Ляда 1 отсекающая"},
                 new DoorType {Type = "Ляда 1 переключающая"},
                 new DoorType {Type = "Ляда 2 отсекающая"},
-                new DoorType {Type = "Ляда 2 отсекающая"},
                 new DoorType {Type = "Ляда 2 переключающая"},
                 new DoorType {Type = "Ляда атмосферная"},
                 new DoorType {Type = "Ляда дифузорная"},
@@ -33,11 +32,19 @@ namespace DataRepository.DataAccess
             var doorState = new List<DoorState>
             {
                 new DoorState {State = "Неопределен"},
-                new DoorState {State = "Открыт"},
                 new DoorState {State = "Закрыт"},
+                new DoorState {State = "Открыт"},
                 new DoorState {State = "Неопределен"}
             };
             doorState.ForEach(d => context.DoorState.Add(d));
+
+            //Init FanState table
+            var fanState = new List<FanState>
+            {
+                new FanState {State = "Выключен"},
+                new FanState {State = "Включен"},
+            };
+            fanState.ForEach(d => context.FanState.Add(d));
 
             //Init AnalogSignalType table
             var analogSignalType = new List<AnalogSignalType>
