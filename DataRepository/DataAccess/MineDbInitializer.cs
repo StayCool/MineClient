@@ -13,44 +13,41 @@ namespace DataRepository.DataAccess
             if (context == null)
                 context = new MineContext();
 
-            //Инициализация таблицы ляд
-            var doors = new List<Door>
+            //Init DoorType table
+            var doorType = new List<DoorType>
             {
-                new Door { DoorType = "Ляда 1 отсекающая", DoorState = "открыта"},
-                new Door { DoorType = "Ляда 1 отсекающая", DoorState = "закрыта"},
-                new Door { DoorType = "Ляда 1 отсекающая", DoorState = "не определено"},
-
-                new Door { DoorType = "Ляда 1 переключающая", DoorState = "открыта"},
-                new Door { DoorType = "Ляда 1 переключающая", DoorState = "закрыта"},
-                new Door { DoorType = "Ляда 1 переключающая", DoorState = "не определено"},
-               
-                new Door { DoorType = "Ляда 2 отсекающая", DoorState = "открыта"},
-                new Door { DoorType = "Ляда 2 отсекающая", DoorState = "закрыта"},
-                new Door { DoorType = "Ляда 2 отсекающая", DoorState = "не определено"},
-
-                new Door { DoorType = "Ляда 2 переключающая", DoorState = "открыта"},
-                new Door { DoorType = "Ляда 2 переключающая", DoorState = "закрыта"},
-                new Door { DoorType = "Ляда 2 переключающая", DoorState = "не определено"},
-
-                new Door { DoorType = "Ляда атмосферная", DoorState = "открыта" },
-                new Door { DoorType = "Ляда атмосферная", DoorState = "закрыта" },
-                new Door { DoorType = "Ляда атмосферная", DoorState = "не определено" },
-
-                new Door { DoorType = "Ляда дифузорная", DoorState = "открыта" },
-                new Door { DoorType = "Ляда дифузорная", DoorState = "закрыта" },
-                new Door { DoorType = "Ляда дифузорная", DoorState = "не определено" },
-
-                new Door { DoorType = "Ляда подводящего канал", DoorState = "открыта" },
-                new Door { DoorType = "Ляда подводящего канал", DoorState = "закрыта" },
-                new Door { DoorType = "Ляда подводящего канал", DoorState = "не определено" },
-
-                new Door { DoorType = "Направляющий аппарата вентилятора 1", DoorState = "открыта" },
-                new Door { DoorType = "Направляющий аппарата вентилятора 1", DoorState = "закрыта" },
-
-                new Door { DoorType = "Направляющий аппарата вентилятора 2", DoorState = "открыта" },
-                new Door { DoorType = "Направляющий аппарата вентилятора 2", DoorState = "закрыта" },
+                new DoorType {Type = "Ляда 1 отсекающая"},
+                new DoorType {Type = "Ляда 1 переключающая"},
+                new DoorType {Type = "Ляда 2 отсекающая"},
+                new DoorType {Type = "Ляда 2 отсекающая"},
+                new DoorType {Type = "Ляда 2 переключающая"},
+                new DoorType {Type = "Ляда атмосферная"},
+                new DoorType {Type = "Ляда дифузорная"},
+                new DoorType {Type = "Ляда подводящего канала"},
+                new DoorType {Type = "Направляющий аппарата вентилятора 1"},
+                new DoorType {Type = "Направляющий аппарата вентилятора 2"}
             };
-            doors.ForEach(s => context.Doors.Add(s));
+            doorType.ForEach(d => context.DoorsType.Add(d));
+
+            //Init DoorState table
+            var doorState = new List<DoorState>
+            {
+                new DoorState {State = "Неопределен"},
+                new DoorState {State = "Открыт"},
+                new DoorState {State = "Закрыт"},
+                new DoorState {State = "Неопределен"}
+            };
+            doorState.ForEach(d => context.DoorState.Add(d));
+
+            //Init AnalogSignalType table
+            var analogSignalType = new List<AnalogSignalType>
+            {
+                new AnalogSignalType {Type = "Аналоговый сигнал 1"},
+                new AnalogSignalType {Type = "Аналоговый сигнал 2"},
+                new AnalogSignalType {Type = "Аналоговый сигнал 3"}
+            };
+            analogSignalType.ForEach(s => context.AnalogSignalType.Add(s));
+            
             context.SaveChanges();
         }
     }

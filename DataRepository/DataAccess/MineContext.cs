@@ -9,11 +9,13 @@ namespace DataRepository.DataAccess
 {
     public class MineContext : DbContext
     {
-        public IDbSet<FanLog> FanLogs { get; set; }
-        public IDbSet<Door> Doors { get; set; }
-        public IDbSet<DoorsLog> DoorsLogs { get; set; }
-        public IDbSet<AnalogSignal> AnalogSignals { get; set; } 
+        public IDbSet<FanLog> FanLog { get; set; }
+        public IDbSet<DoorsLog> DoorsLog { get; set; }
+        
+        public IDbSet<DoorType> DoorsType { get; set; }
+        public IDbSet<AnalogSignalType> AnalogSignalType { get; set; }
 
+        public IDbSet<DoorState> DoorState { get; set; }
 
         public MineContext()
             : base(GetConnectionName())
@@ -22,7 +24,7 @@ namespace DataRepository.DataAccess
         }
 
         protected static string GetConnectionName() {
-            return @"Data Source=(localdb)\v11.0;Database=MineDb;Trusted_Connection=True;";
+            return @"Data Source=(localdb)\v11.0;Database=MineDb1;Trusted_Connection=True;";
         }
     }
 }

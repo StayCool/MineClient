@@ -11,14 +11,16 @@ namespace DataRepository.Models
         public int Id { get; set; }
 
         public int FanNumber { get; set; }
-        public int Fan1State { get; set; }
-        public int Fan2State { get; set; }
+        public int Fan1StateId { get; set; }
+        public int Fan2StateId { get; set; }
 
         public int DoorsLogId { get; set; }
-        public int AnalogSignalsId { get; set; }
+        public int AnalogSignalLogId { get; set; }
         public DateTime Date { get; set; }
 
-        public virtual DoorsLog DoorsLog { get; set; }
-        public virtual AnalogSignal AnalogSignals { get; set; }
+        public FanState Fan1State { get; set; }
+        public FanState Fans2State { get; set; }
+        public virtual ICollection<DoorsLog> DoorsLogs { get; set; }
+        public virtual ICollection<AnalogSignalLog> AnalogSignalLogs { get; set; }
     }
 }

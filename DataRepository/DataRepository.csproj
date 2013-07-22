@@ -54,10 +54,12 @@
     <Compile Include="DataAccess\MineDbInitializer.cs" />
     <Compile Include="DataAccess\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="DataAccess\UnitOfWork\RepoUnit.cs" />
-    <Compile Include="Models\AnalogSignal.cs" />
-    <Compile Include="Models\Door.cs" />
+    <Compile Include="Models\AnalogSignalLog.cs" />
     <Compile Include="Models\DoorsLog.cs" />
+    <Compile Include="Models\DoorState.cs" />
+    <Compile Include="Models\DoorType.cs" />
     <Compile Include="Models\FanLog.cs" />
+    <Compile Include="Models\AnalogSignalType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
