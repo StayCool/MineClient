@@ -8,7 +8,7 @@ using System.Net.Sockets;
 
 namespace CLTcpServer
 {
-    class TcpServer : Interfaces.IRemoteExchange
+    public class TcpServer : Interfaces.IRemoteExchange
     {
 
         public event Interfaces.ReceiveHandler ReceiveEvent;
@@ -17,7 +17,8 @@ namespace CLTcpServer
         {
             get { return clients.Count; }
         }
-          
+
+        private Thread _acceptThread;
         // Запуск сервера и вспомогательного потока акцептирования клиентских подключений
         // т.е. назначения сокетов ответственных за обмен сообщениями 
         // с соответствующим клиентским приложением
@@ -26,6 +27,7 @@ namespace CLTcpServer
             clients = new List<TcpClient>();
             clients_string = new List<string>();
         }
+
 
         public bool StartServer(string strPort)
         {
@@ -42,14 +44,15 @@ namespace CLTcpServer
                     _server.Start();
 
 
-                    Thread acceptThread = new Thread(AcceptClients);
-                    acceptThread.Start();
+                    _acceptThread = new Thread(AcceptClients);
+                    _acceptThread.IsBackground = true;
+                    _acceptThread.Start();
 
                     // оповещение, что сервер запущен
                     return true;
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     return false;
@@ -125,7 +128,8 @@ namespace CLTcpServer
                 }
             }
         }
-        
+
+
 
         // Асинхронная отправка сообщения клиенту.
         private void AsyncSendCompleted(IAsyncResult ar)
@@ -134,7 +138,7 @@ namespace CLTcpServer
             ns.EndWrite(ar);
         }
 
-        
+
         // Извлечение сообщения от клиента
         private void ReceiveRun(object num)
         {
@@ -143,14 +147,15 @@ namespace CLTcpServer
                 try
                 {
                     string s = null;
-                    clients_string[(int) num] = "";
-                    NetworkStream ns = clients[(int) num].GetStream();
+                    clients_string[(int)num] = "";
+                    NetworkStream ns = clients[(int)num].GetStream();
                     // Раскомментировав строчку ниже, тем самым уменьшив размер приемного буфера, можно убедиться,
                     // что прием данных будет все равно осуществляться полностью.
                     while (ns.DataAvailable == true)
                     {
                         // Определить точный размер буфера приема позволяет свойство класса TcpClient - Available
-                        byte[] buffer = new byte[clients[(int) num].Available];
+
+                        byte[] buffer = new byte[clients[(int)num].Available];
 
                         ns.Read(buffer, 0, buffer.Length);
                         s += Encoding.Default.GetString(buffer);
@@ -158,14 +163,14 @@ namespace CLTcpServer
                     if (s != null)
                     {
 
-                        if (s.IndexOf("+++") > 0) //close connection
+                        if (s.IndexOf("+++") == 0) //close connection
                         {
                             clients[(int)num].Close();
+                            clients.RemoveAt((int)num);
                             break;
                         }
-                        clients_string[(int) num] = s;
                         if (ReceiveEvent != null)
-                            ReceiveEvent(s,(int)num);
+                            ReceiveEvent(s);
                         // Вынужденная строчка для экономия ресурсов процессора.
                         // Неизящный способ.
                         Thread.Sleep(100);
@@ -188,7 +193,7 @@ namespace CLTcpServer
         // клиентскими приложениями.
         private List<TcpClient> clients;
         // Флаг мягкой остановки циклов и дополнительных потоков
-        private bool _stopNetwork;  
+        private bool _stopNetwork;
         //сообщения клиентов
         private List<string> clients_string;
     }

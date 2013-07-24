@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="WpfClient.View.ParametersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:WpfClient.ViewModel" xmlns:view="clr-namespace:WpfClient.View"
+             d:DataContext="{d:DesignInstance viewModels:ParametersVm}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <TabControl ItemsSource="{Binding Fans}" SelectedIndex="{Binding SelectedIndex}">
+        <TabControl.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding FanName}"/>
+            </DataTemplate>
+        </TabControl.ItemTemplate>
+
+        <TabControl.ContentTemplate>
+            <DataTemplate>
+                <ListView ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=view:ParametersView},
+                    Path=DataContext.PropertyValues}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Имя параметра" DisplayMemberBinding="{Binding Property}"/>
+                            <GridViewColumn Header="Значение" DisplayMemberBinding="{Binding Value}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+    </TabControl>
+</UserControl>

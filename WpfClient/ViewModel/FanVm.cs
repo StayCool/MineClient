@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataRepository
+namespace WpfClient.ViewModel
 {
-    public class Class1
+    public class FanVm
     {
+        public string FanName { get; set; }
     }
 }

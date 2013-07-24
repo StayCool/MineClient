@@ -5,8 +5,8 @@ using System.Text;
 
 namespace CLTcpServer.Interfaces
 {
-    delegate void ReceiveHandler(string msg, int clientNum);
-    interface IRemoteExchange
+    public delegate void ReceiveHandler(string msg);
+    public interface IRemoteExchange
     {
         //server initialization
         bool StartServer(string strPort);
