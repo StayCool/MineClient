@@ -41,6 +41,10 @@ namespace WpfClient.ViewModel
 
             if (menuStr.Equals("FanParams", StringComparison.InvariantCulture))
                 CurrentView = new ParametersVm();
+            else if (menuStr.Equals("FanParamsAnalog", StringComparison.InvariantCulture))
+            {
+                CurrentView = new AnalogParametersVm();
+            }
         }
 
 

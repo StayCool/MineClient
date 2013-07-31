@@ -4,7 +4,7 @@
         xmlns:loc="clr-namespace:WpfClient.ViewModel" 
         xmlns:wpfApplication3="clr-namespace:WpfClient.View"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        Title="MainWindow" Height="600" Width="600">
+        Title="MainWindow" Height="Auto" Width="Auto">
     <Grid Name="gridMain">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -23,8 +23,10 @@
             <MenuItem Header="ФАЙЛ"/>
             <MenuItem Header="ПРАВКА"/>
             <MenuItem Header="ВИД">
-                <MenuItem Header="Параметры вентиляторов" VerticalAlignment="Center" Width="Auto"
+                <MenuItem Header="Параметры в цифровом виде" VerticalAlignment="Center" Width="Auto"
                           Command="{Binding MenuClick}" CommandParameter="FanParams" />
+                <MenuItem Header="Параметры в аналоговом виде" VerticalAlignment="Center" Width="Auto"
+                          Command="{Binding MenuClick}" CommandParameter="FanParamsAnalog" />
             </MenuItem>
         </Menu>
 
@@ -33,6 +35,9 @@
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type loc:ParametersVm}">
                     <wpfApplication3:ParametersView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type loc:AnalogParametersVm}">
+                    <wpfApplication3:AnalogParametersView />
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
