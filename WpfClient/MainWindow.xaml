@@ -3,28 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:WpfClient.ViewModel" 
         xmlns:wpfApplication3="clr-namespace:WpfClient.View"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        Title="MainWindow" Height="600" Width="600">
-    <Grid Name="gridMain">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:general="clr-namespace:WpfClient.ViewModel.General" 
+        xmlns:plot="clr-namespace:WpfClient.ViewModel.Plot"
+        mc:Ignorable="d"    
+        d:DataContext="{d:DesignInstance loc:MainVm}"
+        Title="MainWindow" Height="600" Width="900">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid.DataContext>
-            <loc:MainVm/>
-        </Grid.DataContext>
-
 
         <Menu Height="20" VerticalAlignment="Top" Grid.Row="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <MenuItem Header="ФАЙЛ"/>
-            <MenuItem Header="ПРАВКА"/>
+            <MenuItem Header="СРЕДСТВА">
+                <MenuItem Header="Настройки" VerticalAlignment="Center" Width="Auto"
+                          Command="{Binding MenuClick}" CommandParameter="SettingsView"/>
+            </MenuItem>
             <MenuItem Header="ВИД">
                 <MenuItem Header="Параметры вентиляторов" VerticalAlignment="Center" Width="Auto"
                           Command="{Binding MenuClick}" CommandParameter="FanParams" />
+                <MenuItem Header="Главное окно" VerticalAlignment="Center" Width="Auto"
+                          Command="{Binding MenuClick}" CommandParameter="GeneralView" />
             </MenuItem>
         </Menu>
 
@@ -33,6 +39,15 @@
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type loc:ParametersVm}">
                     <wpfApplication3:ParametersView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type general:GeneralVm}">
+                    <wpfApplication3:GeneralView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type plot:AnalogParametersVm}">
+                    <wpfApplication3:AnalogParametersView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type loc:SettingsVm}">
+                    <wpfApplication3:SettingsView/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

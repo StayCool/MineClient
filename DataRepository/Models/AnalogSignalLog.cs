@@ -15,6 +15,6 @@ namespace DataRepository.Models
         public int SignalValue { get; set; }
 
         public virtual FanLog FanLog { get; set; }
-        public virtual AnalogSignalType SignalType { get; set; }
+        public virtual AnalogSignal SignalType { get; set; }
     }
 }

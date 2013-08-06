@@ -2,30 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using CLTcpServer.Interfaces;
-using DataRepository.DataAccess.UnitOfWork;
+using DataRepository.DataAccess.GenericRepository;
 using DataRepository.Models;
 using WpfClient.Model.Abstract;
 using WpfClient.ViewModel;
 
 namespace WpfClient.Services
 {
-    public enum DoorEnum
-    {
-        mb100 = 1, mb101, mb105,
-        mb106, mb102, mb103,
-        mb104, mb114, mb115,
-    }
-
-    public enum AnalogSignalEnum
-    {
-        mi2 = 1, mi4, mi6
-    }
-
-    public enum FanEnum
-    {
-        mb11, mb12, fn
-    }
-
     public class DatabaseService
     {
         private readonly IMsgParser _msgParser;
@@ -44,7 +27,7 @@ namespace WpfClient.Services
             
             using (var repoUnit = RepoUnit)
             {
-                repoUnit.FansLogRepo.Save(MapToFanLog(paramsTable));
+                repoUnit.FanLog.Save(MapToFanLog(paramsTable));
                 repoUnit.Commit();   
             }
         }
@@ -60,6 +43,7 @@ namespace WpfClient.Services
             }
             return doorsLogs;
         }
+
         public List<AnalogSignalLog> MapToAnalogSignalLog(IDictionary<string, int> paramsTable)
         {
             var analogSignals = new List<AnalogSignalLog>(); 
@@ -69,6 +53,7 @@ namespace WpfClient.Services
             }
             return analogSignals;
         }
+
         public FanLog MapToFanLog(IDictionary<string, int> paramsTable) {
 
             return new FanLog {
@@ -89,7 +74,7 @@ namespace WpfClient.Services
             {
                 using (var repoUnit = RepoUnit) 
                 {
-                    var fansLogRepo = repoUnit.FansLogRepo;
+                    var fansLogRepo = repoUnit.FanLog;
 
                     var fansLogId = fansLogRepo.Load().Where(n => n.FanNumber == fanNum).Max(n => n.Id);
                     var fansLog = fansLogRepo.Find(fansLogId);

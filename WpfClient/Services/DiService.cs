@@ -1,33 +1,24 @@
 ﻿using CLTcpServer;
 using CLTcpServer.Interfaces;
-using Ninject;
-using WpfClient.Model;
+using MineClient.Rules;
 using WpfClient.Model.Abstract;
 using WpfClient.Model.Concrete;
+using WpfClient.ViewModel;
 
 namespace WpfClient.Services
 {
     public class DiService 
     {
-        private static IKernel _kernel;
-
-        static DiService()
+        public static void SetBindings()
         {
-            _kernel = new StandardKernel();
-            SetBindings();
-        }
-
-        private static void SetBindings()
-        {
-            _kernel.Bind<IMsgParser>().To<MsgParser>();
-            _kernel.Bind<IRemoteExchange>().To<TcpServer>();
-            _kernel.Bind<DatabaseService>().ToSelf().InSingletonScope();
-            _kernel.Bind<RemoteService>().ToSelf();
-        }
-
-        public static TInterf Get<TInterf>()
-        {
-            return _kernel.Get<TInterf>();
+            IoC.RegisterType<IMsgParser, MsgParser>();
+            IoC.RegisterType<IRemoteExchange, TcpServer>();
+            IoC.RegisterSingleton<DatabaseService, DatabaseService>();
+            IoC.RegisterSingleton<MainVm, MainVm>();
+            IoC.RegisterSingleton<SettingsVm, SettingsVm>();
+            IoC.RegisterInstance<RemoteService, RemoteService>();
+            IoC.RegisterInstance<GeneralService, GeneralService>();
+            IoC.RegisterType<IConfig, MineConfig>();
         }
     }
 }

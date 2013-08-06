@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataRepository\DataRepository.csproj">
+    <ProjectReference Include="..\DataRepository\Mc.DataRepository.csproj">
       <Project>{347c93fe-73fa-4c78-b915-f5a8419a076c}</Project>
-      <Name>DataRepository</Name>
+      <Name>Mc.DataRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

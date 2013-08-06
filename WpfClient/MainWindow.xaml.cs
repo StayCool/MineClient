@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using WpfClient.Services;
+using WpfClient.ViewModel;
 
 namespace WpfClient
 {
@@ -21,6 +11,9 @@ namespace WpfClient
     {
         public MainWindow() {
             InitializeComponent();
+
+            DiService.SetBindings();
+            DataContext = IoC.Resolve<MainVm>();
         }
     }
 }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WpfClient</RootNamespace>
     <AssemblyName>WpfClient</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -53,7 +55,17 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Core.2013.1.52.1\lib\portable-net4+sl4+wp71+win8\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.Wpf.2013.1.52.1\lib\NET45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.Wpf.2013.1.52.1\lib\NET45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\net35\System.Windows.Interactivity.dll</HintPath>
@@ -72,17 +84,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EnumToColorConverter.cs" />
+    <Compile Include="Converters\PercentageConvereter.cs" />
     <Compile Include="Model\Abstract\IMsgParser.cs" />
     <Compile Include="Model\Concrete\MsgParser.cs" />
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\DiService.cs" />
+    <Compile Include="Services\Enums.cs" />
+    <Compile Include="Services\GeneralService.cs" />
+    <Compile Include="Services\MineConfig.cs" />
     <Compile Include="Services\RemoteService.cs" />
-    <Compile Include="ViewModel\FanVm.cs" />
+    <Compile Include="ViewModel\General\FanVm.cs" />
+    <Compile Include="ViewModel\General\GeneralVm.cs" />
+    <Compile Include="ViewModel\General\SignalVm.cs" />
     <Compile Include="ViewModel\MainVm.cs" />
     <Compile Include="ViewModel\ParametersVm.cs" />
+    <Compile Include="ViewModel\Plot\AnalogParametersVm.cs" />
+    <Compile Include="ViewModel\Plot\MeasurementVm.cs" />
     <Compile Include="ViewModel\PropertyValueVm.cs" />
+    <Compile Include="ViewModel\SettingsVm.cs" />
+    <Compile Include="View\AnalogParametersView.xaml.cs">
+      <DependentUpon>AnalogParametersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GeneralView.xaml.cs">
+      <DependentUpon>GeneralView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ParametersView.xaml.cs">
       <DependentUpon>ParametersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -96,7 +127,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AnalogParametersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\GeneralView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ParametersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,13 +171,17 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CLTcpServer\CLTcpServer.csproj">
+    <ProjectReference Include="..\CLTcpServer\Mc.CLTcpServer.csproj">
       <Project>{54f202e1-4093-4c8e-b47a-81aa7e081729}</Project>
-      <Name>CLTcpServer</Name>
+      <Name>Mc.CLTcpServer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataRepository\DataRepository.csproj">
+    <ProjectReference Include="..\DataRepository\Mc.DataRepository.csproj">
       <Project>{347c93fe-73fa-4c78-b915-f5a8419a076c}</Project>
-      <Name>DataRepository</Name>
+      <Name>Mc.DataRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MineClient.Rules\Mc.Rules.csproj">
+      <Project>{a7e08858-1fb3-4791-9fa8-136dc66ee396}</Project>
+      <Name>Mc.Rules</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

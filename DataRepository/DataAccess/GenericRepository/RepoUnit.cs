@@ -4,24 +4,29 @@ using System.Data.Entity.Validation;
 using DataRepository.DataAccess.GenericRepository;
 using DataRepository.Models;
 
-namespace DataRepository.DataAccess.UnitOfWork
+namespace DataRepository.DataAccess.GenericRepository
 {
-    public class RepoUnit : IUnitOfWork
+    public class RepoUnit : IDisposable
     {
         private MineContext _context;
+        private IDataRepository<FanLog> _fanLog;
+        private IDataRepository<AnalogSignal> _analogSignal; 
 
         private MineContext getContext()
         {
             return _context ?? (_context = new MineContext());
         }
 
-        private IDataRepository<FanLog> _fanLogRepo;
 
-        public IDataRepository<FanLog> FansLogRepo {
-            get { return _fanLogRepo ?? (_fanLogRepo = new DataRepository<FanLog>(getContext())); }
+        public IDataRepository<FanLog> FanLog 
+        {
+            get { return _fanLog ?? (_fanLog = getRepository<FanLog>()); }
         }
 
-
+        public IDataRepository<AnalogSignal> AnalogSignal
+        {
+            get { return _analogSignal ?? (_analogSignal = getRepository<AnalogSignal>()); }
+        }
 
         public void Commit() {
             try {
@@ -40,13 +45,14 @@ namespace DataRepository.DataAccess.UnitOfWork
         public void Dispose() {
             if (_context != null)
                 _context.Dispose();
+            
             //GC.SuppressFinalize(this);
         }
 
-        public IDataRepository<TEntity> GetRepository<TEntity>()
-            where TEntity : class, IEntityId
+        private IDataRepository<T> getRepository<T>()
+            where T : class, IEntityId
         {
-            return new DataRepository<TEntity>(_context);
+            return new DataRepository<T>(getContext());
         }
     }
 }

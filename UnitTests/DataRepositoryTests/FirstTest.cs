@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using System.Linq;
 using DataRepository.DataAccess.GenericRepository;
-using DataRepository.DataAccess.UnitOfWork;
 using DataRepository.Models;
 using NUnit.Framework;
 using DataRepository.DataAccess;
@@ -12,7 +11,7 @@ namespace UnitTests.DataRepositoryTests
     [TestFixture]
     public class FirstTest
     {
-        private IUnitOfWork _uow;
+        private RepoUnit _uow;
 
 
         [Test]

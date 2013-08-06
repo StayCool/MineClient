@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using WpfClient.Services;
+using WpfClient.ViewModel.General;
 
 namespace WpfClient.ViewModel
 {
@@ -40,18 +41,14 @@ namespace WpfClient.ViewModel
 
         private void updatePropertuValues()
         {
-            var databaseService = DiService.Get<DatabaseService>();
+            var databaseService = IoC.Resolve<DatabaseService>();
             var propertyList = databaseService.GetLastParameters(SelectedIndex + 1);
 
-            if (propertyList.Count > 0)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                Application.Current.Dispatcher.Invoke(
-                        (Action)(() =>
-                        {
-                            PropertyValues.Clear();
-                            propertyList.ForEach(n => PropertyValues.Add(n));
-                        }));
-            }
+                PropertyValues.Clear();
+                propertyList.ForEach(n => PropertyValues.Add(n));
+            });
         }
     }
 }

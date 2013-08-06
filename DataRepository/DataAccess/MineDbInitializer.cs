@@ -47,13 +47,13 @@ namespace DataRepository.DataAccess
             fanState.ForEach(d => context.FanState.Add(d));
 
             //Init AnalogSignalType table
-            var analogSignalType = new List<AnalogSignalType>
+            var analogSignalType = new List<AnalogSignal>
             {
-                new AnalogSignalType {Type = "Аналоговый сигнал 1"},
-                new AnalogSignalType {Type = "Аналоговый сигнал 2"},
-                new AnalogSignalType {Type = "Аналоговый сигнал 3"}
+                new AnalogSignal {Type = "Аналоговый сигнал 1"},
+                new AnalogSignal {Type = "Аналоговый сигнал 2"},
+                new AnalogSignal {Type = "Аналоговый сигнал 3"}
             };
-            analogSignalType.ForEach(s => context.AnalogSignalType.Add(s));
+            analogSignalType.ForEach(s => context.AnalogSignals.Add(s));
             
             context.SaveChanges();
         }

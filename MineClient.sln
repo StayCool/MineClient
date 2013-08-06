@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataRepository", "DataRepository\DataRepository.csproj", "{347C93FE-73FA-4C78-B915-F5A8419A076C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc.DataRepository", "DataRepository\Mc.DataRepository.csproj", "{347C93FE-73FA-4C78-B915-F5A8419A076C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{13354F9A-97AC-48CD-9CA5-97548461FA5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc.UnitTest", "UnitTests\Mc.UnitTest.csproj", "{13354F9A-97AC-48CD-9CA5-97548461FA5F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F9F964D4-8029-4AFF-A227-4033D9EECCB4}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,9 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F9F964
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfClient", "WpfClient\WpfClient.csproj", "{37C742D9-ED91-4AF5-906C-1001E136B7CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc.WpfClient", "WpfClient\Mc.WpfClient.csproj", "{37C742D9-ED91-4AF5-906C-1001E136B7CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLTcpServer", "CLTcpServer\CLTcpServer.csproj", "{54F202E1-4093-4C8E-B47A-81AA7E081729}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc.CLTcpServer", "CLTcpServer\Mc.CLTcpServer.csproj", "{54F202E1-4093-4C8E-B47A-81AA7E081729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc.Rules", "MineClient.Rules\Mc.Rules.csproj", "{A7E08858-1FB3-4791-9FA8-136DC66EE396}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{54F202E1-4093-4C8E-B47A-81AA7E081729}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54F202E1-4093-4C8E-B47A-81AA7E081729}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54F202E1-4093-4C8E-B47A-81AA7E081729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E08858-1FB3-4791-9FA8-136DC66EE396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E08858-1FB3-4791-9FA8-136DC66EE396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E08858-1FB3-4791-9FA8-136DC66EE396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E08858-1FB3-4791-9FA8-136DC66EE396}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
