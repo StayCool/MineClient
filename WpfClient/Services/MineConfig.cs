@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MineClient.Rules;
+using WpfClient.Model.Abstract;
 
 namespace WpfClient.Services
 {

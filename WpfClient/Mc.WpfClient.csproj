@@ -39,6 +39,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
@@ -64,9 +65,13 @@
     <Reference Include="OxyPlot.Xps">
       <HintPath>..\packages\OxyPlot.Wpf.2013.1.52.1\lib\NET45\OxyPlot.Xps.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\net35\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -75,6 +80,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -85,35 +92,46 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\EnumToColorConverter.cs" />
-    <Compile Include="Converters\PercentageConvereter.cs" />
+    <Compile Include="Model\Abstract\IConfig.cs" />
+    <Compile Include="Model\Abstract\IDataInserter.cs" />
     <Compile Include="Model\Abstract\IMsgParser.cs" />
+    <Compile Include="Model\Abstract\IRemoteListener.cs" />
+    <Compile Include="Model\AsyncProvider.cs" />
+    <Compile Include="Model\Concrete\Config.cs" />
+    <Compile Include="Model\Concrete\DataBaseInserter.cs" />
     <Compile Include="Model\Concrete\MsgParser.cs" />
+    <Compile Include="Model\Concrete\TcpRemoteListener.cs" />
+    <Compile Include="Model\Entities\Door.cs" />
+    <Compile Include="Model\Entities\FanObject.cs" />
+    <Compile Include="Model\Entities\Parameter.cs" />
+    <Compile Include="Model\Enums.cs" />
+    <Compile Include="Model\IoC.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\DatabaseService.cs" />
-    <Compile Include="Services\DiService.cs" />
-    <Compile Include="Services\Enums.cs" />
-    <Compile Include="Services\GeneralService.cs" />
+    <Compile Include="Services\FanService.cs" />
+    <Compile Include="Services\IocService.cs" />
     <Compile Include="Services\MineConfig.cs" />
-    <Compile Include="Services\RemoteService.cs" />
+    <Compile Include="ViewModel\FanObject\FanObjectVm.cs" />
+    <Compile Include="ViewModel\FanObject\IndicatorVm.cs" />
+    <Compile Include="ViewModel\FanObject\ThermometerVm.cs" />
+    <Compile Include="ViewModel\FanObject\TubeSystemVm.cs" />
     <Compile Include="ViewModel\General\FanVm.cs" />
     <Compile Include="ViewModel\General\GeneralVm.cs" />
-    <Compile Include="ViewModel\General\SignalVm.cs" />
     <Compile Include="ViewModel\MainVm.cs" />
-    <Compile Include="ViewModel\ParametersVm.cs" />
     <Compile Include="ViewModel\Plot\AnalogParametersVm.cs" />
     <Compile Include="ViewModel\Plot\MeasurementVm.cs" />
-    <Compile Include="ViewModel\PropertyValueVm.cs" />
     <Compile Include="ViewModel\SettingsVm.cs" />
     <Compile Include="View\AnalogParametersView.xaml.cs">
       <DependentUpon>AnalogParametersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FanObjectView.xaml.cs">
+      <DependentUpon>FanObjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GeneralView.xaml.cs">
       <DependentUpon>GeneralView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ParametersView.xaml.cs">
       <DependentUpon>ParametersView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -131,15 +149,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\FanObjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\GeneralView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ParametersView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,14 +197,15 @@
       <Project>{347c93fe-73fa-4c78-b915-f5a8419a076c}</Project>
       <Name>Mc.DataRepository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MineClient.Rules\Mc.Rules.csproj">
-      <Project>{a7e08858-1fb3-4791-9fa8-136dc66ee396}</Project>
-      <Name>Mc.Rules</Name>
+    <ProjectReference Include="..\Mc.CustomControls\Mc.CustomControls.csproj">
+      <Project>{2000c48e-70e4-42ff-b867-9633fa447bc9}</Project>
+      <Name>Mc.CustomControls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MVVMLight.Nuget.Readme.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

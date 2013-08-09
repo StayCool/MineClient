@@ -5,7 +5,11 @@ using DataRepository.DataAccess;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
+using WpfClient.Model.Abstract;
+using WpfClient.Model.Concrete;
+using WpfClient.Model.Entities;
 using WpfClient.Services;
+using WpfClient.ViewModel.FanObject;
 using WpfClient.ViewModel.General;
 
 namespace WpfClient.ViewModel
@@ -18,7 +22,9 @@ namespace WpfClient.ViewModel
         public MainVm()
         {
             Database.SetInitializer(new MineDbInitializer());
-            var remoteExchange = IoC.Resolve<RemoteService>();
+            
+            IoC.Resolve<IRemoteListener>().InitServer("15000");
+
             CurrentView = IoC.Resolve<GeneralVm>();
         }
 
@@ -43,12 +49,10 @@ namespace WpfClient.ViewModel
         {
             var menuStr = t as string;
 
-            if (menuStr.Equals("FanParams", StringComparison.InvariantCulture))
-                CurrentView = new ParametersVm();
             if (menuStr.Equals("GeneralView", StringComparison.InvariantCulture))
                 CurrentView = IoC.Resolve<GeneralVm>();
-            if (menuStr.Equals("SettingsView", StringComparison.InvariantCulture))
-                CurrentView = IoC.Resolve<SettingsVm>();
+            if (menuStr.Equals("FanObject", StringComparison.InvariantCulture))
+                CurrentView = IoC.Resolve<FanObjectVm>();
         }
     }
 }

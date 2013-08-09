@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using WpfClient.Model;
+using WpfClient.Model.Concrete;
 using WpfClient.Services;
 using WpfClient.ViewModel;
 
@@ -12,7 +14,7 @@ namespace WpfClient
         public MainWindow() {
             InitializeComponent();
 
-            DiService.SetBindings();
+            IocService.SetBindings();
             DataContext = IoC.Resolve<MainVm>();
         }
     }

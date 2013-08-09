@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Data;
 using System.Windows.Media;
+using WpfClient.Model.Entities;
 using WpfClient.ViewModel;
 using WpfClient.ViewModel.General;
 
@@ -14,14 +15,14 @@ namespace WpfClient.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var v = (SignalVm.ValueState) value;
+            var v = (Parameter.ValueState) value;
             switch (v)
             {
-                case SignalVm.ValueState.Ok:
+                case Parameter.ValueState.Ok:
                     return new SolidColorBrush(Colors.LightGreen);
-                case SignalVm.ValueState.Bad:
+                case Parameter.ValueState.Bad:
                     return new SolidColorBrush(Colors.Yellow);
-                case SignalVm.ValueState.Dangerous:
+                case Parameter.ValueState.Dangerous:
                     return new SolidColorBrush(Colors.OrangeRed);
             }
 

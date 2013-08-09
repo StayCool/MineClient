@@ -40,6 +40,9 @@
                 <DataTemplate>
                     <Border BorderThickness="1" BorderBrush="DarkGray" Margin="10 5 10 0">
                         <Label Content="{Binding FanName}" HorizontalContentAlignment="Center"/>
+                        <Border.InputBindings>
+                            <MouseBinding  Gesture="LeftDoubleClick" Command="{Binding FanObjectClick}"/>
+                        </Border.InputBindings>
                     </Border>
                     
                 </DataTemplate>
@@ -63,12 +66,12 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="1" Background="{Binding SignalState, Converter={StaticResource EnumToColor}}" 
+                                <Border BorderThickness="1" Background="{Binding ParameterState, Converter={StaticResource EnumToColor}}" 
                                         BorderBrush="DarkGray" Margin="10 7 10 0">
                                     <Border.InputBindings>
                                         <MouseBinding  Gesture="LeftDoubleClick" 
                                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, 
-                                                                         Path=DataContext.MenuClick}"
+                                                                         Path=DataContext.ParameterClick}"
                                                        CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent},
                                                                                   Path=(ItemsControl.AlternationIndex)}"/>
                                     </Border.InputBindings>

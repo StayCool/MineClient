@@ -43,7 +43,7 @@ namespace WpfClient.ViewModel.Plot
             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             PlotModel.LegendBorder = OxyColors.Black;
 
-            var dateAxis = new DateTimeAxis(AxisPosition.Bottom, "Date", "HH:mm") { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
+            var dateAxis = new DateTimeAxis(AxisPosition.Bottom, "Date", "yyyy-MM-dd HH:mm:ss") { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
             PlotModel.Axes.Add(dateAxis);
             var valueAxis = new LinearAxis(AxisPosition.Left, 0) { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
             PlotModel.Axes.Add(valueAxis);
@@ -77,6 +77,7 @@ namespace WpfClient.ViewModel.Plot
         {
             if (to == default (DateTime)) to = DateTime.Now;
 
+            id--;
             //if (from == default(DateTime)) from = to - new TimeSpan(24, 0, 0);
 
             using (var repoUnit = new RepoUnit())
