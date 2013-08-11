@@ -16,16 +16,13 @@ namespace DataRepository.DataAccess.GenericRepository
             _context = context;
         }
 
-        public virtual IQueryable<TEntity> GetAll() {
-            return _context.Set<TEntity>();
-        }
-
-        public virtual IQueryable<TEntity> FindAllBy(Expression<Func<TEntity, bool>> predicate) {
-            return _context.Set<TEntity>().Where(predicate);
-        }
-
         public virtual TEntity FindFirstBy(Expression<Func<TEntity, bool>> predicate) {
             return _context.Set<TEntity>().FirstOrDefault(predicate);
+        }
+
+        public IQueryable<TEntity> Load(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _context.Set<TEntity>().Where(predicate);
         }
 
         public virtual void Add(TEntity entity) {
@@ -57,6 +54,11 @@ namespace DataRepository.DataAccess.GenericRepository
 
         public virtual TEntity Find(int id) {
             return _context.Set<TEntity>().Find(id);
+        }
+
+        public TEntity LastRecord(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _context.Set<TEntity>().Where(predicate).OrderByDescending(t => t.Id).First();
         }
 
         public IQueryable<TEntity> Load()

@@ -120,6 +120,7 @@ namespace CLTcpServer
                     clients.Add(_server.AcceptTcpClient());
                     clients_string.Add("");
                     Thread readThread = new Thread(ReceiveRun);
+                    readThread.IsBackground = true;
                     readThread.Start(clients.Count - 1);
                 }
                 catch (Exception ex)

@@ -290,6 +290,7 @@ namespace WpfClient.ViewModel.FanObject
                 case "Реверс": Revers(); break;
                 case "Норма": Norma(); break;
             }
+
             if (workingFan == 1) V1Work();
             if (workingFan == 2) V2Work();
         }
