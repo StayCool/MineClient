@@ -291,9 +291,12 @@ namespace WpfClient.ViewModel.FanObjectSystem
                 case "Реверс": Revers(); break;
                 case "Норма": Norma(); break;
             }
+            if (SystemState.Value == "Реверс" || SystemState.Value == "Норма")
+            {
+                if (workingFan == 1) V1Work();
+                if (workingFan == 2) V2Work();
+            }
 
-            if (workingFan == 1) V1Work();
-            if (workingFan == 2) V2Work();
         }
 
         private void setFanMode(FanObject fanObject)

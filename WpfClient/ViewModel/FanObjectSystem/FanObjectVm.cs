@@ -35,7 +35,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
             TubeSystemVm.Update(fanObject);
             //IndicatorVm.Update(getIndicatorValues(fanObject));
-            //ThermometerVm.Update(getThermometerValues(fanObject));
+           //ThermometerVm.Update(getThermometerValues(fanObject));
         }
 
         private List<Parameter> getThermometerValues(FanObject fanObject)

@@ -78,13 +78,13 @@ namespace Mc.CustomControls.Controls
 
                 TranslateTransform trans_reight = new TranslateTransform();
                 image_reight.RenderTransform = trans_reight;
-                DoubleAnimation anim_reight = new DoubleAnimation(0, canvas.ActualWidth, TimeSpan.FromMilliseconds(4000));
+                DoubleAnimation anim_reight = new DoubleAnimation(-20, canvas.ActualWidth, TimeSpan.FromMilliseconds(4000));
                 anim_reight.RepeatBehavior = RepeatBehavior.Forever;
                 trans_reight.BeginAnimation(TranslateTransform.XProperty, anim_reight);
 
                 TranslateTransform trans_left = new TranslateTransform();
                 image_left.RenderTransform = trans_left;
-                DoubleAnimation anim_left = new DoubleAnimation(0, -canvas.ActualWidth, TimeSpan.FromMilliseconds(4000));
+                DoubleAnimation anim_left = new DoubleAnimation(20, -canvas.ActualWidth, TimeSpan.FromMilliseconds(4000));
                 anim_left.RepeatBehavior = RepeatBehavior.Forever;
                 trans_left.BeginAnimation(TranslateTransform.XProperty, anim_left);
             } catch (Exception ex) { }

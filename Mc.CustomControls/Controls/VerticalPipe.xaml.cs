@@ -72,13 +72,13 @@ namespace Mc.CustomControls.Controls
 
                 TranslateTransform trans_down = new TranslateTransform();
                 image_down.RenderTransform = trans_down;
-                DoubleAnimation anim_down = new DoubleAnimation(0, canvas.ActualHeight, TimeSpan.FromMilliseconds(4000));
+                DoubleAnimation anim_down = new DoubleAnimation(-20, canvas.ActualHeight, TimeSpan.FromMilliseconds(4000));
                 anim_down.RepeatBehavior = RepeatBehavior.Forever;
                 trans_down.BeginAnimation(TranslateTransform.YProperty, anim_down);
 
                 TranslateTransform trans_top = new TranslateTransform();
                 image_top.RenderTransform = trans_top;
-                DoubleAnimation anim_top = new DoubleAnimation(0, -canvas.ActualHeight, TimeSpan.FromMilliseconds(4000));
+                DoubleAnimation anim_top = new DoubleAnimation(20, -canvas.ActualHeight, TimeSpan.FromMilliseconds(4000));
                 anim_top.RepeatBehavior = RepeatBehavior.Forever;
                 trans_top.BeginAnimation(TranslateTransform.YProperty, anim_top);
             } catch (Exception ex) { }
