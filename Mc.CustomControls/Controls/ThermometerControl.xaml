@@ -11,18 +11,19 @@
     <UserControl.Resources>
         <converters:PercentageConvereter  x:Key="PercentageConverter"/>
         <converters:MultiPercentageConverter x:Key="MultiPercentageConverter"/>
+        <converters:PercentageFontConverter x:Key="PercentageFontConverter"/>
         <system:Decimal x:Key="LnHeight">0.005</system:Decimal>
         <system:Double x:Key="LnWidth">0.4</system:Double>
         <system:Double x:Key="LnSmallWidth">0.2</system:Double>
-        <system:Double x:Key="FontSize">0.06</system:Double>
+        <system:Double x:Key="FontSize">0.11</system:Double>
 
         <Style x:Key="ThermometerStyle" TargetType="ProgressBar">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ProgressBar">
-                        <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="15" Padding="2">
+                        <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="7" Padding="2">
                             <Grid>
-                                <Rectangle VerticalAlignment="Bottom" RadiusX="10" RadiusY="10">
+                                <Rectangle VerticalAlignment="Bottom" RadiusX="10" RadiusY="5">
                                     <Rectangle.Height>
                                         <MultiBinding Converter="{StaticResource MultiPercentageConverter}">
                                             <MultiBinding.Bindings>
@@ -51,7 +52,7 @@
         <Grid Background="#FFECECEC" Name="MyGrid" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.25*"/>
-                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.25*"/>
                 <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0.3*"/>
@@ -75,27 +76,35 @@
                     <DataTemplate>
                         <Grid>
                             <Rectangle Fill="DarkSlateGray" HorizontalAlignment="Left" VerticalAlignment="Top"
-                                Height="2"
+                                Height="1" SnapsToDevicePixels="True" 
                                 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UniformGrid}}, Path=ActualWidth, 
                                     Converter={StaticResource PercentageConverter}, ConverterParameter={StaticResource LnSmallWidth}}"/>
 
                             <Rectangle Fill="DarkSlateGray" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                Height="2"
+                                Height="1" SnapsToDevicePixels="True" 
                                 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UniformGrid}}, Path=ActualWidth, 
                                     Converter={StaticResource PercentageConverter}, ConverterParameter={StaticResource LnWidth}}"/>
-                            <Label Content="{Binding}" HorizontalAlignment="Right" Foreground="DarkSlateGray"
-                                   FontSize="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UniformGrid}}, Path=ActualHeight, 
-                                    Converter={StaticResource PercentageConverter}, ConverterParameter={StaticResource FontSize}}"/>
+                            
+                            <TextBlock Text="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="DarkSlateGray">
+                                <TextBlock.FontSize>
+                                    <MultiBinding Converter="{StaticResource PercentageFontConverter}" ConverterParameter="{StaticResource FontSize}">
+                                        <MultiBinding.Bindings>
+                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=UniformGrid}" Path="ActualHeight"/>
+                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=UniformGrid}" Path="ActualWidth"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </TextBlock.FontSize>
+                            </TextBlock>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="5"  ClipToBounds="True">
-                <Border Background="Transparent" BorderBrush="Black" BorderThickness="10,10,0,0" 
-                        Margin="-12">
+            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="5" ClipToBounds="True">
+                <Border Background="Transparent" BorderBrush="Black" BorderThickness="5,5,0,0" 
+                        Margin="-9">
                     <Border.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="15" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}"/>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}"/>
                     </Border.Effect>
                 </Border>
             </Border>

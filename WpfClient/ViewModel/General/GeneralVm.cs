@@ -1,18 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Threading;
-using DataRepository.DataAccess.GenericRepository;
-using DataRepository.Models;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
 using WpfClient.Model.Concrete;
 using WpfClient.Model.Entities;
@@ -68,7 +60,7 @@ namespace WpfClient.ViewModel.General
             Task.Run(() =>
             {
                 var signals = new List<string> {"Вентилятор в работе", "Состояние вентилятора"};
-                signals.AddRange(_databaseService.GetAnalogSignals(1).Select(s => s.Property));
+                signals.AddRange(_databaseService.GetAnalogSignals(1).Select(s => s.Name));
                 
                 Application.Current.Dispatcher.BeginInvoke(new Action(() => signals.ForEach(s => _signalNames.Add(s))));
             });
@@ -76,26 +68,37 @@ namespace WpfClient.ViewModel.General
 
         private void updateFanValues()
         {
-            var parametersList = new List<List<Parameter>>();
+            var parametersList = new List<List<ParameterVm>>();
 
             for (int i = 1; i <= _fans.Count; i++)
             {
-                var fanObjectVm = _databaseService.GetFanObject(i);
-                var parameters = new List<Parameter>();
-                parameters.Add(new Parameter {
-                    Value = fanObjectVm.WorkingFanNumber == 0 ? "ОСТАНОВ" : string.Format("№{0}",fanObjectVm.WorkingFanNumber), 
-                                             ParameterState = Parameter.ValueState.None});
-
-                parameters.Add(new Parameter { Value = _fanService.GetFanMode(fanObjectVm.WorkingFanNumber, fanObjectVm.Doors), ParameterState = Parameter.ValueState.None });
-                parameters.AddRange(fanObjectVm.Parameters);
+                var fanObject = _databaseService.GetFanObject(i);
+                var parameters = new List<ParameterVm>();
+                
+                parameters.Add(getFanNumberParameter(fanObject));
+                parameters.Add(getFanStateParameter(fanObject));
+                fanObject.Parameters.ForEach(p => parameters.Add(new ParameterVm(p)));
                 
                 parametersList.Add(parameters);
             }
             
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                for (int i = 0; i < parametersList.Count; i++) _fans[i].Values = parametersList[i];
+                for (var i = 0; i < parametersList.Count; i++) _fans[i].Values = parametersList[i];
             }));
+        }
+
+        private ParameterVm getFanStateParameter(FanObject fanObject)
+        {
+            return _fanService.GetFanMode(fanObject.WorkingFanNumber, fanObject.Doors);
+        }
+
+        private ParameterVm getFanNumberParameter(FanObject fanObject)
+        {
+            var parameter = new ParameterVm {Value = fanObject.WorkingFanNumber == 0 ? "АВАРИЯ" : string.Format("№{0}", fanObject.WorkingFanNumber)};
+            parameter.State = SystemStateService.GetFanState(fanObject.WorkingFanNumber);
+
+            return parameter;
         }
     }
 }

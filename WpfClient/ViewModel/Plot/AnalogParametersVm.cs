@@ -75,9 +75,10 @@ namespace WpfClient.ViewModel.Plot
 
         public void ShowSignal(int funNum, int id, DateTime from = default(DateTime), DateTime to = default(DateTime))
         {
+            if (id <= 0) return;
+
             if (to == default (DateTime)) to = DateTime.Now;
 
-            id--;
             //if (from == default(DateTime)) from = to - new TimeSpan(24, 0, 0);
 
             using (var repoUnit = new RepoUnit())

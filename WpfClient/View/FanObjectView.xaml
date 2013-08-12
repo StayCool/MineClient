@@ -1,15 +1,16 @@
-﻿<?Mapping XmlNamespace="CodeMapNS" ClrNamespace="WpfClient.Model" ?>
-    <UserControl x:Class="WpfClient.View.FanObjectView"
+﻿<UserControl x:Class="WpfClient.View.FanObjectView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:elements="clr-namespace:Mc.CustomControls.Controls;assembly=Mc.CustomControls"
-             xmlns:fanObject="clr-namespace:WpfClient.ViewModel.FanObject"
-             xmlns:e = "CodeMapNS"
-             d:DataContext="{d:DesignInstance fanObject:FanObjectVm}"
+             xmlns:converters="clr-namespace:WpfClient.Converters"
+
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1250" Background="LightBlue">
+    <UserControl.Resources>
+            <converters:EnumToColorConverter x:Key="EnumToColor"/>
+    </UserControl.Resources>
     
     <Canvas Width="1250" Height="700" DataContext="{Binding TubeSystemVm}">
         <elements:VerticalPipe Move="{Binding V1onTop}" PipeColor="DarkGray" Canvas.Left="344" Canvas.Top="188" Height="126" Width="45"></elements:VerticalPipe>
@@ -166,8 +167,10 @@
         <elements:Fan Rotation="{Binding RotationV1}" Radius="20"  Canvas.Top="217" Canvas.Left="114"/>
         <TextBox FontFamily="Arial" Background="WhiteSmoke" FontSize="16" TextAlignment="Center"
                  Text="ООО&#x0a;ДОНБАССУГЛЕАВТОМАТИКА " RenderTransformOrigin="0.445,0.41"/>
-        <TextBox Background="WhiteSmoke" Text="Состояние системы" Canvas.Left="1132"/>
-        <TextBox Background="WhiteSmoke" TextAlignment="Center" Text="{Binding FanMode}" Canvas.Left="1132" Canvas.Top="21" Width="118"/>
+        <TextBox Text="СОСТОЯНИЕ СИСТЕМЫ" Canvas.Left="1067" Height="27" Width="179" FontSize="16"
+                 Background="{Binding SystemState.State, Converter={StaticResource EnumToColor}}"/>
+        <TextBox TextAlignment="Center" Text="{Binding SystemState.Value}" FontSize="15" Canvas.Left="1067" 
+                 Canvas.Top="32" Width="179" Height="46" Background="{Binding SystemState.State, Converter={StaticResource EnumToColor}}"/>
 
         <Grid Width="{Binding RelativeSource={RelativeSource AncestorType=Canvas}, Path=ActualWidth}"
               Height="{Binding RelativeSource={RelativeSource AncestorType=Canvas}, Path=ActualHeight}">
@@ -190,23 +193,26 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <UniformGrid Rows="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2">
-                <elements:IndicatorControl/>
-                <elements:IndicatorControl/>
-                <elements:IndicatorControl/>
-                <elements:IndicatorControl/>
-            </UniformGrid>
-            
-            <UniformGrid Rows="1" Grid.Column="2" Grid.Row="8">
-                <elements:IndicatorControl/>
-                <elements:IndicatorControl/>
+            <UniformGrid Rows="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
+                         DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.IndicatorVm}">
+                <elements:IndicatorControl Value="{Binding Values[0]}" Level="{Binding Levels[0]}"/>
+                <elements:IndicatorControl Value="{Binding Values[1]}" Level="{Binding Levels[1]}"/>
+                <elements:IndicatorControl Value="{Binding Values[2]}" Level="{Binding Levels[2]}"/>
+                <elements:IndicatorControl Value="{Binding Values[3]}" Level="{Binding Levels[3]}"/>
             </UniformGrid>
 
-            <UniformGrid Rows="1" Grid.Column="4" Grid.Row="6" Grid.RowSpan="3">
-                <elements:ThermometerControl/>
-                <elements:ThermometerControl/>
-                <elements:ThermometerControl/>
-                <elements:ThermometerControl/>
+            <UniformGrid Rows="1" Grid.Column="2" Grid.Row="8"
+                         DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.IndicatorVm}">
+                <elements:IndicatorControl Value="{Binding Values[4]}" Level="{Binding Levels[4]}"/>
+                <elements:IndicatorControl Value="{Binding Values[5]}" Level="{Binding Levels[5]}"/>
+            </UniformGrid>
+
+            <UniformGrid Rows="1" Grid.Column="4" Grid.Row="6" Grid.RowSpan="3"
+                         DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.ThermometerVm}">
+                <elements:ThermometerControl Level="{Binding Levels[0]}"/>
+                <elements:ThermometerControl Level="{Binding Levels[1]}"/>
+                <elements:ThermometerControl Level="{Binding Levels[2]}"/>
+                <elements:ThermometerControl Level="{Binding Levels[3]}"/>
             </UniformGrid>
         </Grid>
     </Canvas>

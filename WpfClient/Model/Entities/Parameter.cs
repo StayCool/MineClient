@@ -2,14 +2,8 @@ namespace WpfClient.Model.Entities
 {
     public class Parameter
     {
-        public enum ValueState
-        {
-            Ok, Bad, Dangerous, None
-        }
-
-        public string Value { get; set; }
-        public string Property { get; set; }
-
-        public ValueState ParameterState { get; set; }
+        public double Value { get; set; }
+        public string Name { get; set; }
+        public StateEnum State { get; set; }
     }
 }

@@ -1,29 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using WpfClient.Model;
 using WpfClient.Model.Entities;
+using WpfClient.ViewModel;
 
 namespace WpfClient.Services
 {
     public class FanService
     {
-        public string GetFanMode(int workingFanNum, List<Door> doors)
+        public ParameterVm GetFanMode(int workingFanNum, List<Door> doors)
         {
             var pattern = new StringBuilder();
             doors.ForEach(d => pattern.Append(d.StateId));
 
-            if (workingFanNum == 1) {
-                return pattern.ToString() == "332223332" ? "Норма" :
-                       pattern.ToString() == "332232232" ? "Реверс" : "Авария";
-            }
-            if (workingFanNum == 2) {
-                return pattern.ToString() == "223323323" ? "Норма" :
-                       pattern.ToString() == "223332223" ? "Реверс" : "Авария";
-            }
+            var mode = getModeString(workingFanNum, pattern.ToString());
+            var state = mode.Equals("АВАРИЯ", StringComparison.InvariantCultureIgnoreCase)
+                            ? StateEnum.Dangerous
+                            : StateEnum.Ok;
 
-            return "Авария";
+            return new ParameterVm
+            {
+                Name = "Вентиялтор в работe",
+                Value = mode,
+                State =  state 
+            };
+        }
+
+        private string getModeString(int workingFanNum, string pattern)
+        {
+            if (workingFanNum == 1) 
+            {
+                return pattern == "332223332" ? "Норма" :
+                       pattern == "332232232" ? "Реверс" : "АВАРИЯ";
+            } 
+            if (workingFanNum == 2) 
+            {
+               return  pattern == "223323323" ? "Норма" :
+                       pattern == "223332223" ? "Реверс" : "АВАРИЯ";
+            }
+            return "АВАРИЯ";
         }
     }
 }

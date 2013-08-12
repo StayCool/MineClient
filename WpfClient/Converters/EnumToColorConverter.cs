@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using System.Windows.Media;
+using WpfClient.Model;
 using WpfClient.Model.Entities;
-using WpfClient.ViewModel;
-using WpfClient.ViewModel.General;
 
 namespace WpfClient.Converters
 {
@@ -15,15 +11,15 @@ namespace WpfClient.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var v = (Parameter.ValueState) value;
+            var v = (StateEnum)value;
             switch (v)
             {
-                case Parameter.ValueState.Ok:
+                case StateEnum.Ok:
                     return new SolidColorBrush(Colors.LightGreen);
-                case Parameter.ValueState.Bad:
+                case StateEnum.Warning:
                     return new SolidColorBrush(Colors.Yellow);
-                case Parameter.ValueState.Dangerous:
-                    return new SolidColorBrush(Colors.OrangeRed);
+                case StateEnum.Dangerous:
+                    return new SolidColorBrush(Colors.IndianRed);
             }
 
             return null;

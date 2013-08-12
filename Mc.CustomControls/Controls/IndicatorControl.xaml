@@ -53,7 +53,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" BorderThickness="2" BorderBrush="DarkGray" Background="Gray" ClipToBounds="True">
+        <Border Grid.Row="0" BorderThickness="2" BorderBrush="DarkGray" Background="DarkSlateGray" ClipToBounds="True">
             <Border Background="Transparent" BorderBrush="Black" BorderThickness="10,10,0,0" 
                         Margin="-12">
                 <Border.Effect>
@@ -62,7 +62,7 @@
             </Border>
         </Border>
 
-        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"
+        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="WhiteSmoke" FontWeight="Bold"
                        Content="{Binding Path=Value, ElementName=Indicator}">
             <Label.FontSize>
                 <MultiBinding Converter="{StaticResource PercentageFontConverter}" ConverterParameter="{StaticResource FontSize}">

@@ -24,8 +24,10 @@ namespace Mc.CustomControls.Controls
     /// </summary>
     public partial class ThermometerControl : UserControl, INotifyPropertyChanged
     {
+        public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(double), typeof(ThermometerControl));
+
         private double _level;
-        
+
         public ObservableCollection<int> Lines { get; set; }
 
         public double Level

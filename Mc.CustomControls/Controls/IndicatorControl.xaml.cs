@@ -26,6 +26,9 @@ namespace Mc.CustomControls.Controls
         private double _value;
         private double _level;
 
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(IndicatorControl));
+        public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(double), typeof(IndicatorControl));
+
         public double Value {
             get { return _value; }
             set {
@@ -45,8 +48,6 @@ namespace Mc.CustomControls.Controls
 
         public IndicatorControl() {
             InitializeComponent();
-            Level = 0.5;
-            Value = 100.5;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

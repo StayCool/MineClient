@@ -1,22 +1,18 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
-using DataRepository.DataAccess.GenericRepository;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Ninject.Parameters;
 using WpfClient.Model;
-using WpfClient.Model.Concrete;
-using WpfClient.Services;
-using WpfClient.ViewModel.FanObject;
+using WpfClient.ViewModel.FanObjectSystem;
 using WpfClient.ViewModel.Plot;
-using Parameter = WpfClient.Model.Entities.Parameter;
 
 namespace WpfClient.ViewModel.General
 {
     public class FanVm : ViewModelBase
     {
-        private List<Parameter> _parameters;
+        private List<ParameterVm> _parameters;
+
         private RelayCommand<object> _paramClickCommand;
         private RelayCommand<object> _fanClickCommand;
 
@@ -32,9 +28,9 @@ namespace WpfClient.ViewModel.General
             get { return string.Format("¬≈Õ“»Àﬂ“Œ– π{0}", FanObjectId); }
         }
 
-        public List<Parameter> Values
+        public List<ParameterVm> Values
         {
-            get { return _parameters ?? (_parameters = new List<Parameter>()); }
+            get { return _parameters ?? (_parameters = new List<ParameterVm>()); }
             set
             {
                 if (value != null) _parameters = value;
@@ -59,9 +55,11 @@ namespace WpfClient.ViewModel.General
 
         private void OnParamClick(object t)
         {
+            if ((int)t <= 1) return;
+
             var analogParametersVm = new AnalogParametersVm();
             IoC.Resolve<MainVm>().CurrentView = analogParametersVm;
-            analogParametersVm.ShowSignal(FanObjectId, (int)t);
+            analogParametersVm.ShowSignal(FanObjectId, (int)t - 1);
         }
     }
 }

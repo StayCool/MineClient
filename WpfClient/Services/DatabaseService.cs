@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataRepository.DataAccess.GenericRepository;
-using DataRepository.Models;
-using WpfClient.Model;
 using WpfClient.Model.Entities;
-using WpfClient.ViewModel;
-using WpfClient.ViewModel.General;
 
 namespace WpfClient.Services
 {
@@ -19,7 +14,7 @@ namespace WpfClient.Services
             using (var unit = new RepoUnit())
             {
                 var analogSignals = unit.FanLog.LastRecord(f => f.FanNumber == fanObjectNum).AnalogSignalLogs.ToList();
-                parameters.AddRange(analogSignals.Select(signal => new Parameter {Property = signal.SignalType.Type, Value = signal.SignalValue.ToString()}));
+                parameters.AddRange(analogSignals.Select(signal => new Parameter {Name = signal.SignalType.Type, Value = signal.SignalValue}));
             }
 
             return parameters;
@@ -32,15 +27,22 @@ namespace WpfClient.Services
             using (var unit = new RepoUnit())
             {
                 var fanLog = unit.FanLog.LastRecord(f => f.FanNumber == fanOjbectNum);
-                
-                fanObjectVm.Parameters.AddRange(fanLog.AnalogSignalLogs.Select(s => new Parameter {Property = s.SignalType.Type, Value = s.SignalValue.ToString()}));
+
+                fanObjectVm.Parameters.AddRange(
+                    fanLog.AnalogSignalLogs.Select(
+                        s => new Parameter { Name = s.SignalType.Type, Value = s.SignalValue, State = SystemStateService.GetParameterState(s.SignalValue) }));
+
                 fanObjectVm.Doors.AddRange(fanLog.DoorsLogs.Select(d => new Door {Type = d.DoorType.Type, State = d.DoorState.State, StateId = d.DoorStateId, TypeId = d.DoorTypeId}));
-                
-                fanObjectVm.WorkingFanNumber = fanLog.Fan1State_Id == fanLog.Fan2State_Id ? 0 : fanLog.Fan1State_Id == 2 ? 1 : 2;
+                fanObjectVm.WorkingFanNumber = GetWorkingFanNumber(fanLog.Fan1State_Id, fanLog.Fan2State_Id);
                 fanObjectVm.Date = fanLog.Date;
             }
             return fanObjectVm;
         }
+
+        private int GetWorkingFanNumber(int? fan1State, int? fan2State)
+        {
+            return fan1State == fan2State ? 0 : fan1State == 2 ? 1 : 2;
+        } 
 
 
         //public List<PropertyValueVm> GetLastParameters(int fanNum)

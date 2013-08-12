@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Text;
 using Mc.CustomControls.Model;
 using WpfClient.Model;
 using System.Linq;
 using WpfClient.Services;
-using Entity = WpfClient.Model.Entities;
+using WpfClient.Model.Entities;
 
-namespace WpfClient.ViewModel.FanObject
+namespace WpfClient.ViewModel.FanObjectSystem
 {
     class TubeSystemVm : INotifyPropertyChanged
     {
-        private string _fanMode;
-        private FanService _fanService;
+        private ParameterVm _systemState;
+        private readonly FanService _fanService;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -248,14 +249,13 @@ namespace WpfClient.ViewModel.FanObject
         }
         #endregion PrivateMethods
 
-
-        public string FanMode
+        public ParameterVm SystemState
         {
-            get { return _fanMode; }
+            get { return _systemState ?? (_systemState = new ParameterVm()); }
             set
             {
-                _fanMode = value;
-                OnPropertyChanged("FanMode");
+                _systemState = value;
+                OnPropertyChanged("SystemState");
             }
         }
 
@@ -263,19 +263,20 @@ namespace WpfClient.ViewModel.FanObject
         {
             ClearTubes();
             _fanService = fanService;
+
             DoorsState = new ObservableCollection<DoorStateEnum>();
             for (int i = 0; i < 15; i++)
                 DoorsState.Add(DoorStateEnum.Open);
         }
 
-        public void Update(Entity.FanObject fanObject)
+        public void Update(FanObject fanObject)
         {
-            SetFanMode(fanObject);
-            SetWorkingFan(fanObject.WorkingFanNumber);
-            SetDoorsState(fanObject.Doors);
+            setFanMode(fanObject);
+            setWorkingFan(fanObject.WorkingFanNumber);
+            setDoorsState(fanObject.Doors);
         }     
 
-        public void SetWorkingFan(int workingFan)
+        private void setWorkingFan(int workingFan)
         {
             RotationV1 = workingFan == 1;
             RotationV2 = workingFan == 2;
@@ -285,7 +286,7 @@ namespace WpfClient.ViewModel.FanObject
         private void setArrows(int workingFan) 
         {
             ClearTubes();
-            switch (FanMode) 
+            switch (SystemState.Value) 
             {
                 case "Реверс": Revers(); break;
                 case "Норма": Norma(); break;
@@ -295,12 +296,30 @@ namespace WpfClient.ViewModel.FanObject
             if (workingFan == 2) V2Work();
         }
 
-        public void SetFanMode(Entity.FanObject fanObject)
+        private void setFanMode(FanObject fanObject)
         {
-            FanMode = _fanService.GetFanMode(fanObject.WorkingFanNumber, fanObject.Doors);
+            var value = new StringBuilder();
+            var state = StateEnum.Ok;
+
+            //Get if reverse or normal
+            var fanMode = _fanService.GetFanMode(fanObject.WorkingFanNumber, fanObject.Doors);
+            value.Append(fanMode.Value);
+
+            //Check if working fan number is correct
+            var fanState = SystemStateService.GetFanState(fanObject.WorkingFanNumber);
+
+            if (fanState == StateEnum.Dangerous || fanMode.State == StateEnum.Dangerous)
+            {
+                state = StateEnum.Dangerous;
+                value.Append("! Проблема:\n");
+                value.Append(fanState == StateEnum.Dangerous ? " (вентилятор)" : "");
+                value.Append(fanMode.State == StateEnum.Dangerous ? " (ляды)" : "");
+            }
+
+            SystemState = new ParameterVm { Value = value.ToString(), State = state };
         }
 
-        public void SetDoorsState(List<Entity.Door> doors)
+        private void setDoorsState(List<Door> doors)
         {
             foreach (var type in Enum.GetValues(typeof (DoorType)))
             {

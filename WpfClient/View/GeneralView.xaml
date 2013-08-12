@@ -24,10 +24,10 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        
-        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="1" 
+
+        <Border Grid.Row="0" Grid.Column="1" Background="Beige" Grid.ColumnSpan="2" BorderThickness="1" 
                 BorderBrush="DarkGray" Margin="10">
-            <Label Content="НАЗВАНИЕ ШАХТЫ" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Content="ДОНБАССУГЛЕАВТОМАТИКА" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
         
         <ItemsControl ItemsSource="{Binding Fans}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
@@ -38,7 +38,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="1" BorderBrush="DarkGray" Margin="10 5 10 0">
+                    <Border BorderThickness="1" Background="Beige" BorderBrush="DarkGray" Margin="10 5 10 0">
                         <Label Content="{Binding FanName}" HorizontalContentAlignment="Center"/>
                         <Border.InputBindings>
                             <MouseBinding  Gesture="LeftDoubleClick" Command="{Binding FanObjectClick}"/>
@@ -66,7 +66,7 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="1" Background="{Binding ParameterState, Converter={StaticResource EnumToColor}}" 
+                                <Border BorderThickness="1" Background="{Binding State, Converter={StaticResource EnumToColor}}" 
                                         BorderBrush="DarkGray" Margin="10 7 10 0">
                                     <Border.InputBindings>
                                         <MouseBinding  Gesture="LeftDoubleClick" 
@@ -95,13 +95,11 @@
             
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="1" BorderBrush="DarkGray" Margin="10 7 10 0">
-                        <Label Content="{Binding}" HorizontalAlignment="Center"/>
+                    <Border BorderThickness="1" Background="Beige" BorderBrush="DarkGray" Margin="10 7 10 0">
+                        <Label Content="{Binding}"  HorizontalAlignment="Center" />
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-            
+        </ItemsControl>           
     </Grid>
 </UserControl>

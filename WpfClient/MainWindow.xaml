@@ -7,7 +7,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:general="clr-namespace:WpfClient.ViewModel.General" 
         xmlns:plot="clr-namespace:WpfClient.ViewModel.Plot"
-        xmlns:fanObject="clr-namespace:WpfClient.ViewModel.FanObject"
+        xmlns:fanObjectSystem="clr-namespace:WpfClient.ViewModel.FanObjectSystem"
         mc:Ignorable="d"    
         d:DataContext="{d:DesignInstance loc:MainVm}"
         Title="MainWindow" Height="Auto" Width="Auto">
@@ -44,7 +44,7 @@
                 <DataTemplate DataType="{x:Type plot:AnalogParametersVm}">
                     <wpfApplication3:AnalogParametersView/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type fanObject:FanObjectVm}">
+                <DataTemplate DataType="{x:Type fanObjectSystem:FanObjectVm}">
                     <wpfApplication3:FanObjectView/>
                 </DataTemplate>
             </ContentControl.Resources>

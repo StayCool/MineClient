@@ -6,10 +6,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
 using WpfClient.Model.Abstract;
-using WpfClient.Model.Concrete;
-using WpfClient.Model.Entities;
-using WpfClient.Services;
-using WpfClient.ViewModel.FanObject;
+using WpfClient.ViewModel.FanObjectSystem;
 using WpfClient.ViewModel.General;
 
 namespace WpfClient.ViewModel
