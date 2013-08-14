@@ -26,7 +26,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
             Update();
 
-            AsyncProvider.StartTimer(2000, Update);
+            AsyncProvider.StartTimer(10000, Update);
         }
 
         public void Update()
@@ -34,18 +34,18 @@ namespace WpfClient.ViewModel.FanObjectSystem
             var fanObject = _databaseService.GetFanObject(_fanObjectId);
 
             TubeSystemVm.Update(fanObject);
-            //IndicatorVm.Update(getIndicatorValues(fanObject));
-           //ThermometerVm.Update(getThermometerValues(fanObject));
+            IndicatorVm.Update(getIndicatorValues(fanObject));
+            ThermometerVm.Update(getThermometerValues(fanObject));
         }
 
         private List<Parameter> getThermometerValues(FanObject fanObject)
         {
-            return null;
+            return new List<Parameter> {fanObject.Parameters[0], fanObject.Parameters[1]};
         }
 
         private List<Parameter> getIndicatorValues(FanObject fanObject)
         {
-            return null;
+            return new List<Parameter> { fanObject.Parameters[2]};
         }
     }
 }

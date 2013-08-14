@@ -25,8 +25,15 @@ namespace WpfClient.ViewModel.General
             _databaseService = databaseService;
             _fanService = fanService;
 
-            AsyncProvider.StartTimer(2000, updateFanValues);
+            initialize();
+
+            updateFanValues();
+            setParameterNames();
+
+            AsyncProvider.StartTimer(10000, updateFanValues);
         }
+
+        public DateTimeVm DateTime { get { return IoC.Resolve<DateTimeVm>(); } }
 
         public ObservableCollection<string> Signals 
         {
@@ -37,21 +44,7 @@ namespace WpfClient.ViewModel.General
             }
         }
 
-        public List<FanVm> Fans
-        {
-            get
-            {
-                if (_fans == null)
-                {
-                    _fans = new List<FanVm>();
-                    for (int i = 1; i <= Config.Instance.FansCount; i++)
-                    {
-                        _fans.Add(new FanVm(i));
-                    }
-                }
-                return _fans;
-            }
-        }
+        public List<FanVm> Fans { get { return _fans; } }
 
         private void setParameterNames()
         {
@@ -60,7 +53,7 @@ namespace WpfClient.ViewModel.General
             Task.Run(() =>
             {
                 var signals = new List<string> {"Вентилятор в работе", "Состояние вентилятора"};
-                signals.AddRange(_databaseService.GetAnalogSignals(1).Select(s => s.Name));
+                signals.AddRange(_databaseService.GetAnalogSignalNames());
                 
                 Application.Current.Dispatcher.BeginInvoke(new Action(() => signals.ForEach(s => _signalNames.Add(s))));
             });
@@ -70,16 +63,16 @@ namespace WpfClient.ViewModel.General
         {
             var parametersList = new List<List<ParameterVm>>();
 
-            for (int i = 1; i <= _fans.Count; i++)
+            for (var i = 1; i <= Fans.Count; i++)
             {
+                parametersList.Add(new List<ParameterVm>());
+
                 var fanObject = _databaseService.GetFanObject(i);
-                var parameters = new List<ParameterVm>();
-                
-                parameters.Add(getFanNumberParameter(fanObject));
-                parameters.Add(getFanStateParameter(fanObject));
-                fanObject.Parameters.ForEach(p => parameters.Add(new ParameterVm(p)));
-                
-                parametersList.Add(parameters);
+                if (fanObject == null) continue;
+
+                parametersList[i - 1].Add(getFanNumberParameter(fanObject));
+                parametersList[i - 1].Add(getFanStateParameter(fanObject));
+                fanObject.Parameters.ForEach(p => parametersList[i - 1].Add(new ParameterVm(p)));
             }
             
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
@@ -99,6 +92,15 @@ namespace WpfClient.ViewModel.General
             parameter.State = SystemStateService.GetFanState(fanObject.WorkingFanNumber);
 
             return parameter;
+        }
+
+        private void initialize()
+        {
+            _fans = new List<FanVm>();
+            for (int i = 1; i <= Config.Instance.FansCount; i++) 
+            {
+                _fans.Add(new FanVm(i));
+            }
         }
     }
 }

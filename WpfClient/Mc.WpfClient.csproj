@@ -112,6 +112,7 @@
     <Compile Include="Services\IocService.cs" />
     <Compile Include="Services\MineConfig.cs" />
     <Compile Include="Services\SystemStateService.cs" />
+    <Compile Include="ViewModel\DateTimeVm.cs" />
     <Compile Include="ViewModel\FanObjectSystem\FanObjectVm.cs" />
     <Compile Include="ViewModel\FanObjectSystem\IndicatorVm.cs" />
     <Compile Include="ViewModel\FanObjectSystem\ThermometerVm.cs" />

@@ -25,9 +25,20 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
+        <Border Grid.Row="0" Grid.Column="0" Margin="10" BorderThickness="2" BorderBrush="LightSlateGray">
+            <UniformGrid Rows="1" Background="LightGray">
+                <TextBox Text="{Binding DateTime.Date}" Background="Transparent" BorderThickness="0" 
+                         FontSize="14" VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center" Foreground="#FF323232" FontStyle="Italic"/>
+                <TextBox Text="{Binding DateTime.Time}" Background="Transparent" BorderThickness="0" 
+                         FontSize="14" Foreground="#FF323232" VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"/>
+            </UniformGrid>
+        </Border>
+        
         <Border Grid.Row="0" Grid.Column="1" Background="Beige" Grid.ColumnSpan="2" BorderThickness="1" 
                 BorderBrush="DarkGray" Margin="10">
-            <Label Content="ДОНБАССУГЛЕАВТОМАТИКА" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Content="Название шахты" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
         
         <ItemsControl ItemsSource="{Binding Fans}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">

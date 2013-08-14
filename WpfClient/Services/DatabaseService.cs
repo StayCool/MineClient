@@ -13,11 +13,23 @@ namespace WpfClient.Services
 
             using (var unit = new RepoUnit())
             {
+                if (isFanLogEmpty(unit, fanObjectNum)) return null;
                 var analogSignals = unit.FanLog.LastRecord(f => f.FanNumber == fanObjectNum).AnalogSignalLogs.ToList();
                 parameters.AddRange(analogSignals.Select(signal => new Parameter {Name = signal.SignalType.Type, Value = signal.SignalValue}));
             }
 
             return parameters;
+        }
+
+        public List<string> GetAnalogSignalNames()
+        {
+            var names = new List<string>();
+
+            using (var unit = new RepoUnit())
+            {
+                names.AddRange(unit.AnalogSignal.Load().Select(s => s.Type).ToList());
+            }
+            return names;
         }
 
         public FanObject GetFanObject(int fanOjbectNum)
@@ -26,6 +38,8 @@ namespace WpfClient.Services
 
             using (var unit = new RepoUnit())
             {
+                if (isFanLogEmpty(unit, fanOjbectNum)) return null;
+
                 var fanLog = unit.FanLog.LastRecord(f => f.FanNumber == fanOjbectNum);
 
                 fanObjectVm.Parameters.AddRange(
@@ -37,6 +51,11 @@ namespace WpfClient.Services
                 fanObjectVm.Date = fanLog.Date;
             }
             return fanObjectVm;
+        }
+
+        private bool isFanLogEmpty(RepoUnit unit, int fanObjectNum)
+        {
+            return unit == null || !unit.FanLog.Load(f => f.FanNumber == fanObjectNum).Any();
         }
 
         private int GetWorkingFanNumber(int? fan1State, int? fan2State)

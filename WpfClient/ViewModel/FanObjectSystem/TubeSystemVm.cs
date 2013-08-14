@@ -21,6 +21,9 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
         public ObservableCollection<DoorStateEnum> DoorsState { get; set; }
         public ObservableCollection<string> DoorsText { get; set; }
+
+
+        public DateTimeVm DateTime { get { return IoC.Resolve<DateTimeVm>(); } }
  
         #region Property
         private bool _rotationV1;
@@ -319,9 +322,8 @@ namespace WpfClient.ViewModel.FanObjectSystem
             if (fanState == StateEnum.Dangerous || fanMode.State == StateEnum.Dangerous)
             {
                 state = StateEnum.Dangerous;
-                value.Append("! Проблема:\n");
-                value.Append(fanState == StateEnum.Dangerous ? " (вентилятор)" : "");
-                value.Append(fanMode.State == StateEnum.Dangerous ? " (ляды)" : "");
+                if (fanState == StateEnum.Dangerous) value.Append("\nВентилятор остановлен");
+                else if (fanMode.State == StateEnum.Dangerous) value.Append("\nЛяды не собраны");
             }
 
             SystemState = new ParameterVm { Value = value.ToString(), State = state };

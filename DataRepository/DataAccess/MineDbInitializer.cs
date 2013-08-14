@@ -49,9 +49,16 @@ namespace DataRepository.DataAccess
             //Init AnalogSignalType table
             var analogSignalType = new List<AnalogSignal>
             {
-                new AnalogSignal {Type = "Аналоговый сигнал 1"},
-                new AnalogSignal {Type = "Аналоговый сигнал 2"},
-                new AnalogSignal {Type = "Аналоговый сигнал 3"}
+                new AnalogSignal {Type = "Расход Q (м3/c)"},
+                new AnalogSignal {Type = "Давление (кПа)"},
+                new AnalogSignal {Type = "Температура подшипника №1 (град)"},
+                new AnalogSignal {Type = "Температура подшипника №2 (град)"},
+                new AnalogSignal {Type = "Температура подшипника №3 (град)"},
+                new AnalogSignal {Type = "Температура подшипника №4 (град)"},
+                new AnalogSignal {Type = "Вибрация подшипника №1 (мкм)"},
+                new AnalogSignal {Type = "Вибрация подшипника №2 (мкм)"},
+                new AnalogSignal {Type = "Вибрация подшипника №3 (мкм)"},
+                new AnalogSignal {Type = "Вибрация подшипника №4 (мкм)"}
             };
             analogSignalType.ForEach(s => context.AnalogSignals.Add(s));
             

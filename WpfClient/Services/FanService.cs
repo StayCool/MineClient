@@ -16,7 +16,8 @@ namespace WpfClient.Services
 
             var mode = getModeString(workingFanNum, pattern.ToString());
             var state = mode.Equals("АВАРИЯ", StringComparison.InvariantCultureIgnoreCase)
-                            ? StateEnum.Dangerous
+                            ? StateEnum.Dangerous : mode.Equals("Реверс", StringComparison.InvariantCultureIgnoreCase)
+                            ? StateEnum.Warning
                             : StateEnum.Ok;
 
             return new ParameterVm

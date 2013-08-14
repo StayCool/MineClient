@@ -2,14 +2,16 @@ namespace WpfClient.Model.Abstract
 {
     public interface IConfig
     {
-        int FansCount { get; set; }
+        double FansCount { get; set; }
 
-        int MaxTemperature { get; set; }
+        double MaxTemperature { get; set; }
 
-        int MaxIndicatorValue { get; set; }
+        double MaxPillowValue { get; set; }
 
-        int ParameterWarning { get; set; }
+        double MaxIndicatorValue { get; set; }
 
-        int ParameterDanger { get; set; }
+        double ParameterWarning { get; set; }
+
+        double ParameterDanger { get; set; }
     }
 }

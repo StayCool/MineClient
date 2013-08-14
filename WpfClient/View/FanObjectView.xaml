@@ -165,10 +165,21 @@
         <elements:Fan Rotation="{Binding RotationV1}" Radius="20"  Canvas.Top="217" Canvas.Left="114"/>
         <TextBox FontFamily="Arial" Background="WhiteSmoke" FontSize="16" TextAlignment="Center"
                  Text="ООО&#x0a;ДОНБАССУГЛЕАВТОМАТИКА " RenderTransformOrigin="0.445,0.41"/>
-        <TextBox Text="СОСТОЯНИЕ СИСТЕМЫ" Canvas.Left="1067" Height="27" Width="179" FontSize="16"
+        <Label Content="РЕЖИМ РАБОТЫ" Canvas.Left="1067" Width="179" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                  Background="{Binding SystemState.State, Converter={StaticResource EnumToColor}}"/>
-        <TextBox TextAlignment="Center" Text="{Binding SystemState.Value}" FontSize="15" Canvas.Left="1067" 
-                 Canvas.Top="32" Width="179" Height="46" Background="{Binding SystemState.State, Converter={StaticResource EnumToColor}}"/>
+        <Label HorizontalContentAlignment="Center" Content="{Binding SystemState.Value}" FontSize="15" Canvas.Left="1067" 
+                 Canvas.Top="32" Width="179" Background="{Binding SystemState.State, Converter={StaticResource EnumToColor}}"/>
+
+        <Border Grid.Row="0" Grid.Column="0" BorderThickness="1"  BorderBrush="#FFABADB3" Canvas.Top="39" Width="233">
+            <UniformGrid Rows="1" Background="WhiteSmoke">
+                <TextBox Text="{Binding DateTime.Date}" Background="Transparent" BorderThickness="0" 
+                         FontSize="16" VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center" Foreground="#FF323232" FontStyle="Italic"/>
+                <TextBox Text="{Binding DateTime.Time}" Background="Transparent" BorderThickness="0" 
+                         FontSize="16" Foreground="#FF323232" VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"/>
+            </UniformGrid>
+        </Border>
 
         <Grid Width="{Binding RelativeSource={RelativeSource AncestorType=Canvas}, Path=ActualWidth}"
               Height="{Binding RelativeSource={RelativeSource AncestorType=Canvas}, Path=ActualHeight}">
@@ -199,10 +210,30 @@
                 <elements:IndicatorControl Value="{Binding Values[3]}" Level="{Binding Levels[3]}"/>
             </UniformGrid>
 
+            <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Text="Вибрация подшипников, мкм" HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center" Background="DarkSlateGray" FontSize="15" Foreground="LightGray"/>
+            <UniformGrid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Rows="1">
+                <TextBox Text="№1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="DarkSlateGray"
+                         FontSize="14" Foreground="LightGray"/>
+                <TextBox Text="№2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="DarkSlateGray" 
+                         FontSize="14" Foreground="LightGray"/>
+                <TextBox Text="№3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="DarkSlateGray" 
+                         FontSize="14" Foreground="LightGray"/>
+                <TextBox Text="№4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="DarkSlateGray" 
+                         FontSize="14" Foreground="LightGray"/>
+            </UniformGrid>
+
             <UniformGrid Rows="1" Grid.Column="2" Grid.Row="8"
                          DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.IndicatorVm}">
                 <elements:IndicatorControl Value="{Binding Values[4]}" Level="{Binding Levels[4]}"/>
                 <elements:IndicatorControl Value="{Binding Values[5]}" Level="{Binding Levels[5]}"/>
+            </UniformGrid>
+            
+            <UniformGrid Grid.Column="2" Grid.Row="7" Rows="1">
+                <TextBox Text="Q, м3/с" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="DarkSlateGray"
+                         FontSize="14" Foreground="LightGray"/>
+                <TextBox Text="P, кПа" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="DarkSlateGray" 
+                         FontSize="14" Foreground="LightGray"/>
             </UniformGrid>
 
             <UniformGrid Rows="1" Grid.Column="4" Grid.Row="6" Grid.RowSpan="3"
@@ -211,6 +242,15 @@
                 <elements:ThermometerControl Level="{Binding Levels[1]}"/>
                 <elements:ThermometerControl Level="{Binding Levels[2]}"/>
                 <elements:ThermometerControl Level="{Binding Levels[3]}"/>
+            </UniformGrid>
+            
+            <TextBlock Grid.Column="4" Grid.Row="4" Text="Температура подшипников, град. С" TextAlignment="Center" 
+                     Background="#FFECECEC" FontSize="15" Foreground="DarkSlateGray"/>
+            <UniformGrid Grid.Column="4" Grid.Row="5" Rows="1">
+                <Label Content="№1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FFECECEC" Foreground="DarkSlateGray" FontSize="14"/>
+                <Label Content="№2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FFECECEC" Foreground="DarkSlateGray" FontSize="14"/>
+                <Label Content="№3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FFECECEC" Foreground="DarkSlateGray" FontSize="14"/>
+                <Label Content="№4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FFECECEC" Foreground="DarkSlateGray" FontSize="14"/>
             </UniformGrid>
         </Grid>
     </Canvas>

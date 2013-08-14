@@ -9,7 +9,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
     class ThermometerVm : ViewModelBase
     {
         private readonly int _thermometerCount = 4;
-        private readonly int _maxTemperature;
+        private readonly double _maxTemperature;
 
         public ObservableCollection<double> Levels { get; set; }  
 
@@ -21,9 +21,9 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
         public void Update(List<Parameter> temperatures)
         {
-            for (var i = 0; i < _thermometerCount; i++)
+            for (var i = 0; i < temperatures.Count && i < _thermometerCount; i++)
             {
-                Levels[i] = _maxTemperature / temperatures[i].Value;
+                Levels[i] = temperatures[i].Value / _maxTemperature;
             }
         }
 

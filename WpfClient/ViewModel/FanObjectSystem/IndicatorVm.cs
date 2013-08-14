@@ -9,6 +9,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
     {
         private readonly int _indicatorCount = 6;
         private readonly double _maxIndicatorValue;
+        private readonly double _maxPillowValue;
 
         public ObservableCollection<double> Levels { get; set; }
         public ObservableCollection<double> Values { get; set; }
@@ -16,15 +17,19 @@ namespace WpfClient.ViewModel.FanObjectSystem
         public IndicatorVm()
         {
             _maxIndicatorValue = Config.Instance.MaxIndicatorValue;
+            _maxPillowValue = Config.Instance.MaxPillowValue;
+
             initialize();
         }
 
         public void Update(List<Parameter> indicatorValues)
         {
-            for (var i = 0; i < _indicatorCount; i++)
+            for (var i = 0; i < indicatorValues.Count && i < _indicatorCount; i++)
             {
-                Levels[i] = _maxIndicatorValue / indicatorValues[i].Value;
+                Values[i] = indicatorValues[i].Value;
             }
+            //Levels[0] = indicatorValues[0].Value / _maxIndicatorValue;
+            Levels[0] = indicatorValues[0].Value / _maxPillowValue;
         }
 
         private void initialize()
@@ -35,7 +40,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
             for (var i = 0; i < _indicatorCount; i++)
             {
                 Levels.Add(0);
-                Values.Add(150);
+                Values.Add(0);
             }
         }
     }

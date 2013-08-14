@@ -11,93 +11,62 @@ namespace WpfClient.Services
 {
     class MineConfig : IConfig
     {
-        private int _fansCount;
-        private int _maxTemperature;
-        private int _maxIndicatorValue;
-        private int _parameterWarning;
-        private int _parameterDanger;
+        private double _fansCount;
+        private double _maxTemperature;
+        private double _maxIndicatorValue;
+        private double _parameterWarning;
+        private double _parameterDanger;
+        private double _maxPillowValue;
 
-        public int FansCount {
-            get
-            {
-                if (_fansCount == 0)
-                {
-                    _fansCount = int.Parse(ConfigurationManager.AppSettings["FanObjectCount"]);
-                }
-                return _fansCount;
-            }
-            set
-            {
-                _fansCount = 0;
-                ConfigurationManager.AppSettings["FanObjectCount"] = value.ToString(CultureInfo.InvariantCulture);
-            }
-        }
-
-        public int MaxTemperature
+        public double FansCount 
         {
-            get
-            {
-                if (_maxTemperature == 0)
-                {
-                    _maxTemperature = int.Parse(ConfigurationManager.AppSettings["MaxTemperature"]);
-                }
-                return _maxTemperature;
-            }
-            set
-            {
-                _maxTemperature = 0;
-                ConfigurationManager.AppSettings["MaxTemperature"] = value.ToString(CultureInfo.InvariantCulture);
-            }
+            get { return (_fansCount = getParameter("FanObjectCount", _fansCount)); }
+            set { setParameter("FanObjectCount", ref _fansCount, value); }
         }
 
-        public int MaxIndicatorValue {
-            get
-            {
-                if (_maxIndicatorValue == 0)
-                {
-                    _maxIndicatorValue = int.Parse(ConfigurationManager.AppSettings["MaxIndicatorValue"]);
-                }
-                return _maxIndicatorValue;
-            }
-            set
-            {
-                _maxIndicatorValue = 0;
-                ConfigurationManager.AppSettings["MaxTemperature"] = value.ToString(CultureInfo.InvariantCulture);
-            }
-        }
-
-        public int ParameterWarning
+        public double MaxTemperature
         {
-            get
-            {
-                if (_parameterWarning == 0)
-                {
-                    _parameterWarning = int.Parse(ConfigurationManager.AppSettings["ParameterWarning"]);
-                }
-                return _parameterWarning;
-            }
-            set
-            {
-                _parameterWarning = 0;
-                ConfigurationManager.AppSettings["ParameterWarning"] = value.ToString(CultureInfo.InvariantCulture);
-            }
+            get { return (_maxTemperature = getParameter("MaxTemperature", _maxTemperature)); }
+            set { setParameter("MaxTemperature", ref _maxTemperature, value); }
         }
 
-        public int ParameterDanger 
+        public double MaxPillowValue
         {
-            get 
+            get { return (_maxPillowValue = getParameter("MaxPillowValue", _maxPillowValue)); } 
+            set { setParameter("MaxPillowValue", ref _maxPillowValue, value); }
+        }
+
+        public double MaxIndicatorValue 
+        {
+            get { return (_maxIndicatorValue = getParameter("MaxIndicatorValue", _maxIndicatorValue)); }
+            set { setParameter("MaxIndicatorValue", ref _maxIndicatorValue, value); }
+        }
+
+        public double ParameterWarning
+        {
+            get { return (_parameterWarning = getParameter("ParameterWarning", _parameterWarning)); }
+            set { setParameter("ParameterWarning", ref _parameterWarning, value); }
+        }
+
+        public double ParameterDanger 
+        {
+            get { return (_parameterDanger = getParameter("ParameterDanger", _parameterDanger)); }
+            set { setParameter("ParameterDanger", ref _parameterDanger, value); }
+        }
+
+        private double getParameter(string name, double value)
+        {
+            if (Math.Abs(value) < 1e-10)
             {
-                if (_parameterDanger == 0) 
-                {
-                    _parameterDanger = int.Parse(ConfigurationManager.AppSettings["ParameterDanger"]);
-                }
-                return _parameterDanger;
+                value = double.Parse(ConfigurationManager.AppSettings[name]);
             }
-            set 
-            {
-                _parameterDanger = 0;
-                ConfigurationManager.AppSettings["ParameterDanger"] = value.ToString(CultureInfo.InvariantCulture);
-            }
+            return value;
+        }
+
+        private void setParameter(string name, ref double oldValue, double newValue)
+        {
+            oldValue = 0;
+            ConfigurationManager.AppSettings[name] = newValue.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

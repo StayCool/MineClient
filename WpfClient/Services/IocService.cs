@@ -17,6 +17,7 @@ namespace WpfClient.Services
             IoC.RegisterInstance<IRemoteListener, TcpRemoteListener>();
             IoC.RegisterInstance<IDataInserter, DataBaseInserter>();
             IoC.RegisterType<IConfig, MineConfig>();
+            IoC.RegisterSingleton<DateTimeVm, DateTimeVm>();
         }
     }
 }
