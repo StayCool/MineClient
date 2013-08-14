@@ -11,6 +11,6 @@
         <model:PiePiece
                     WedgeAngle="90" RotationAngle="0"
                     Radius="{Binding ElementName=control, Path=ActualHeight}"
-            InnerRadius="30" Fill="DarkGray"  Stroke="Black"/>
+            InnerRadius="30" Fill="LightGray"  Stroke="Black"/>
     </Canvas>
 </UserControl>

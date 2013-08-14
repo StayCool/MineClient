@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="Mc.CustomControls.Controls.Lada"
+﻿<UserControl x:Name="usercontrol"
+             x:Class="Mc.CustomControls.Controls.Lada"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,13 +9,19 @@
     <Grid>
     <Canvas  Name="canvas" Height="{Binding ElementName=root, Path=Height}"  
             Width="{Binding ElementName=root, Path=Width}">
-        <Rectangle Name="Close"  Fill="HotPink"
+        <Rectangle Name="Close"
             Width="10" 
                    Height="{Binding ElementName=canvas,Path=ActualHeight}">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{Binding ElementName=usercontrol, Path=CloseColor}" />
+            </Rectangle.Fill>
         </Rectangle>
-            <Rectangle Name="Open"  Fill="HotPink"
+            <Rectangle Name="Open"
             Width="{Binding ElementName=canvas,Path=ActualWidth}" 
                    Height="10">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="{Binding ElementName=usercontrol, Path=OpenColor}" />
+                </Rectangle.Fill>
             </Rectangle>
         </Canvas>
     </Grid>

@@ -93,16 +93,16 @@
         <elements:PipeBinderDouble Width="49" Canvas.Top="604" Height="55" Canvas.Left="113"/>
 
 
-        <TextBox Background="WhiteSmoke" Text="ЛО №1" Canvas.Left="422" Canvas.Top="191"></TextBox>
-        <elements:Lada State="{Binding DoorsState[1]}" Canvas.Left="422" Canvas.Top="217" Height="45"></elements:Lada>
-        <TextBox Background="WhiteSmoke" Text="ЛО №2" Canvas.Left="422" Canvas.Top="480"></TextBox>
-        <elements:Lada State="{Binding DoorsState[3]}" Canvas.Left="422" Canvas.Top="507" Height="45"></elements:Lada>
-        <TextBox Background="WhiteSmoke" Text="ЛП №2" Canvas.Left="402" Canvas.Top="377"></TextBox>
-        <elements:Lada State="{Binding DoorsState[4]}" Canvas.Left="402" Canvas.Top="404" Height="45"></elements:Lada>
-        <TextBox Background="WhiteSmoke" Text="ЛП №1" Canvas.Left="402" Canvas.Top="292"></TextBox>
-        <elements:Lada State="{Binding DoorsState[2]}" Canvas.Left="402" Canvas.Top="319" Height="45"></elements:Lada>
-        <TextBox Background="WhiteSmoke" Text="НА №1" Canvas.Left="164" Canvas.Top="180"></TextBox>
-        <elements:Lada State="{Binding DoorsState[8]}" Canvas.Left="111" Canvas.Top="167" Height="45" RenderTransformOrigin="0.5,0.5">
+        <TextBox Background="{Binding DoorsText[1]}" Text="ЛО №1" Canvas.Left="422" Canvas.Top="191"></TextBox>
+        <elements:Lada State="{Binding DoorsState[1]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="422" Canvas.Top="217" Height="45"></elements:Lada>
+        <TextBox Background="{Binding DoorsText[3]}" Text="ЛО №2" Canvas.Left="422" Canvas.Top="480"></TextBox>
+        <elements:Lada State="{Binding DoorsState[3]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="422" Canvas.Top="507" Height="45"></elements:Lada>
+        <TextBox Background="{Binding DoorsText[4]}" Text="ЛП №2" Canvas.Left="402" Canvas.Top="377"></TextBox>
+        <elements:Lada State="{Binding DoorsState[4]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="402" Canvas.Top="404" Height="45"></elements:Lada>
+        <TextBox Background="{Binding DoorsText[2]}" Text="ЛП №1" Canvas.Left="402" Canvas.Top="292"></TextBox>
+        <elements:Lada State="{Binding DoorsState[2]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="402" Canvas.Top="319" Height="45"></elements:Lada>
+        <TextBox Background="{Binding DoorsText[8]}" Text="НА №1" Canvas.Left="164" Canvas.Top="182"></TextBox>
+        <elements:Lada State="{Binding DoorsState[8]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="111" Canvas.Top="167" Height="45" RenderTransformOrigin="0.5,0.5">
             <elements:Lada.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -112,8 +112,7 @@
                 </TransformGroup>
             </elements:Lada.RenderTransform>
         </elements:Lada>
-        <TextBox Background="WhiteSmoke" Text="НА №2" Canvas.Left="164" Canvas.Top="277"></TextBox>
-        <elements:Lada State="{Binding DoorsState[8]}" Canvas.Left="111" Canvas.Top="265" Height="45" RenderTransformOrigin="0.5,0.5">
+        <elements:Lada State="{Binding DoorsState[8]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="111" Canvas.Top="265" Height="45" RenderTransformOrigin="0.5,0.5">
             <elements:Lada.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -123,8 +122,7 @@
                 </TransformGroup>
             </elements:Lada.RenderTransform>
         </elements:Lada>
-        <TextBox Background="WhiteSmoke" Text="НА №1" Canvas.Left="165" Canvas.Top="468"/>
-        <elements:Lada State="{Binding DoorsState[9]}" Canvas.Left="112" Canvas.Top="458" Height="45" RenderTransformOrigin="0.5,0.5">
+        <elements:Lada State="{Binding DoorsState[9]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="112" Canvas.Top="458" Height="45" RenderTransformOrigin="0.5,0.5">
             <elements:Lada.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -134,8 +132,8 @@
                 </TransformGroup>
             </elements:Lada.RenderTransform>
         </elements:Lada>
-        <TextBox Background="WhiteSmoke" Text="НА №2" Canvas.Left="165" Canvas.Top="567"/>
-        <elements:Lada State="{Binding DoorsState[9]}" Canvas.Left="112" Canvas.Top="556" Height="45" RenderTransformOrigin="0.5,0.5">
+        <TextBox Background="{Binding DoorsText[9]}" Text="НА №2" Canvas.Left="165" Canvas.Top="471"/>
+        <elements:Lada State="{Binding DoorsState[9]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="112" Canvas.Top="556" Height="45" RenderTransformOrigin="0.5,0.5">
             <elements:Lada.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -145,12 +143,12 @@
                 </TransformGroup>
             </elements:Lada.RenderTransform>
         </elements:Lada>
-        <TextBox Background="WhiteSmoke" Text="ЛА" Canvas.Left="907" Canvas.Top="78"/>
-        <elements:Lada State="{Binding DoorsState[5]}" Canvas.Left="897" Canvas.Top="105" Height="45"/>
-        <TextBox Background="WhiteSmoke" Text="ЛПК" Canvas.Left="992" Canvas.Top="292"/>
-        <elements:Lada State="{Binding DoorsState[7]}" Canvas.Left="1022" Canvas.Top="315" Height="54" Width="59"/>
-        <TextBox Background="WhiteSmoke" Text="ЛД" Canvas.Left="1098" Canvas.Top="195"/>
-        <elements:Lada State="{Binding DoorsState[6]}" Canvas.Left="1025" Canvas.Top="211" Height="57" Width="52" RenderTransformOrigin="0.5,0.5">
+        <TextBox Background="{Binding DoorsText[5]}" Text="ЛА" Canvas.Left="907" Canvas.Top="78"/>
+        <elements:Lada State="{Binding DoorsState[5]}" OpenColor="Red" CloseColor="LightGreen" Canvas.Left="897" Canvas.Top="105" Height="45"/>
+        <TextBox Background="{Binding DoorsText[7]}" Text="ЛПК" Canvas.Left="992" Canvas.Top="292"/>
+        <elements:Lada State="{Binding DoorsState[7]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="1022" Canvas.Top="315" Height="54" Width="59"/>
+        <TextBox Background="{Binding DoorsText[6]}" Text="ЛД" Canvas.Left="1098" Canvas.Top="195"/>
+        <elements:Lada State="{Binding DoorsState[6]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="1025" Canvas.Top="211" Height="57" Width="52" RenderTransformOrigin="0.5,0.5">
             <elements:Lada.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

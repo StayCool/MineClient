@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Media;
 using Mc.CustomControls.Model;
 using WpfClient.Model;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<DoorStateEnum> DoorsState { get; set; }
+        public ObservableCollection<string> DoorsText { get; set; }
  
         #region Property
         private bool _rotationV1;
@@ -267,6 +269,9 @@ namespace WpfClient.ViewModel.FanObjectSystem
             DoorsState = new ObservableCollection<DoorStateEnum>();
             for (int i = 0; i < 15; i++)
                 DoorsState.Add(DoorStateEnum.Open);
+            DoorsText = new ObservableCollection<string>();
+            for (int i = 0; i < 15; i++)
+                DoorsText.Add("WhiteSmoke");
         }
 
         public void Update(FanObject fanObject)
@@ -328,6 +333,9 @@ namespace WpfClient.ViewModel.FanObjectSystem
             {
                 var stateId = doors.First(d => d.TypeId == (int) type).StateId;
                 DoorsState[(int) type] = Enum.IsDefined(typeof(DoorStateEnum), stateId) ? (DoorStateEnum)stateId : DoorStateEnum.Undefined ;
+                DoorsText[(int) type] = DoorsState[(int) type] == DoorStateEnum.Undefined
+                                            ? "Red"
+                                            : "WhiteSmoke";
             }
         }
 

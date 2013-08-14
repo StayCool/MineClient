@@ -8,7 +8,7 @@
     <Grid>
         <Canvas  Name="canvas" Height="{Binding ElementName=root, Path=Height}"  
             Width="{Binding ElementName=root, Path=Width}">
-            <Rectangle  Fill="DarkGray"
+            <Rectangle  Fill="LightGray"
             Width="{Binding ElementName=canvas, Path=ActualWidth}" 
                    Height="{Binding ElementName=canvas,Path=ActualHeight}">
                 </Rectangle>

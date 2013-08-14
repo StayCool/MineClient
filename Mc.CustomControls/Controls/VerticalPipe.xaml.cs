@@ -32,7 +32,6 @@ namespace Mc.CustomControls.Controls
             }
         }
 
-        private string _move;
         public string Move {
             get {
                 return (string)GetValue(MoveProperty);
