@@ -22,7 +22,6 @@ namespace WpfClient.ViewModel.FanObjectSystem
         public ObservableCollection<DoorStateEnum> DoorsState { get; set; }
         public ObservableCollection<string> DoorsText { get; set; }
 
-
         public DateTimeVm DateTime { get { return IoC.Resolve<DateTimeVm>(); } }
  
         #region Property
@@ -198,6 +197,11 @@ namespace WpfClient.ViewModel.FanObjectSystem
             set { _reversDown = value; OnPropertyChanged("ReversDown"); }
         }
 
+        private string _normaTopReverseDown;
+        public string NormaTopReverseDown {
+            get { return _normaTopReverseDown; }
+            set { _normaTopReverseDown = value; OnPropertyChanged("NormaTopReverseDown"); }
+        }
         #endregion
 
         #region PrivateMethods
@@ -207,6 +211,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
             ReversLeft = "Stop";
             NormaReightReversLeft = "Stop";
             NormaLeftReversReight = "Stop";
+            NormaTopReverseDown = "Stop";
             NormaLeft = "Stop";
             NormaTop = "Stop";
             WorkLeft = "Stop";
@@ -240,6 +245,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
             NormaTop = "Top";
             NormaLeftReversReight = "Left";
             NormaReightReversLeft = "Reight";
+            NormaTopReverseDown = "Top";
             WorkLeft = "Left";
             WorkReight = "Reight";
         }
@@ -249,6 +255,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
             ReversLeft = "Left";
             NormaLeftReversReight = "Reight";
             NormaReightReversLeft = "Left";
+            NormaTopReverseDown = "Down";
             WorkLeft = "Left";
             WorkReight = "Reight";
         }
@@ -314,6 +321,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
             //Get if reverse or normal
             var fanMode = _fanService.GetFanMode(fanObject.WorkingFanNumber, fanObject.Doors);
+            state = fanMode.State;
             value.Append(fanMode.Value);
 
             //Check if working fan number is correct

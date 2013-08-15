@@ -25,7 +25,7 @@ namespace WpfClient.ViewModel.General
 
         public string FanName
         {
-            get { return string.Format("ÂÅÍÒÈËßÒÎĞ ¹{0}", FanObjectId); }
+            get { return string.Format("ÂÅÍÒÈËßÒÎĞÍÀß ÓÑÒÀÍÎÂÊÀ ¹{0}", FanObjectId); }
         }
 
         public List<ParameterVm> Values

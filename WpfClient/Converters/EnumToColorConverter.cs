@@ -17,7 +17,7 @@ namespace WpfClient.Converters
                 case StateEnum.Ok:
                     return new SolidColorBrush(Colors.LightGreen);
                 case StateEnum.Warning:
-                    return new SolidColorBrush(Colors.Yellow);
+                    return new SolidColorBrush(Colors.Orange);
                 case StateEnum.Dangerous:
                     return new SolidColorBrush(Colors.IndianRed);
             }

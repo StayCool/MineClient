@@ -40,12 +40,12 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
         private List<Parameter> getThermometerValues(FanObject fanObject)
         {
-            return new List<Parameter> {fanObject.Parameters[0], fanObject.Parameters[1]};
+            return new List<Parameter> {fanObject.Parameters[2]};
         }
 
         private List<Parameter> getIndicatorValues(FanObject fanObject)
         {
-            return new List<Parameter> { fanObject.Parameters[2]};
+            return new List<Parameter> { fanObject.Parameters[0], fanObject.Parameters[1]};
         }
     }
 }

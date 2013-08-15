@@ -24,12 +24,14 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
         public void Update(List<Parameter> indicatorValues)
         {
-            for (var i = 0; i < indicatorValues.Count && i < _indicatorCount; i++)
+            Levels[0] = indicatorValues[0].Value / _maxIndicatorValue;
+            Levels[1] = indicatorValues[1].Value / _maxPillowValue;
+
+            for (var i = 0; i < _indicatorCount; i++)
             {
-                Values[i] = indicatorValues[i].Value;
+                Values[i] = indicatorValues[i%2].Value;
+                Levels[i] = indicatorValues[i%2].Value / _maxPillowValue;
             }
-            //Levels[0] = indicatorValues[0].Value / _maxIndicatorValue;
-            Levels[0] = indicatorValues[0].Value / _maxPillowValue;
         }
 
         private void initialize()

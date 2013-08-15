@@ -21,9 +21,9 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
         public void Update(List<Parameter> temperatures)
         {
-            for (var i = 0; i < temperatures.Count && i < _thermometerCount; i++)
+            for (var i = 0; i < _thermometerCount; i++)
             {
-                Levels[i] = temperatures[i].Value / _maxTemperature;
+                Levels[i] = temperatures[0].Value / _maxTemperature;
             }
         }
 

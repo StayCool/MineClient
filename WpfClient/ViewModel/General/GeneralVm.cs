@@ -54,9 +54,9 @@ namespace WpfClient.ViewModel.General
             {
                 var signals = new List<string> {"Вентилятор в работе", "Состояние вентилятора"};
                 signals.AddRange(_databaseService.GetAnalogSignalNames());
-                
-                Application.Current.Dispatcher.BeginInvoke(new Action(() => signals.ForEach(s => _signalNames.Add(s))));
-            });
+
+                return signals;
+            }).ContinueWith(task => task.Result.ForEach(s => _signalNames.Add(s)));
         }
 
         private void updateFanValues()

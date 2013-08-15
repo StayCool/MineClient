@@ -49,7 +49,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="1" Background="Beige" BorderBrush="DarkGray" Margin="10 5 10 0">
+                    <Border BorderThickness="1" Background="{Binding Values[1].State, Converter={StaticResource EnumToColor}}"  BorderBrush="DarkGray" Margin="10 5 10 0">
                         <Label Content="{Binding FanName}" HorizontalContentAlignment="Center"/>
                         <Border.InputBindings>
                             <MouseBinding  Gesture="LeftDoubleClick" Command="{Binding FanObjectClick}"/>
