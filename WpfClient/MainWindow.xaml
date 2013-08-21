@@ -28,8 +28,8 @@
                           Command="{Binding MenuClick}" CommandParameter="FanObject"/>
             </MenuItem>
             <MenuItem Header="ВИД">
-                <MenuItem Header="Параметры вентиляторов" VerticalAlignment="Center" Width="Auto"
-                          Command="{Binding MenuClick}" CommandParameter="FanParams" />
+                <MenuItem Header="История" VerticalAlignment="Center" Width="Auto"
+                          Command="{Binding MenuClick}" CommandParameter="History" />
                 <MenuItem Header="Главное окно" VerticalAlignment="Center" Width="Auto"
                           Command="{Binding MenuClick}" CommandParameter="GeneralView" />
             </MenuItem>
@@ -46,6 +46,12 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type fanObjectSystem:FanObjectVm}">
                     <wpfApplication3:FanObjectView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type plot:OnPlotClickVm}">
+                    <wpfApplication3:OnPlotClickView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type loc:HistoryVm}">
+                    <wpfApplication3:HistoryView/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

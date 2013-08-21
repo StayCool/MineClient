@@ -8,12 +8,19 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance plot:AnalogParametersVm}"
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    
+
     <Grid Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ActualHeight}" 
           HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <oxy:Plot x:Name="Plot1" 
-                  Title="A Graph" Model="{Binding PlotModel}" Margin="50">
-        </oxy:Plot>
+
+        <Button BorderBrush="{x:Null}" Background="WhiteSmoke" Margin="0"  
+                Width="35" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackArrowClick}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/left_arrow.png" />
+            </StackPanel>
+        </Button>
+        <oxy:Plot x:Name="Plot1"
+                   Title="A Graph" Model="{Binding PlotModel}" Margin="50"/>
+
     </Grid>
     
 </UserControl>

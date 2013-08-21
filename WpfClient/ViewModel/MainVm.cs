@@ -48,8 +48,8 @@ namespace WpfClient.ViewModel
 
             if (menuStr.Equals("GeneralView", StringComparison.InvariantCulture))
                 CurrentView = IoC.Resolve<GeneralVm>();
-            if (menuStr.Equals("FanObject", StringComparison.InvariantCulture))
-                CurrentView = IoC.Resolve<FanObjectVm>();
+            if (menuStr.Equals("History", StringComparison.InvariantCulture))
+                CurrentView = IoC.Resolve<HistoryVm>();
         }
     }
 }

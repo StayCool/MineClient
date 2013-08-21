@@ -23,9 +23,15 @@ namespace Mc.CustomControls.Controls
         {
             var fn = ((Fan) dependencyObject);
             if (fn.Rotation)
+            {
                 fn.rt.BeginAnimation(RotateTransform.AngleProperty, fn.da);
+                fn.FanControl.Background = Brushes.AliceBlue;
+            }
             else
+            {
                 fn.rt.BeginAnimation(RotateTransform.AngleProperty, null);
+                fn.FanControl.Background = Brushes.Pink;
+            }
         }
 
         public bool Rotation
