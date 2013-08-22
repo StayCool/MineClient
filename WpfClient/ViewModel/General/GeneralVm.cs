@@ -63,7 +63,7 @@ namespace WpfClient.ViewModel.General
         {
             var parametersList = new List<List<ParameterVm>>();
 
-            for (var i = 1; i <= Fans.Count; i++)
+            for (var i = 1; i <= _fans.Count; i++)
             {
                 parametersList.Add(new List<ParameterVm>());
 
@@ -97,7 +97,7 @@ namespace WpfClient.ViewModel.General
         private void initialize()
         {
             _fans = new List<FanVm>();
-            for (int i = 1; i <= Config.Instance.FansCount; i++) 
+            for (int i = 1; i <= Config.Instance.FanObjectConfig.FanObjectCount; i++) 
             {
                 _fans.Add(new FanVm(i));
             }

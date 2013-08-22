@@ -1,13 +1,15 @@
 ﻿<Window x:Class="WpfClient.MainWindow"
+        Closing="MainWindow_OnClosing"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:WpfClient.ViewModel" 
         xmlns:wpfApplication3="clr-namespace:WpfClient.View"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:general="clr-namespace:WpfClient.ViewModel.General" 
-        xmlns:plot="clr-namespace:WpfClient.ViewModel.Plot"
+        xmlns:general="clr-namespace:WpfClient.ViewModel.General"
         xmlns:fanObjectSystem="clr-namespace:WpfClient.ViewModel.FanObjectSystem"
+        xmlns:settings2="clr-namespace:WpfClient.ViewModel.Settings"
+        xmlns:settings="clr-namespace:WpfClient.View.Settings"
         mc:Ignorable="d"    
         d:DataContext="{d:DesignInstance loc:MainVm}"
         Title="MainWindow" Height="Auto" Width="Auto">
@@ -25,7 +27,7 @@
             <MenuItem Header="ФАЙЛ"/>
             <MenuItem Header="СРЕДСТВА">
                 <MenuItem Header="Настройки" VerticalAlignment="Center" Width="Auto"
-                          Command="{Binding MenuClick}" CommandParameter="FanObject"/>
+                          Command="{Binding MenuClick}" CommandParameter="SettingsView"/>
             </MenuItem>
             <MenuItem Header="ВИД">
                 <MenuItem Header="История" VerticalAlignment="Center" Width="Auto"
@@ -41,9 +43,6 @@
                 <DataTemplate DataType="{x:Type general:GeneralVm}">
                     <wpfApplication3:GeneralView/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type plot:AnalogParametersVm}">
-                    <wpfApplication3:AnalogParametersView/>
-                </DataTemplate>
                 <DataTemplate DataType="{x:Type fanObjectSystem:FanObjectVm}">
                     <wpfApplication3:FanObjectView/>
                 </DataTemplate>
@@ -51,7 +50,8 @@
                     <wpfApplication3:OnPlotClickView/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type loc:HistoryVm}">
-                    <wpfApplication3:HistoryView/>
+                <DataTemplate DataType="{x:Type settings2:SettingsVm}">
+                    <settings:SettingsView/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

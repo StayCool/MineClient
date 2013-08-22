@@ -1,28 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfClient.Model.Abstract;
+using WpfClient.Model.Settings;
 
 namespace WpfClient.Services
 {
     class MineConfig : IConfig
     {
-        private double _fansCount;
+        private readonly Configuration _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        private FanObjectConfigSection _fanObjectConfig;
+
         private double _maxTemperature;
         private double _maxIndicatorValue;
         private double _parameterWarning;
         private double _parameterDanger;
         private double _maxPillowValue;
 
-        public double FansCount 
+        public FanObjectConfigSection FanObjectConfig
         {
-            get { return (_fansCount = getParameter("FanObjectCount", _fansCount)); }
-            set { setParameter("FanObjectCount", ref _fansCount, value); }
+            get { return _fanObjectConfig ?? (_fanObjectConfig = (FanObjectConfigSection)_config.GetSection("FanObjectConfig")); }
         }
+
+        public void Save()
+        {
+            _config.Save(ConfigurationSaveMode.Full);
+        }
+
 
         public double MaxTemperature
         {

@@ -49,7 +49,7 @@ namespace DataRepository.DataAccess
             //Init AnalogSignalType table
             var analogSignalType = new List<AnalogSignal>
             {
-                new AnalogSignal {Type = "Расход Q (м3/c)"},
+                new AnalogSignal {Type = "Расход Воздуха (м3/c)"},
                 new AnalogSignal {Type = "Давление (кПа)"},
                 new AnalogSignal {Type = "Температура подшипника №1 (град)"},
                 new AnalogSignal {Type = "Температура подшипника №2 (град)"},

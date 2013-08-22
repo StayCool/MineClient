@@ -1,9 +1,9 @@
+using WpfClient.Model.Settings;
+
 namespace WpfClient.Model.Abstract
 {
     public interface IConfig
     {
-        double FansCount { get; set; }
-
         double MaxTemperature { get; set; }
 
         double MaxPillowValue { get; set; }
@@ -13,5 +13,9 @@ namespace WpfClient.Model.Abstract
         double ParameterWarning { get; set; }
 
         double ParameterDanger { get; set; }
+
+        FanObjectConfigSection FanObjectConfig { get; }
+
+        void Save();
     }
 }

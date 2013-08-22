@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using WpfClient.Model;
 using WpfClient.Model.Concrete;
 using WpfClient.Services;
@@ -16,6 +17,11 @@ namespace WpfClient
 
             IocService.SetBindings();
             DataContext = IoC.Resolve<MainVm>();
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            Config.Instance.Save();
         }
     }
 }

@@ -72,6 +72,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\net35\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -109,6 +110,8 @@
     <Compile Include="Model\Entities\Parameter.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\IoC.cs" />
+    <Compile Include="Model\Settings\FanObjectConfigSection.cs" />
+    <Compile Include="Model\Settings\RangeValueElement.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\FanService.cs" />
@@ -130,6 +133,10 @@
     <Compile Include="ViewModel\Plot\OnPlotClickVm.cs" />
     <Compile Include="ViewModel\Plot\PropertyValueVm.cs" />
     <Compile Include="ViewModel\SettingsVm.cs" />
+
+    <Compile Include="ViewModel\Settings\FanObjectSettingsVm.cs" />
+    <Compile Include="ViewModel\Settings\RangeValueElementVm.cs" />
+    <Compile Include="ViewModel\Settings\SettingsVm.cs" />
     <Compile Include="View\AnalogParametersView.xaml.cs">
       <DependentUpon>AnalogParametersView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +154,12 @@
     </Compile>
     <Compile Include="View\ParametersView.xaml.cs">
       <DependentUpon>ParametersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\FanObjectSettingsView.xaml.cs">
+      <DependentUpon>FanObjectSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +194,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ParametersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Settings\FanObjectSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Settings\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

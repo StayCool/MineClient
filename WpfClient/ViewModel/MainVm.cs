@@ -6,8 +6,8 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
 using WpfClient.Model.Abstract;
-using WpfClient.ViewModel.FanObjectSystem;
 using WpfClient.ViewModel.General;
+using WpfClient.ViewModel.Settings;
 
 namespace WpfClient.ViewModel
 {
@@ -50,6 +50,8 @@ namespace WpfClient.ViewModel
                 CurrentView = IoC.Resolve<GeneralVm>();
             if (menuStr.Equals("History", StringComparison.InvariantCulture))
                 CurrentView = IoC.Resolve<HistoryVm>();
+            if (menuStr.Equals("SettingsView", StringComparison.InvariantCulture))
+                CurrentView = IoC.Resolve<SettingsVm>();
         }
     }
 }
