@@ -132,8 +132,6 @@
     <Compile Include="ViewModel\Plot\MeasurementVm.cs" />
     <Compile Include="ViewModel\Plot\OnPlotClickVm.cs" />
     <Compile Include="ViewModel\Plot\PropertyValueVm.cs" />
-    <Compile Include="ViewModel\SettingsVm.cs" />
-
     <Compile Include="ViewModel\Settings\FanObjectSettingsVm.cs" />
     <Compile Include="ViewModel\Settings\RangeValueElementVm.cs" />
     <Compile Include="ViewModel\Settings\SettingsVm.cs" />

@@ -9,7 +9,7 @@
         xmlns:general="clr-namespace:WpfClient.ViewModel.General"
         xmlns:fanObjectSystem="clr-namespace:WpfClient.ViewModel.FanObjectSystem"
         xmlns:settings2="clr-namespace:WpfClient.ViewModel.Settings"
-        xmlns:settings="clr-namespace:WpfClient.View.Settings"
+        xmlns:settings="clr-namespace:WpfClient.View.Settings" xmlns:plot="clr-namespace:WpfClient.ViewModel.Plot"
         mc:Ignorable="d"    
         d:DataContext="{d:DesignInstance loc:MainVm}"
         Title="MainWindow" Height="Auto" Width="Auto">
@@ -43,6 +43,9 @@
                 <DataTemplate DataType="{x:Type general:GeneralVm}">
                     <wpfApplication3:GeneralView/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type plot:AnalogParametersVm}">
+                    <wpfApplication3:AnalogParametersView/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type fanObjectSystem:FanObjectVm}">
                     <wpfApplication3:FanObjectView/>
                 </DataTemplate>
@@ -50,6 +53,8 @@
                     <wpfApplication3:OnPlotClickView/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type loc:HistoryVm}">
+                    <wpfApplication3:HistoryView/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type settings2:SettingsVm}">
                     <settings:SettingsView/>
                 </DataTemplate>

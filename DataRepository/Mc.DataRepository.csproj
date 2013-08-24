@@ -47,12 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\GenericRepository\DataRepository.cs" />
-    <Compile Include="DataAccess\GenericRepository\IDataRepository.cs" />
-    <Compile Include="DataAccess\GenericRepository\IEntityId.cs" />
+    <Compile Include="Models\GenericRepository\DataRepository.cs" />
+    <Compile Include="Models\GenericRepository\IDataRepository.cs" />
+    <Compile Include="Models\GenericRepository\IEntityId.cs" />
     <Compile Include="DataAccess\MineContext.cs" />
     <Compile Include="DataAccess\MineDbInitializer.cs" />
-    <Compile Include="DataAccess\GenericRepository\RepoUnit.cs" />
+    <Compile Include="Models\GenericRepository\RepoUnit.cs" />
     <Compile Include="Models\AnalogSignalLog.cs" />
     <Compile Include="Models\DoorsLog.cs" />
     <Compile Include="Models\DoorState.cs" />
