@@ -1,6 +1,7 @@
 using System;
 using CLTcpServer.Interfaces;
 using WpfClient.Model.Abstract;
+using WpfClient.Services;
 
 namespace WpfClient.Model.Concrete
 {
@@ -10,7 +11,7 @@ namespace WpfClient.Model.Concrete
 
         public TcpRemoteListener(IRemoteExchange remoteExchange, IDataInserter dataInserter) {
             _remoteExchange = remoteExchange;
-            SetDataInserter(dataInserter);
+            _remoteExchange.ReceiveEvent += RemoteService.onRecieve;
         }
 
         public void InitServer(string port)

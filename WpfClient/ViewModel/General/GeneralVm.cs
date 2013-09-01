@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight;
@@ -19,6 +18,7 @@ namespace WpfClient.ViewModel.General
 
         private readonly DatabaseService _databaseService;
         private readonly FanService _fanService;
+        private ParameterVm _remoteSignalState { get; set; }
 
         public GeneralVm(DatabaseService databaseService, FanService fanService)
         {
@@ -45,6 +45,16 @@ namespace WpfClient.ViewModel.General
         }
 
         public List<FanVm> Fans { get { return _fans; } }
+
+        public ParameterVm RemoteSignalState
+        {
+            get { return _remoteSignalState; }
+            set
+            {
+                _remoteSignalState = value;
+                RaisePropertyChanged("RemoteSignalState");
+            }
+        }
 
         private void setParameterNames()
         {
@@ -79,6 +89,22 @@ namespace WpfClient.ViewModel.General
             {
                 for (var i = 0; i < parametersList.Count; i++) _fans[i].Values = parametersList[i];
             }));
+
+            checkRemoteSignalState();
+        }
+
+        private void checkRemoteSignalState()
+        {
+            if (System.DateTime.Now - RemoteService.LastRecieve > new TimeSpan(0, 1, 0))
+            {
+                RemoteSignalState.Value = RemoteSignalState.Name + " отсутствует";
+                RemoteSignalState.State = StateEnum.Dangerous;
+            }
+            else
+            {
+                RemoteSignalState.Value = RemoteSignalState.Name + " хорошо";
+                RemoteSignalState.State = StateEnum.Ok;
+            }
         }
 
         private ParameterVm getFanStateParameter(FanObject fanObject)
@@ -96,6 +122,7 @@ namespace WpfClient.ViewModel.General
 
         private void initialize()
         {
+            RemoteSignalState = new ParameterVm { Name = "Состояние сигнала:", Value = "неопределено" };
             _fans = new List<FanVm>();
             for (int i = 1; i <= Config.Instance.FanObjectConfig.FanObjectCount; i++) 
             {

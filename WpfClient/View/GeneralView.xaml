@@ -35,6 +35,12 @@
                          HorizontalContentAlignment="Center"/>
             </UniformGrid>
         </Border>
+
+        <Border Grid.Row="1" Grid.Column="0" Margin="10 5 10 0"  BorderThickness="1" 
+                BorderBrush="DarkGray">
+            <Label Content="{Binding RemoteSignalState.Value}" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                   Background="{Binding RemoteSignalState.State, Converter={StaticResource EnumToColor}}"/>
+        </Border>
         
         <Border Grid.Row="0" Grid.Column="1" Background="Beige" Grid.ColumnSpan="2" BorderThickness="1" 
                 BorderBrush="DarkGray" Margin="10">
