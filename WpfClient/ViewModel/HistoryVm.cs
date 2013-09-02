@@ -112,7 +112,7 @@ namespace WpfClient.ViewModel
             get { return _showRecordClickCommand ?? (_showRecordClickCommand = new RelayCommand(ShowRecordClickHandler)); }
         }
 
-        public ObservableCollection<PropertyValueVm> ListCollection { get; set; }
+        public ObservableCollection<OnPlotClickData> ListCollection { get; set; }
         #endregion
 
 
@@ -159,7 +159,7 @@ namespace WpfClient.ViewModel
 
         public HistoryVm()
         {
-            ListCollection = new ObservableCollection<PropertyValueVm>();
+            ListCollection = new ObservableCollection<OnPlotClickData>();
         }
         private bool CheckInput()
         {
@@ -227,6 +227,6 @@ namespace WpfClient.ViewModel
             ListCollection.Clear();
             _propertyList[Int32.Parse(CurrentRecord)-1].ForEach(n => ListCollection.Add(n));
         }
-        private List<List<PropertyValueVm>> _propertyList = new List<List<PropertyValueVm>>();
+        private List<List<OnPlotClickData>> _propertyList = new List<List<OnPlotClickData>>();
     }
 }

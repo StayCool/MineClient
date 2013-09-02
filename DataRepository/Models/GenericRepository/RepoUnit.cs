@@ -10,7 +10,8 @@ namespace DataRepository.DataAccess.GenericRepository
     {
         private MineContext _context;
         private IDataRepository<FanLog> _fanLog;
-        private IDataRepository<AnalogSignal> _analogSignal; 
+        private IDataRepository<AnalogSignal> _analogSignal;
+        private IDataRepository<DoorType> _doorType; 
 
         private MineContext getContext()
         {
@@ -26,6 +27,11 @@ namespace DataRepository.DataAccess.GenericRepository
         public IDataRepository<AnalogSignal> AnalogSignal
         {
             get { return _analogSignal ?? (_analogSignal = getRepository<AnalogSignal>()); }
+        }
+
+        public IDataRepository<DoorType> DoorType
+        {
+            get { return _doorType ?? (_doorType = getRepository<DoorType>()); }
         }
 
         public void Commit() {

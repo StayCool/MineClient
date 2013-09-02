@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
 using System.Windows.Media;
+using GalaSoft.MvvmLight.Command;
 using Mc.CustomControls.Model;
 using WpfClient.Model;
 using System.Linq;
@@ -25,6 +27,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
         public DateTimeVm DateTime { get { return IoC.Resolve<DateTimeVm>(); } }
  
         #region Property
+        #region FanProperty
         private bool _rotationV1;
         public bool RotationV1
         {
@@ -38,6 +41,33 @@ namespace WpfClient.ViewModel.FanObjectSystem
             set { _rotationV2 = value; OnPropertyChanged("RotationV2"); }
         }
 
+        private string _firstFanOnOffMode;
+        public string FirstFanOnOffMode
+        {
+            get { return _firstFanOnOffMode; }
+            set { _firstFanOnOffMode = value; OnPropertyChanged("FirstFanOnOffMode"); }
+        }
+
+        private string _secondFanOnOffMode;
+        public string SecondFanOnOffMode
+        {
+            get { return _secondFanOnOffMode; }
+            set { _secondFanOnOffMode = value; OnPropertyChanged("SecondFanOnOffMode"); }
+        }
+
+        private RelayCommand _firstFanClickCommand; //on/off fan
+        public ICommand FirstFanClick
+        {
+            get { return _firstFanClickCommand ?? (_firstFanClickCommand = new RelayCommand(FirstFanClickHandler)); }
+        }
+
+        private RelayCommand _secondFanClickCommand; //on/off fan
+        public ICommand SecondFanClick
+        {
+            get { return _secondFanClickCommand ?? (_secondFanClickCommand = new RelayCommand(SecondFanClickHandler)); }
+        }
+        #endregion
+        #region DoorProperty
         private DoorStateEnum _lo1;
         public DoorStateEnum Lo1
         {
@@ -92,7 +122,8 @@ namespace WpfClient.ViewModel.FanObjectSystem
             get { return _ld; }
             set { _ld = value; OnPropertyChanged("Ld"); }
         }
-
+        #endregion
+        #region TubeProperty
         private string _v1onDown;
         public string V1onDown
         {
@@ -203,6 +234,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
             set { _normaTopReverseDown = value; OnPropertyChanged("NormaTopReverseDown"); }
         }
         #endregion
+        #endregion
 
         #region PrivateMethods
         private void ClearTubes()
@@ -259,6 +291,14 @@ namespace WpfClient.ViewModel.FanObjectSystem
             WorkLeft = "Left";
             WorkReight = "Reight";
         }
+        private void FirstFanClickHandler()
+        {
+
+        }
+        private void SecondFanClickHandler()
+        {
+
+        }
         #endregion PrivateMethods
 
         public ParameterVm SystemState
@@ -289,6 +329,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
             setFanMode(fanObject);
             setWorkingFan(fanObject.WorkingFanNumber);
             setDoorsState(fanObject.Doors);
+            setOnOffModeState();
         }     
 
         private void setWorkingFan(int workingFan)
@@ -349,6 +390,11 @@ namespace WpfClient.ViewModel.FanObjectSystem
             }
         }
 
+        private void setOnOffModeState()
+        {
+            FirstFanOnOffMode = RotationV1 == true ? "Отключить" : "Включить";
+            SecondFanOnOffMode = RotationV2 == true ? "Отключить" : "Включить";
+        }
         protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

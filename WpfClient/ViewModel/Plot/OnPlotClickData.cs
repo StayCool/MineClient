@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfClient.ViewModel.Plot
 {
-    public class PropertyValueVm
+    public class OnPlotClickData
     {
         public string Property { get; set; }
         public string Value { get; set; }

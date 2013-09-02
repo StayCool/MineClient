@@ -73,7 +73,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button  Grid.Column="7" Grid.Row="6" Command="{Binding FindClick}">
+        <Button  Grid.Column="7" VerticalAlignment="Top"  Grid.Row="5" Command="{Binding FindClick}" Margin="0,10,0,0">
             <TextBlock Text="Поиск"></TextBlock>
         </Button>
 

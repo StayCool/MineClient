@@ -168,7 +168,13 @@
                 </TransformGroup>
             </elements:Lada.RenderTransform>
         </elements:Lada>
+        <Button Canvas.Top="315" Canvas.Left="13" Width="96" Command="{Binding FirstFanClick}">
+            <TextBlock Text="{Binding FirstFanOnOffMode}"/>
+        </Button>
         <TextBox Background="WhiteSmoke" Text="Вентилятор №1" Canvas.Top="291" RenderTransformOrigin="0.445,0.41" Canvas.Left="13"/>
+        <Button Canvas.Top="604" Canvas.Left="13" Width="96" Command="{Binding SecondFanClick}">
+            <TextBlock Text="{Binding SecondFanOnOffMode}"/>
+        </Button>
         <TextBox Background="WhiteSmoke" Text="Вентилятор №2" Canvas.Top="581" RenderTransformOrigin="0.445,0.41" Canvas.Left="13"/>
 
         <elements:Fan Rotation="{Binding RotationV2}" Radius="20" Canvas.Top="603" Canvas.Left="115"/>

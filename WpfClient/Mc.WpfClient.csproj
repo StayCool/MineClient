@@ -118,6 +118,7 @@
     <Compile Include="Services\IocService.cs" />
     <Compile Include="Services\MineConfig.cs" />
     <Compile Include="Services\RemoteService.cs" />
+    <Compile Include="Services\PlotService.cs" />
     <Compile Include="Services\SystemStateService.cs" />
     <Compile Include="ViewModel\DateTimeVm.cs" />
     <Compile Include="ViewModel\FanObjectSystem\FanObjectVm.cs" />
@@ -129,16 +130,14 @@
     <Compile Include="ViewModel\HistoryVm.cs" />
     <Compile Include="ViewModel\MainVm.cs" />
     <Compile Include="ViewModel\ParameterVm.cs" />
-    <Compile Include="ViewModel\Plot\AnalogParametersVm.cs" />
-    <Compile Include="ViewModel\Plot\MeasurementVm.cs" />
+    <Compile Include="ViewModel\Plot\OxyPlotData.cs" />
     <Compile Include="ViewModel\Plot\OnPlotClickVm.cs" />
-    <Compile Include="ViewModel\Plot\PropertyValueVm.cs" />
+    <Compile Include="ViewModel\Plot\PlotData.cs" />
+    <Compile Include="ViewModel\Plot\PlotVm.cs" />
+    <Compile Include="ViewModel\Plot\OnPlotClickData.cs" />
     <Compile Include="ViewModel\Settings\FanObjectSettingsVm.cs" />
     <Compile Include="ViewModel\Settings\RangeValueElementVm.cs" />
     <Compile Include="ViewModel\Settings\SettingsVm.cs" />
-    <Compile Include="View\AnalogParametersView.xaml.cs">
-      <DependentUpon>AnalogParametersView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\FanObjectView.xaml.cs">
       <DependentUpon>FanObjectView.xaml</DependentUpon>
     </Compile>
@@ -148,11 +147,11 @@
     <Compile Include="View\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OnPlotClickView.xaml.cs">
+    <Compile Include="View\Plot\OnPlotClickView.xaml.cs">
       <DependentUpon>OnPlotClickView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ParametersView.xaml.cs">
-      <DependentUpon>ParametersView.xaml</DependentUpon>
+    <Compile Include="View\Plot\PlotView.xaml.cs">
+      <DependentUpon>PlotView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Settings\FanObjectSettingsView.xaml.cs">
       <DependentUpon>FanObjectSettingsView.xaml</DependentUpon>
@@ -172,10 +171,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AnalogParametersView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\FanObjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,11 +183,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OnPlotClickView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="View\Plot\OnPlotClickView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ParametersView.xaml">
+    <Page Include="View\Plot\PlotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

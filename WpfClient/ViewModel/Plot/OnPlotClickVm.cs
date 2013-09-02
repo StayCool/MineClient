@@ -12,11 +12,11 @@ using WpfClient.Services;
 
 namespace WpfClient.ViewModel.Plot
 {
-    class OnPlotClickVm:ViewModelBase
+    class OnPlotClickVm : ViewModelBase
     {
-        public ObservableCollection<PropertyValueVm> ListCollection { get; set; }
+        public ObservableCollection<OnPlotClickData> ListCollection { get; set; }
 
-        private AnalogParametersVm _prevView;
+        private PlotVm _prevView;
 
         private RelayCommand _backArrowClickCommand;
         public ICommand BackArrowClick
@@ -29,17 +29,17 @@ namespace WpfClient.ViewModel.Plot
             IoC.Resolve<MainVm>().CurrentView = _prevView;
         }
 
-        public OnPlotClickVm(DateTime date, int fanObjectId, AnalogParametersVm prevView)
+        public OnPlotClickVm(DateTime date, int fanObjectId, PlotVm prevView)
         {
             _prevView = prevView;
-            ListCollection = new ObservableCollection<PropertyValueVm>();
+            ListCollection = new ObservableCollection<OnPlotClickData>();
             UpdatePropertyValue(date, fanObjectId);
         }
 
         private void UpdatePropertyValue(DateTime date, int fanObjectId)
         {
             var databaseService = IoC.Resolve<DatabaseService>();
-            var propertyList = databaseService.FindParameterByIdAndDate(fanObjectId, date);
+            var propertyList = databaseService.FindDataByIdAndDate(fanObjectId, date);
 
             if (propertyList.Count > 0)
             {

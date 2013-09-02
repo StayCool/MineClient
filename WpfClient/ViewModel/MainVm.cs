@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
 using WpfClient.Model.Abstract;
 using WpfClient.ViewModel.General;
+using WpfClient.ViewModel.Plot;
 using WpfClient.ViewModel.Settings;
 
 namespace WpfClient.ViewModel
@@ -52,6 +53,8 @@ namespace WpfClient.ViewModel
                 CurrentView = IoC.Resolve<HistoryVm>();
             if (menuStr.Equals("SettingsView", StringComparison.InvariantCulture))
                 CurrentView = IoC.Resolve<SettingsVm>();
+            if (menuStr.Equals("PlotView", StringComparison.InvariantCulture))
+                CurrentView = IoC.Resolve<PlotVm>();
         }
     }
 }

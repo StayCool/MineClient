@@ -33,6 +33,16 @@ namespace WpfClient.Services
             }
             return names;
         }
+        public List<string> GetDigitSignalNames()
+        {
+            var names = new List<string>();
+
+            using (var unit = new RepoUnit())
+            {
+                names.AddRange(unit.DoorType.Load().Select(s => s.Type).ToList());
+            }
+            return names;
+        }
 
         public FanObject GetFanObject(int fanOjbectNum)
         {
@@ -66,9 +76,9 @@ namespace WpfClient.Services
         } 
 
 
-        public List<PropertyValueVm> FindParameterByIdAndDate(int fanNum, DateTime date)
+        public List<OnPlotClickData> FindDataByIdAndDate(int fanNum, DateTime date)
         {
-            var propertyList = new List<PropertyValueVm>();
+            var propertyList = new List<OnPlotClickData>();
 
             try
             {
@@ -79,12 +89,13 @@ namespace WpfClient.Services
                     var fansLogId = fansLogRepo.Load().Where(n => n.FanNumber == fanNum && n.Date == date).Max(n => n.Id);
                     var fansLog = fansLogRepo.Find(fansLogId);
 
-                    propertyList.Add(new PropertyValueVm { Property = "Время приема параметров", Value = fansLog.Date.ToString() });
-                    propertyList.Add(new PropertyValueVm { Property = "Вентилятор 1", Value = fansLog.Fan1State.State });
-                    propertyList.Add(new PropertyValueVm { Property = "Вентилятор 2", Value = fansLog.Fan2State.State });
+                    propertyList.Add(new OnPlotClickData { Property = "Время приема параметров", Value = fansLog.Date.ToString() });
+                    propertyList.Add(new OnPlotClickData { Property = "Вентиляторная установка №", Value = fanNum.ToString() });
+                    propertyList.Add(new OnPlotClickData { Property = "Вентилятор 1", Value = fansLog.Fan1State.State });
+                    propertyList.Add(new OnPlotClickData { Property = "Вентилятор 2", Value = fansLog.Fan2State.State });
 
-                    propertyList.AddRange(fansLog.DoorsLogs.Select(doorLog => new PropertyValueVm { Property = doorLog.DoorType.Type, Value = doorLog.DoorState.State }));
-                    propertyList.AddRange(fansLog.AnalogSignalLogs.Select(signal => new PropertyValueVm { Property = signal.SignalType.Type, Value = signal.SignalValue.ToString() }));
+                    propertyList.AddRange(fansLog.DoorsLogs.Select(doorLog => new OnPlotClickData { Property = doorLog.DoorType.Type, Value = doorLog.DoorState.State }));
+                    propertyList.AddRange(fansLog.AnalogSignalLogs.Select(signal => new OnPlotClickData { Property = signal.SignalType.Type, Value = signal.SignalValue.ToString() }));
                 }
             }
             catch (Exception)
@@ -94,9 +105,9 @@ namespace WpfClient.Services
             return propertyList;
         }
 
-        public List<List<PropertyValueVm>> HistoryFind(int fanNum, DateTime dateFrom, DateTime dateTill)
+        public List<List<OnPlotClickData>> HistoryFind(int fanNum, DateTime dateFrom, DateTime dateTill)
         {
-            var propertyList = new List<List<PropertyValueVm>>();
+            var propertyList = new List<List<OnPlotClickData>>();
 
             try
             {
@@ -108,13 +119,13 @@ namespace WpfClient.Services
                     foreach (var fanLogId in fansLogId.ToArray())
                     {
                         var fansLog = fansLogRepo.Find(fanLogId);
-                        propertyList.Add(new List<PropertyValueVm>());
-                        propertyList[i].Add(new PropertyValueVm { Property = "Время приема параметров", Value = fansLog.Date.ToString() });
-                        propertyList[i].Add(new PropertyValueVm { Property = "Вентилятор 1", Value = fansLog.Fan1State.State });
-                        propertyList[i].Add(new PropertyValueVm { Property = "Вентилятор 2", Value = fansLog.Fan2State.State });
+                        propertyList.Add(new List<OnPlotClickData>());
+                        propertyList[i].Add(new OnPlotClickData { Property = "Время приема параметров", Value = fansLog.Date.ToString() });
+                        propertyList[i].Add(new OnPlotClickData { Property = "Вентилятор 1", Value = fansLog.Fan1State.State });
+                        propertyList[i].Add(new OnPlotClickData { Property = "Вентилятор 2", Value = fansLog.Fan2State.State });
 
-                        propertyList[i].AddRange(fansLog.DoorsLogs.Select(doorLog => new PropertyValueVm { Property = doorLog.DoorType.Type, Value = doorLog.DoorState.State }));
-                        propertyList[i].AddRange(fansLog.AnalogSignalLogs.Select(signal => new PropertyValueVm { Property = signal.SignalType.Type, Value = signal.SignalValue.ToString() }));
+                        propertyList[i].AddRange(fansLog.DoorsLogs.Select(doorLog => new OnPlotClickData { Property = doorLog.DoorType.Type, Value = doorLog.DoorState.State }));
+                        propertyList[i].AddRange(fansLog.AnalogSignalLogs.Select(signal => new OnPlotClickData { Property = signal.SignalType.Type, Value = signal.SignalValue.ToString() }));
                         i++;
                     }
                 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WpfClient.ViewModel.Plot
 {
-    public class MeasurementVm
+    public class OxyPlotData
     {
         public string ParamName { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
         public DateTime DateTime { get; set; }
     }
 }

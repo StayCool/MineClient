@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfClient.View
+namespace WpfClient.View.Plot
 {
     /// <summary>
-    /// Interaction logic for OnPlotClickView.xaml
+    /// Interaction logic for PlotView.xaml
     /// </summary>
-    public partial class OnPlotClickView : UserControl
+    public partial class PlotView : UserControl
     {
-        public OnPlotClickView()
+        public PlotView()
         {
             InitializeComponent();
         }

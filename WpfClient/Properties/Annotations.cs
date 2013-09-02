@@ -15,9 +15,8 @@
  */
 
 using System;
-using System.ComponentModel;
 
-namespace WpfClient.Annotations
+namespace WpfClient.Properties
 {
   /// <summary>
   /// Indicates that marked element should be localized or not.
