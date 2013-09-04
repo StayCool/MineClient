@@ -12,6 +12,7 @@ namespace WpfClient.Model.Concrete
         public TcpRemoteListener(IRemoteExchange remoteExchange, IDataInserter dataInserter) {
             _remoteExchange = remoteExchange;
             _remoteExchange.ReceiveEvent += RemoteService.onRecieve;
+            SetDataInserter(dataInserter);
         }
 
         public void InitServer(string port)
