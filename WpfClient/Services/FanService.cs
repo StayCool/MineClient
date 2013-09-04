@@ -22,7 +22,7 @@ namespace WpfClient.Services
 
             return new ParameterVm
             {
-                Name = "Вентиялтор в работe",
+                Name = "Состояние вентилятора",
                 Value = mode,
                 State =  state 
             };

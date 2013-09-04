@@ -23,7 +23,7 @@ namespace DataRepository.DataAccess
         protected static string GetConnectionName() {
             return @"Data Source=.\SQLExpress;Database=MineDb;Trusted_Connection=True;";
             //return @"Data Source=(localdb)\Projects;Database=MineDb;Trusted_Connection=True;";
-            //return @"Data Source=(localdb)\Projects;Database=MineDb2;Trusted_Connection=True;";
+
         }
     }
 }

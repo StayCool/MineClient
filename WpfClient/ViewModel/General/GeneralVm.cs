@@ -114,7 +114,7 @@ namespace WpfClient.ViewModel.General
 
         private ParameterVm getFanNumberParameter(FanObject fanObject)
         {
-            var parameter = new ParameterVm {Value = fanObject.WorkingFanNumber == 0 ? "АВАРИЯ" : string.Format("№{0}", fanObject.WorkingFanNumber)};
+            var parameter = new ParameterVm {Value = fanObject.WorkingFanNumber == 0 ? "АВАРИЯ" : string.Format("№{0}", fanObject.WorkingFanNumber), Name = "Вентилятор в работе"};
             parameter.State = SystemStateService.GetFanState(fanObject.WorkingFanNumber);
 
             return parameter;

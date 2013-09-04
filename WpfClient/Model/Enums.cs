@@ -9,7 +9,7 @@ namespace WpfClient.Model
 
     public enum AnalogSignalType
     {
-        mi2 = 1, mi4, mi6
+        mi2 = 1, mi4, mi6 , mi25, mi26, mi27, mi28, mi29, mi30, mi31
     }
 
     public enum FanEnum

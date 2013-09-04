@@ -97,17 +97,7 @@ namespace WpfClient.ViewModel.Plot
             }
             else
             {
-                int i = 0;
-                foreach (var ListElement in ListCollectionAnalog)
-                {
-                    if (ListElement.Name == paramName)
-                    {
-                        plotService.DeleteSignal(PlotModelAnalog, i);
-                        break;
-                    }
-                    if (ListElement.IsChecked)
-                        i++;
-                }
+                plotService.DeleteSignal(PlotModelAnalog, paramName);
             }
             PlotModelAnalog.RefreshPlot(true);
         }
@@ -148,17 +138,7 @@ namespace WpfClient.ViewModel.Plot
             }
             else
             {
-                int i = 0;
-                foreach (var ListElement in ListCollectionDigit)
-                {
-                    if (ListElement.Name == doorName)
-                    {
-                        plotService.DeleteSignal(PlotModelDigit, i);
-                        break;
-                    }
-                    if (ListElement.IsChecked)
-                        i++;
-                }
+                plotService.DeleteSignal(PlotModelDigit, doorName);
             }
             PlotModelDigit.RefreshPlot(true);
         }

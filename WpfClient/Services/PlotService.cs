@@ -110,11 +110,11 @@ namespace WpfClient.Services
             catch(Exception ex)
             {}
         }
-        public void DeleteSignal(PlotModel plotModel, int elemetNum)
+        public void DeleteSignal(PlotModel plotModel, string elemetName)
         {
             try
             {
-                plotModel.Series.RemoveAt(elemetNum);
+                plotModel.Series.Remove(plotModel.Series.FirstOrDefault(f=>f.Title == elemetName));
             }
             catch (Exception)
             {  
