@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DataRepository.DataAccess.GenericRepository;
 using WpfClient.Model.Entities;
+using WpfClient.Model.Plot;
 using WpfClient.ViewModel.Plot;
 
 namespace WpfClient.Services

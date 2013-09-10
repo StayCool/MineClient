@@ -11,6 +11,7 @@ using WpfClient.Model;
 using System.Linq;
 using WpfClient.Services;
 using WpfClient.Model.Entities;
+using WpfClient.ViewModel.General;
 
 namespace WpfClient.ViewModel.FanObjectSystem
 {
@@ -18,6 +19,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
     {
         private ParameterVm _systemState;
         private readonly FanService _fanService;
+        private int _fanObjectId;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,6 +27,17 @@ namespace WpfClient.ViewModel.FanObjectSystem
         public ObservableCollection<string> DoorsText { get; set; }
 
         public DateTimeVm DateTime { get { return IoC.Resolve<DateTimeVm>(); } }
+
+        private RelayCommand _backArrowClickCommand;
+        public ICommand BackArrowClick
+        {
+            get { return _backArrowClickCommand ?? (_backArrowClickCommand = new RelayCommand(BackArrowClickHandler)); }
+        }
+
+        private void BackArrowClickHandler()
+        {
+            IoC.Resolve<MainVm>().CurrentView = IoC.Resolve<GeneralVm>();
+        }
  
         #region Property
         #region FanProperty
@@ -293,12 +306,14 @@ namespace WpfClient.ViewModel.FanObjectSystem
         }
         private void FirstFanClickHandler()
         {
-
+            RemouteFanControlService.DataForSending.FirstOrDefault(f=>f.FanNum == _fanObjectId).Data = FirstFanOnOffMode=="Включить" ? RemouteFanState.OnFan1 : RemouteFanState.Off;
         }
+
         private void SecondFanClickHandler()
         {
-
+            RemouteFanControlService.DataForSending.FirstOrDefault(f => f.FanNum == _fanObjectId).Data = SecondFanOnOffMode == "Включить" ? RemouteFanState.OnFan2 : RemouteFanState.Off;
         }
+
         #endregion PrivateMethods
 
         public ParameterVm SystemState
@@ -326,6 +341,7 @@ namespace WpfClient.ViewModel.FanObjectSystem
 
         public void Update(FanObject fanObject)
         {
+            _fanObjectId = fanObject.FanObjectId;
             setFanMode(fanObject);
             setWorkingFan(fanObject.WorkingFanNumber);
             setDoorsState(fanObject.Doors);

@@ -8,9 +8,10 @@ namespace WpfClient.Model
         public static void StartTimer(int milliSeconds, Action action)
         {
             var timer = new Timer(milliSeconds);
-            timer.Elapsed += (sender, args) => action();
+            timer.Elapsed += (sender, args) => action(); 
             timer.Start();
             timer.Enabled = true;
         }
+
     }
 }

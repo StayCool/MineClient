@@ -8,6 +8,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
+using WpfClient.Model.Plot;
 using WpfClient.Services;
 
 namespace WpfClient.ViewModel.Plot

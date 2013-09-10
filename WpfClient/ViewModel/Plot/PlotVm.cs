@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Command;
 using Ninject.Parameters;
 using OxyPlot;
 using WpfClient.Model;
+using WpfClient.Model.Plot;
 using WpfClient.Services;
 using WpfClient.ViewModel.General;
 

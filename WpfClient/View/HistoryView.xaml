@@ -22,7 +22,7 @@
             <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="55"/>
             <RowDefinition Height="22"/>
             <RowDefinition Height="24"/>
             <RowDefinition Height="30"/>
@@ -31,7 +31,7 @@
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
         <Button BorderBrush="{x:Null}" Grid.Column="0" Grid.Row="0" Background="WhiteSmoke" Margin="0"  
-                Width="35" HorizontalAlignment="Left" Command="{Binding BackArrowClick}">
+                Width="55" Height="55" HorizontalAlignment="Left" Command="{Binding BackArrowClick}">
             <StackPanel Orientation="Horizontal">
                 <Image Source="../Images/left_arrow.png" />
             </StackPanel>

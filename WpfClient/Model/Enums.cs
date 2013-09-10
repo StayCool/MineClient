@@ -9,7 +9,7 @@ namespace WpfClient.Model
 
     public enum AnalogSignalType
     {
-        mi2 = 1, mi4, mi6 , mi25, mi26, mi27, mi28, mi29, mi30, mi31
+        mi2 = 1, mi4, mi6 , mi25, mi26, mi27, mi28, mi29, mi30, mi31, mi188
     }
 
     public enum FanEnum
@@ -20,5 +20,9 @@ namespace WpfClient.Model
     public enum StateEnum
     {
         None, Ok, Warning, Dangerous
+    }
+    public enum RemouteFanState //enum for remoute control
+    {
+        Init = 0, OnFan1, OnFan2, Off
     }
 }

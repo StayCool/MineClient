@@ -24,7 +24,7 @@
                    Title="A Graph" Model="{Binding PlotModelDigit}" Margin="28"/>
         </Border>
         
-        <ListBox Margin="40,15,0,7" HorizontalAlignment="Left" 
+        <ListBox Margin="50,15,0,7" HorizontalAlignment="Left" 
          VerticalAlignment="Top" Width="250" Height="120" ItemsSource="{Binding ListCollectionAnalog}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -54,7 +54,7 @@
         <DatePicker Margin="0,37,1,0"
             BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Right" Height="24" Text="{Binding DateDisplayTo}" SelectedDate="{Binding DateSelectedTo}"/>
         <Button BorderBrush="{x:Null}" Grid.Row="0" Background="WhiteSmoke" Margin="0"  
-                Width="35" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackArrowClick}">
+                Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackArrowClick}">
             <StackPanel Orientation="Horizontal">
                 <Image Source="../../Images/left_arrow.png" />
             </StackPanel>

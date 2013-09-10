@@ -62,7 +62,7 @@ namespace WpfClient.ViewModel.General
 
             Task.Run(() =>
             {
-                var signals = new List<string> {"Вентилятор в работе", "Состояние вентилятора"};
+                var signals = new List<string> {"Состояние сигнала","Вентилятор в работе", "Состояние вентилятора"};
                 signals.AddRange(_databaseService.GetAnalogSignalNames());
 
                 return signals;
@@ -80,6 +80,7 @@ namespace WpfClient.ViewModel.General
                 var fanObject = _databaseService.GetFanObject(i);
                 if (fanObject == null) continue;
 
+                parametersList[i - 1].Add(checkRemoteSignalState(i));
                 parametersList[i - 1].Add(getFanNumberParameter(fanObject));
                 parametersList[i - 1].Add(getFanStateParameter(fanObject));
                 fanObject.Parameters.ForEach(p => parametersList[i - 1].Add(new ParameterVm(p)));
@@ -89,22 +90,23 @@ namespace WpfClient.ViewModel.General
             {
                 for (var i = 0; i < parametersList.Count; i++) _fans[i].Values = parametersList[i];
             }));
-
-            checkRemoteSignalState();
         }
 
-        private void checkRemoteSignalState()
+        private ParameterVm checkRemoteSignalState(int fanObjectId)
         {
-            if (System.DateTime.Now - RemoteService.LastRecieve > new TimeSpan(0, 1, 0))
+            ParameterVm SignalState = new ParameterVm();
+            SignalState.Name = "Состояние сигнала";
+            if (System.DateTime.Now - RemoteService.GetLastRecieve(fanObjectId) > new TimeSpan(0, 1, 0))
             {
-                RemoteSignalState.Value = RemoteSignalState.Name + " отсутствует";
-                RemoteSignalState.State = StateEnum.Dangerous;
+                SignalState.Value = "отсутствует";
+                SignalState.State = StateEnum.Dangerous;
             }
             else
             {
-                RemoteSignalState.Value = RemoteSignalState.Name + " хорошо";
-                RemoteSignalState.State = StateEnum.Ok;
+                SignalState.Value = "стабильный";
+                SignalState.State = StateEnum.Ok;
             }
+            return SignalState;
         }
 
         private ParameterVm getFanStateParameter(FanObject fanObject)
@@ -122,7 +124,7 @@ namespace WpfClient.ViewModel.General
 
         private void initialize()
         {
-            RemoteSignalState = new ParameterVm { Name = "Состояние сигнала:", Value = "неопределено" };
+            //RemoteSignalState = new ParameterVm { Name = "Состояние сигнала:", Value = "неопределено" };
             _fans = new List<FanVm>();
             for (int i = 1; i <= Config.Instance.FanObjectConfig.FanObjectCount; i++) 
             {

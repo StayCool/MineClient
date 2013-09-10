@@ -9,6 +9,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using WpfClient.Model;
+using WpfClient.Model.Plot;
 using WpfClient.ViewModel;
 using WpfClient.ViewModel.Plot;
 

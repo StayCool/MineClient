@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace WpfClient.ViewModel.Plot
+namespace WpfClient.Model.Plot
 {
     public class OxyPlotData
     {

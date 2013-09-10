@@ -9,6 +9,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
+using WpfClient.Model.Plot;
 using WpfClient.Services;
 using WpfClient.ViewModel.General;
 using WpfClient.ViewModel.Plot;

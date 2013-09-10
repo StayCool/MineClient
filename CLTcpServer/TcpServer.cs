@@ -169,7 +169,9 @@ namespace CLTcpServer
                             break;
                         }
                         if (ReceiveEvent != null)
-                            ReceiveEvent(s);
+                        {
+                            ReceiveEvent(s,(int)num);
+                        }
                         // Вынужденная строчка для экономия ресурсов процессора.
                         // Неизящный способ.
                         Thread.Sleep(100);

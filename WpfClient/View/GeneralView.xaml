@@ -25,26 +25,22 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.Column="0" Margin="10" BorderThickness="2" BorderBrush="LightSlateGray">
+        <Border Height="53" Grid.Row="0" Grid.Column="0" Margin="10" BorderThickness="2" BorderBrush="LightSlateGray">
             <UniformGrid Rows="1" Background="LightGray">
                 <TextBox Text="{Binding DateTime.Date}" Background="Transparent" BorderThickness="0" 
-                         FontSize="14" VerticalContentAlignment="Center"
+                         FontSize="29" FontWeight="Bold" VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center" Foreground="#FF323232" FontStyle="Italic"/>
                 <TextBox Text="{Binding DateTime.Time}" Background="Transparent" BorderThickness="0" 
-                         FontSize="14" Foreground="#FF323232" VerticalContentAlignment="Center"
+                         FontSize="29" FontWeight="Bold" Foreground="#FF323232" VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"/>
             </UniformGrid>
         </Border>
 
-        <Border Grid.Row="1" Grid.Column="0" Margin="10 5 10 0"  BorderThickness="1" 
-                BorderBrush="DarkGray">
-            <Label Content="{Binding RemoteSignalState.Value}" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                   Background="{Binding RemoteSignalState.State, Converter={StaticResource EnumToColor}}"/>
-        </Border>
+
         
-        <Border Grid.Row="0" Grid.Column="1" Background="Beige" Grid.ColumnSpan="2" BorderThickness="1" 
+        <Border Height="53" Grid.Row="0" Grid.Column="1" Background="Beige" Grid.ColumnSpan="2" BorderThickness="1" 
                 BorderBrush="DarkGray" Margin="10">
-            <Label Content="Название шахты" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label FontSize="29" FontWeight="Bold" Content="Название шахты" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
         
         <ItemsControl ItemsSource="{Binding Fans}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
@@ -55,10 +51,10 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="1" Background="{Binding Values[1].State, Converter={StaticResource EnumToColor}}"  BorderBrush="DarkGray" Margin="10 5 10 0">
-                        <Label Content="{Binding FanName}" HorizontalContentAlignment="Center"/>
+                    <Border Height="53" BorderThickness="1" Background="{Binding Values[1].State, Converter={StaticResource EnumToColor}}"  BorderBrush="DarkGray" Margin="10 5 10 0">
+                        <Label VerticalAlignment="Center" FontSize="29" FontWeight="Bold" Content="{Binding FanName}" HorizontalContentAlignment="Center"/>
                         <Border.InputBindings>
-                            <MouseBinding  Gesture="LeftDoubleClick" Command="{Binding FanObjectClick}"/>
+                            <MouseBinding  Gesture="LeftClick" Command="{Binding FanObjectClick}"/>
                         </Border.InputBindings>
                     </Border>
                     
@@ -83,17 +79,17 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="1" Background="{Binding State, Converter={StaticResource EnumToColor}}" 
+                                <Border Height="53" BorderThickness="1" Background="{Binding State, Converter={StaticResource EnumToColor}}" 
                                         BorderBrush="DarkGray" Margin="10 7 10 0">
                                     <Border.InputBindings>
-                                        <MouseBinding  Gesture="LeftDoubleClick" 
+                                        <MouseBinding  Gesture="LeftClick" 
                                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, 
                                                                          Path=DataContext.ParameterClick}"
                                                        CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent},
                                                                                   Path=(ItemsControl.AlternationIndex)}"/>
                                     </Border.InputBindings>
-                                    
-                                    <Label Content="{Binding Value}" HorizontalAlignment="Center"/>
+
+                                    <Label VerticalAlignment="Center" FontSize="29" FontWeight="Bold" Content="{Binding Value}" HorizontalAlignment="Center"/>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -112,8 +108,8 @@
             
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="1" Background="Beige" BorderBrush="DarkGray" Margin="10 7 10 0">
-                        <Label Content="{Binding}"  HorizontalAlignment="Center" />
+                    <Border Height="53" BorderThickness="1" Background="Beige" BorderBrush="DarkGray" Margin="10 7 10 0">
+                        <Label VerticalAlignment="Center" FontSize="29" FontWeight="Bold" Content="{Binding}"  HorizontalAlignment="Center" />
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

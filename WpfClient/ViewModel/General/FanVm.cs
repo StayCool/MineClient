@@ -57,7 +57,7 @@ namespace WpfClient.ViewModel.General
         {
             if ((int)t <= 1) return;
 
-            var analogParametersVm = IoC.Resolve<PlotVm>(new ConstructorArgument("fanObjectId", FanObjectId), new ConstructorArgument("parameterNum", (int)t - 1));
+            var analogParametersVm = IoC.Resolve<PlotVm>(new ConstructorArgument("fanObjectId", FanObjectId), new ConstructorArgument("parameterNum", (int)t - 2));
             IoC.Resolve<MainVm>().CurrentView = analogParametersVm;
         }
     }

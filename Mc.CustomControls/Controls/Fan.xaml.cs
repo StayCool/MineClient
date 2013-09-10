@@ -51,7 +51,7 @@ namespace Mc.CustomControls.Controls
         {
             get { return _radius; }
             set { _radius = value; OnPropertyChanged("Radius");
-                WedgeAngle = _radius*13/5;
+                WedgeAngle = _radius*10/5;
                 FanControl.Width = value*2 + 5;
                 FanControl.Height = value*2 + 5;
             }

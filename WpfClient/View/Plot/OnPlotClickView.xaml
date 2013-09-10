@@ -9,11 +9,11 @@
              d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="55"/>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Button BorderBrush="{x:Null}" Background="WhiteSmoke" Margin="0"  
-                Width="35" HorizontalAlignment="Left" Command="{Binding BackArrowClick}">
+                Width="55" HorizontalAlignment="Left" Command="{Binding BackArrowClick}">
             <StackPanel Orientation="Horizontal">
                 <Image Source="../../Images/left_arrow.png" />
             </StackPanel>
