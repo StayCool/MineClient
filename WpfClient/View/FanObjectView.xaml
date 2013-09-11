@@ -110,15 +110,15 @@
             </elements:PipeBinder.RenderTransform>
         </elements:PipeBinder>
 
-        <TextBox Background="{Binding DoorsText[1]}" Text="ЛО №1" Canvas.Left="445" Canvas.Top="323"></TextBox>
+        <TextBox FontSize="26" Background="{Binding DoorsText[1]}" Text="ЛО №1" Canvas.Left="446" Canvas.Top="305"></TextBox>
         <elements:Lada State="{Binding DoorsState[1]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="443" Canvas.Top="348" Height="62" Width="62"></elements:Lada>
-        <TextBox Background="{Binding DoorsText[3]}" Text="ЛО №2" Canvas.Left="445" Canvas.Top="679"></TextBox>
+        <TextBox FontSize="26" Background="{Binding DoorsText[3]}" Text="ЛО №2" Canvas.Left="447" Canvas.Top="768"></TextBox>
         <elements:Lada State="{Binding DoorsState[3]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="445" Canvas.Top="701" Height="62" Width="62"></elements:Lada>
-        <TextBox Background="{Binding DoorsText[4]}" Text="ЛП №2" Canvas.Left="445" Canvas.Top="553"></TextBox>
+        <TextBox FontSize="26" Background="{Binding DoorsText[4]}" Text="ЛП №2" Canvas.Left="447" Canvas.Top="635"></TextBox>
         <elements:Lada State="{Binding DoorsState[4]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="444" Canvas.Top="578" Height="52" Width="54"></elements:Lada>
-        <TextBox Background="{Binding DoorsText[2]}" Text="ЛП №1" Canvas.Left="446" Canvas.Top="461"></TextBox>
+        <TextBox FontSize="26" Background="{Binding DoorsText[2]}" Text="ЛП №1" Canvas.Left="447" Canvas.Top="439"></TextBox>
         <elements:Lada State="{Binding DoorsState[2]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="443" Canvas.Top="484" Height="53" Width="54"></elements:Lada>
-        <TextBox Background="{Binding DoorsText[8]}" Text="НА №1" Canvas.Left="196" Canvas.Top="289"></TextBox>
+        <TextBox FontSize="26" Background="{Binding DoorsText[8]}" Text="НА №1" Canvas.Left="196" Canvas.Top="289"></TextBox>
         <elements:Lada State="{Binding DoorsState[8]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="118" Canvas.Top="283" Height="62" Width="60" RenderTransformOrigin="0.5,0.5">
             <elements:Lada.RenderTransform>
                 <TransformGroup>
@@ -149,7 +149,7 @@
                 </TransformGroup>
             </elements:Lada.RenderTransform>
         </elements:Lada>
-        <TextBox Background="{Binding DoorsText[9]}" Text="НА №2" Canvas.Left="196" Canvas.Top="640"/>
+        <TextBox FontSize="26" Background="{Binding DoorsText[9]}" Text="НА №2" Canvas.Left="196" Canvas.Top="640"/>
         <elements:Lada State="{Binding DoorsState[9]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="115" Canvas.Top="763" Height="64" RenderTransformOrigin="0.5,0.5" Width="63">
             <elements:Lada.RenderTransform>
                 <TransformGroup>
@@ -160,11 +160,11 @@
                 </TransformGroup>
             </elements:Lada.RenderTransform>
         </elements:Lada>
-        <TextBox Background="{Binding DoorsText[5]}" Text="ЛА" Canvas.Left="1108" Canvas.Top="185"/>
+        <TextBox FontSize="26" Background="{Binding DoorsText[5]}" Text="ЛА" Canvas.Left="1111" Canvas.Top="167"/>
         <elements:Lada State="{Binding DoorsState[5]}" OpenColor="Red" CloseColor="LightGreen" Canvas.Left="1095" Canvas.Top="213" Height="54"/>
-        <TextBox Background="{Binding DoorsText[7]}" Text="ЛПК" Canvas.Left="1200" Canvas.Top="455"/>
+        <TextBox FontSize="26" Background="{Binding DoorsText[7]}" Text="ЛПК" Canvas.Left="1175" Canvas.Top="434"/>
         <elements:Lada State="{Binding DoorsState[7]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="1234" Canvas.Top="481" Height="61" Width="67"/>
-        <TextBox Background="{Binding DoorsText[6]}" Text="ЛД" Canvas.Left="1311" Canvas.Top="333"/>
+        <TextBox FontSize="26" Background="{Binding DoorsText[6]}" Text="ЛД" Canvas.Left="1311" Canvas.Top="333"/>
         <elements:Lada State="{Binding DoorsState[6]}" OpenColor="LightGreen" CloseColor="Red" Canvas.Left="1234" Canvas.Top="347" Height="62" Width="67" RenderTransformOrigin="0.5,0.5">
             <elements:Lada.RenderTransform>
                 <TransformGroup>
@@ -175,14 +175,17 @@
                 </TransformGroup>
             </elements:Lada.RenderTransform>
         </elements:Lada>
-        <Button Canvas.Top="379" Height="30" Width="105" Command="{Binding FirstFanClick}" Canvas.Left="1">
+        <Button FontSize="24" Canvas.Top="392" Height="50" Width="185" Command="{Binding FirstFanClick}" Canvas.Left="-74">
             <TextBlock VerticalAlignment="Center" FontSize="14" Text="{Binding FirstFanOnOffMode}"/>
         </Button>
-        <TextBox FontSize="14" TextAlignment="Center" Background="WhiteSmoke" Text="Вентилятор №1" Canvas.Top="357" RenderTransformOrigin="0.445,0.41"/>
-        <Button Canvas.Top="729" Width="105" Height="30" Command="{Binding SecondFanClick}" Canvas.Left="1">
+        <TextBox FontSize="24" TextAlignment="Center" Background="WhiteSmoke" Text="Вентилятор №1" Canvas.Top="349" RenderTransformOrigin="0.445,0.41" Canvas.Left="-72"/>
+        <PasswordBox Visibility="Hidden" Width="185" FontSize="24"  Background="WhiteSmoke"  Canvas.Top="449" RenderTransformOrigin="0.445,0.41" Canvas.Left="-72"/>
+        
+        <Button FontSize="24" Canvas.Top="744" Width="185" Height="50" Command="{Binding SecondFanClick}" Canvas.Left="-75">
             <TextBlock VerticalAlignment="Center" FontSize="14" Text="{Binding SecondFanOnOffMode}"/>
         </Button>
-        <TextBox Background="WhiteSmoke" FontSize="14" Text="Вентилятор №2" Canvas.Top="707" RenderTransformOrigin="0.445,0.41"/>
+        <TextBox Background="WhiteSmoke" FontSize="24" Text="Вентилятор №2" Canvas.Top="701" RenderTransformOrigin="0.445,0.41" Canvas.Left="-72"/>
+        <PasswordBox Visibility="Hidden"  Width="185" FontSize="24"  Background="WhiteSmoke"  Canvas.Top="799" RenderTransformOrigin="0.445,0.41" Canvas.Left="-74"/>
 
         <elements:Fan Rotation="{Binding RotationV2}" Radius="30" Canvas.Top="698" Canvas.Left="114"/>
         <elements:Fan Rotation="{Binding RotationV1}" Radius="30"  Canvas.Top="345" Canvas.Left="115"/>

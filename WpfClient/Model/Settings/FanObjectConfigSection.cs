@@ -16,7 +16,10 @@ namespace WpfClient.Model.Settings
         public RangeValueElement AirConsumption
         {
             get { return (RangeValueElement)this["airConsumption"]; }
-            set { this["airConsumption"] = value; }
+            set
+            {
+                this["airConsumption"] = value;
+            }
         }
 
         [ConfigurationProperty("pressure")]
@@ -38,6 +41,12 @@ namespace WpfClient.Model.Settings
         {
             get { return (RangeValueElement)this["pillowVibration"]; }
             set { this["pillowVibration"] = value; }
+        }
+        [ConfigurationProperty("gprsQuality")]
+        public RangeValueElement GprsQuality
+        {
+            get { return (RangeValueElement)this["gprsQuality"]; }
+            set { this["gprsQuality"] = value; }
         }
     }
 }

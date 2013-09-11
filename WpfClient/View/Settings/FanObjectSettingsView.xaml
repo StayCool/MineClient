@@ -6,14 +6,18 @@
              xmlns:general="clr-namespace:WpfClient.ViewModel.Settings"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance general:FanObjectSettingsVm}"
-             d:DesignHeight="300" d:DesignWidth="900">
+             d:DesignHeight="500" d:DesignWidth="900">
     <UserControl.Resources>
         <Style TargetType="TextBox">
-            <Setter Property="Height" Value="22"/>
+            <Setter Property="Height" Value="29"/>
             <Setter Property="Width" Value="45"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="Button">
+          
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -27,70 +31,84 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="0"/>
             <ColumnDefinition Width="35"/>
-            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="290"/>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
+            <Button Grid.Column="3" Grid.Row="10"  FontSize="20"  VerticalContentAlignment="Center" 
+                    Width="140" Height="38" VerticalAlignment="Top" Margin="150,0,10,0">
+                <TextBlock Text="Сохранить"/>
+                </Button>
         <DockPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
-        <Label Content="Общие"/>
+            <Label FontSize="20" Content="Общие"/>
         <Separator/>
         </DockPanel>
-        
-        <Label Grid.Row="2" Grid.Column="2" Content="Число вентиляторов:"/>
-        <ComboBox Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalContentAlignment="Center" 
+
+        <Label FontSize="20" Grid.Row="2" Grid.Column="2" Content="Число вентиляторов:"/>
+        <ComboBox FontSize="20" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalContentAlignment="Center" 
                   Width="140" ItemsSource="{Binding FanObjectCounts}" SelectedValue="{Binding FanObjectCount}"/>
 
         <DockPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3">
-            <Label Content="Диапазон аналоговых сигналов"/>
+            <Label FontSize="20" Content="Диапазон аналоговых сигналов"/>
             <Separator/>
         </DockPanel>
 
-        <Label Grid.Row="4" Grid.Column="2" Content="Расход воздуха (м3/с):"/>
+        <Label FontSize="18" Grid.Row="4" Grid.Column="2" Content="Расход воздуха (м3/с):"/>
         <StackPanel Grid.Row="4" Grid.Column="3" Orientation="Horizontal">
-            <Label Content="Опасно >"/>
+            <Label FontSize="18" Content="Опасно &lt;"/>
             <TextBox VerticalContentAlignment="Center" Text="{Binding AirConsumption.WarningLevel}"
                  HorizontalContentAlignment="Center"/>
-            <Label Content="Авария >" Margin="20 0 0 0"/>
-            <TextBox VerticalContentAlignment="Center" Text="{Binding AirConsumption.DangerLevel}"
+            <Label FontSize="18" Content="Авария &lt;" Margin="20 0 0 0"/>
+            <TextBox  VerticalContentAlignment="Center" Text="{Binding AirConsumption.DangerLevel}"
                  HorizontalContentAlignment="Center"/>
         </StackPanel>
 
-        <Label Grid.Row="5" Grid.Column="2" Content="Давление (кПа):"/>
+        <Label FontSize="18" Grid.Row="5" Grid.Column="2" Content="Давление (кПа):"/>
         <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal">
-            <Label Content="Опасно >"/>
+            <Label FontSize="18" Content="Опасно &lt;"/>
             <TextBox VerticalContentAlignment="Center" Text="{Binding Pressure.WarningLevel}"
                  HorizontalContentAlignment="Center"/>
-            <Label Content="Авария >" Margin="20 0 0 0"/>
+            <Label FontSize="18" Content="Авария &lt;" Margin="20 0 0 0"/>
             <TextBox VerticalContentAlignment="Center" Text="{Binding Pressure.DangerLevel}"
                  HorizontalContentAlignment="Center"/>
         </StackPanel>
-        
-        <Label Grid.Row="6" Grid.Column="2" Content="Температура подшипника (град):"/>
+
+        <Label FontSize="18" Grid.Row="6" Grid.Column="2" Content="Температура подшипника (град):"/>
         <StackPanel Grid.Row="6" Grid.Column="3" Orientation="Horizontal">
-            <Label Content="Опасно >"/>
+            <Label FontSize="18" Content="Опасно >"/>
             <TextBox VerticalContentAlignment="Center" Text="{Binding PillowTemperature.WarningLevel}"
                  HorizontalContentAlignment="Center"/>
-            <Label Content="Авария >" Margin="20 0 0 0"/>
+            <Label FontSize="18" Content="Авария >" Margin="20 0 0 0"/>
             <TextBox VerticalContentAlignment="Center" Text="{Binding PillowTemperature.DangerLevel}"
                  HorizontalContentAlignment="Center"/>
         </StackPanel>
 
-        <Label Grid.Row="7" Grid.Column="2" Content="Вибрация подшипника (мкм):"/>
+        <Label FontSize="18" Grid.Row="7" Grid.Column="2" Content="Вибрация подшипника (мкм):"/>
         <StackPanel Grid.Row="7" Grid.Column="3" Orientation="Horizontal">
-            <Label Content="Опасно >"/>
+            <Label FontSize="18" Content="Опасно >"/>
             <TextBox VerticalContentAlignment="Center" Text="{Binding PillowVibration.WarningLevel}"
                  HorizontalContentAlignment="Center"/>
-            <Label Content="Авария >" Margin="20 0 0 0"/>
+            <Label FontSize="18" Content="Авария >" Margin="20 0 0 0"/>
             <TextBox VerticalContentAlignment="Center" Text="{Binding PillowVibration.DangerLevel}"
                  HorizontalContentAlignment="Center"/>
         </StackPanel>
+       
+        <Label FontSize="18" Grid.Row="8" Grid.Column="2" Content="Качество Сигнала"/>
+        <StackPanel Grid.Row="8" Grid.Column="3" Orientation="Horizontal">
+            <Label FontSize="18" Content="Опасно &lt;"/>
+            <TextBox VerticalContentAlignment="Center" Text="{Binding  GprsQuality.WarningLevel}"
+                 HorizontalContentAlignment="Center"/>
+            <Label FontSize="18" Content="Авария &lt;" Margin="20 0 0 0"/>
+            <TextBox VerticalContentAlignment="Center" Text="{Binding GprsQuality.DangerLevel}"
+                 HorizontalContentAlignment="Center"/>
+        </StackPanel>
+
     </Grid>
 </UserControl>

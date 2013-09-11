@@ -4,6 +4,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using WpfClient.Model;
+using WpfClient.ViewModel.General;
 
 namespace WpfClient.ViewModel.Settings
 {
@@ -11,7 +12,15 @@ namespace WpfClient.ViewModel.Settings
     {
         private object _currentView;
         private RelayCommand<object> _optionCommand;
-
+        private RelayCommand _backArrowClickCommand;
+        public ICommand BackArrowClick
+        {
+            get { return _backArrowClickCommand ?? (_backArrowClickCommand = new RelayCommand(BackArrowClickHandler)); }
+        }
+        private void BackArrowClickHandler()
+        {
+            IoC.Resolve<MainVm>().CurrentView = IoC.Resolve<GeneralVm>();
+        }
         public SettingsVm()
         {        
         }

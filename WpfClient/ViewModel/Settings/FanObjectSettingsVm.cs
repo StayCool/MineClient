@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using WpfClient.Model.Concrete;
 
 namespace WpfClient.ViewModel.Settings
@@ -12,6 +14,11 @@ namespace WpfClient.ViewModel.Settings
             initialize();
         }
 
+         ~FanObjectSettingsVm()
+        {
+            Config.Instance.Save();
+        }
+
         private void initialize()
         {
             _fanObjectCount = Config.Instance.FanObjectConfig.FanObjectCount;
@@ -21,7 +28,10 @@ namespace WpfClient.ViewModel.Settings
             PillowVibration = new RangeValueElementVm(Config.Instance.FanObjectConfig.PillowVibration);
             Pressure = new RangeValueElementVm(Config.Instance.FanObjectConfig.Pressure);
             AirConsumption = new RangeValueElementVm(Config.Instance.FanObjectConfig.AirConsumption);
+            GprsQuality = new RangeValueElementVm(Config.Instance.FanObjectConfig.GprsQuality);
         }
+
+        
 
         public int FanObjectCount
         {
@@ -43,5 +53,7 @@ namespace WpfClient.ViewModel.Settings
         public RangeValueElementVm Pressure { get; set; }
 
         public RangeValueElementVm AirConsumption { get; set; }
+
+        public RangeValueElementVm GprsQuality { get; set; }
     }
 }

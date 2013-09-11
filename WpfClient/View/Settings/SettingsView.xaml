@@ -16,7 +16,7 @@
             <Setter Property="Margin" Value="10 5 10 0"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"></Setter>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -40,19 +40,25 @@
     
     <Grid Background="#FFF6F6F6">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="Auto"/> <!--Set as Auto in the END-->
             <ColumnDefinition Width="5"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
-        <StackPanel Grid.Column="0">
+        
+        <Button VerticalAlignment="Top" Grid.Column="0" Background="WhiteSmoke" Margin="0"  
+                MinWidth="22" Height="55" HorizontalAlignment="Left" Command="{Binding BackArrowClick}">
+                <Image Source="../../Images/left_arrow.png" />
+        </Button>
+        <StackPanel Grid.Column="2">
             <Button Content="Вентиляторная Установка" Command="{Binding MenuClick}" CommandParameter="FanObjectSettings"/>
             <Button Content="Цвета" Command="{Binding MenuClick}" CommandParameter="ColorSettings"/>
         </StackPanel>
 
-        <GridSplitter Grid.Column="1" IsEnabled="False" HorizontalAlignment="Stretch"/>
+        <GridSplitter Grid.Column="3" IsEnabled="False" HorizontalAlignment="Stretch"/>
         
-        <ContentControl Grid.Column="2" Content="{Binding CurrentView}">
+        <ContentControl Grid.Column="4" Content="{Binding CurrentView}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type general:FanObjectSettingsVm}">
                     <wpfApplication3:FanObjectSettingsView/>
