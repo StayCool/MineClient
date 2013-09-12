@@ -95,6 +95,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\EnumToColorConverter.cs" />
     <Compile Include="Model\Abstract\IConfig.cs" />
     <Compile Include="Model\Abstract\IDataInserter.cs" />
@@ -115,8 +116,10 @@
     <Compile Include="Model\Plot\OnPlotClickData.cs" />
     <Compile Include="Model\Plot\OxyPlotData.cs" />
     <Compile Include="Model\Plot\PlotData.cs" />
+    <Compile Include="Model\Settings\FanObjectConfigData.cs" />
     <Compile Include="Model\Settings\FanObjectConfigSection.cs" />
     <Compile Include="Model\Settings\RangeValueElement.cs" />
+    <Compile Include="Model\Settings\RangeValueElementVm.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\FanService.cs" />
@@ -139,7 +142,6 @@
     <Compile Include="ViewModel\Plot\OnPlotClickVm.cs" />
     <Compile Include="ViewModel\Plot\PlotVm.cs" />
     <Compile Include="ViewModel\Settings\FanObjectSettingsVm.cs" />
-    <Compile Include="ViewModel\Settings\RangeValueElementVm.cs" />
     <Compile Include="ViewModel\Settings\SettingsVm.cs" />
     <Compile Include="View\FanObjectView.xaml.cs">
       <DependentUpon>FanObjectView.xaml</DependentUpon>

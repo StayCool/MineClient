@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight.Command;
@@ -68,16 +70,16 @@ namespace WpfClient.ViewModel.FanObjectSystem
             set { _secondFanOnOffMode = value; OnPropertyChanged("SecondFanOnOffMode"); }
         }
 
-        private RelayCommand _firstFanClickCommand; //on/off fan
+        private RelayCommand<object> _firstFanClickCommand; //on/off fan
         public ICommand FirstFanClick
         {
-            get { return _firstFanClickCommand ?? (_firstFanClickCommand = new RelayCommand(FirstFanClickHandler)); }
+             get { return _firstFanClickCommand ?? (_firstFanClickCommand = new RelayCommand<object>(FirstFanClickHandler)); }
         }
 
-        private RelayCommand _secondFanClickCommand; //on/off fan
+        private RelayCommand<object> _secondFanClickCommand; //on/off fan
         public ICommand SecondFanClick
         {
-            get { return _secondFanClickCommand ?? (_secondFanClickCommand = new RelayCommand(SecondFanClickHandler)); }
+            get { return _secondFanClickCommand ?? (_secondFanClickCommand = new RelayCommand<object>(SecondFanClickHandler)); }
         }
         #endregion
         #region DoorProperty
@@ -247,6 +249,21 @@ namespace WpfClient.ViewModel.FanObjectSystem
             set { _normaTopReverseDown = value; OnPropertyChanged("NormaTopReverseDown"); }
         }
         #endregion
+
+        private bool _passwordBoxVisibilityFan1;
+        public bool PasswordBoxVisibilityFan1
+        {
+            get { return _passwordBoxVisibilityFan1; }
+            set { _passwordBoxVisibilityFan1 = value; OnPropertyChanged("PasswordBoxVisibilityFan1"); }
+        }
+
+        private bool _passwordBoxVisibilityFan2;
+        public bool PasswordBoxVisibilityFan2
+        {
+            get { return _passwordBoxVisibilityFan2; }
+            set { _passwordBoxVisibilityFan2 = value; OnPropertyChanged("PasswordBoxVisibilityFan2"); }
+        }
+
         #endregion
 
         #region PrivateMethods
@@ -304,14 +321,61 @@ namespace WpfClient.ViewModel.FanObjectSystem
             WorkLeft = "Left";
             WorkReight = "Reight";
         }
-        private void FirstFanClickHandler()
+        private void FirstFanClickHandler(object password)
         {
-            RemouteFanControlService.DataForSending.FirstOrDefault(f=>f.FanNum == _fanObjectId).Data = FirstFanOnOffMode=="Включить" ? RemouteFanState.OnFan1 : RemouteFanState.Off;
+
+            if (FirstFanOnOffMode != "ОК")
+            {
+                PasswordBoxVisibilityFan1 = true;
+                PasswordBoxVisibilityFan2 = false;
+                FirstFanOnOffMode = "ОК";
+            }
+            else
+            {
+                PasswordBox psd = password as PasswordBox;
+                PasswordBoxVisibilityFan1 = false;
+                FirstFanOnOffMode = RotationV1 == true ? "Отключить" : "Включить";
+                if (psd.Password == "1111")
+                {
+                    RemouteFanControlService.DataForSending.FirstOrDefault(f => f.FanNum == _fanObjectId).Data =
+                        FirstFanOnOffMode == "Включить" ? RemouteFanState.OnFan1 : RemouteFanState.Off;
+                    MessageBox.Show("Пароль введен верно", "Информация", MessageBoxButton.OK,
+                               MessageBoxImage.Information);
+                }
+                else
+                    MessageBox.Show("Пароль введен неверно", "Ошибка", MessageBoxButton.OK,
+                               MessageBoxImage.Error);
+                psd.Password = "";
+            }
         }
 
-        private void SecondFanClickHandler()
+        private void SecondFanClickHandler(object password)
         {
-            RemouteFanControlService.DataForSending.FirstOrDefault(f => f.FanNum == _fanObjectId).Data = SecondFanOnOffMode == "Включить" ? RemouteFanState.OnFan2 : RemouteFanState.Off;
+            if (SecondFanOnOffMode != "ОК")
+            {
+                PasswordBoxVisibilityFan2 = true;
+                PasswordBoxVisibilityFan1 = false;
+                SecondFanOnOffMode = "ОК";
+            }
+            else
+            {
+                PasswordBox psd = password as PasswordBox;
+                PasswordBoxVisibilityFan2 = false;
+                SecondFanOnOffMode = RotationV2 == true ? "Отключить" : "Включить";
+                if (psd.Password == "1111")
+                {
+                    RemouteFanControlService.DataForSending.FirstOrDefault(f => f.FanNum == _fanObjectId).Data =
+                        SecondFanOnOffMode == "Включить" ? RemouteFanState.OnFan2 : RemouteFanState.Off;
+                    MessageBox.Show("Пароль введен верно", "Информация", MessageBoxButton.OK,
+                              MessageBoxImage.Information);
+                }
+                else
+                    MessageBox.Show("Пароль введен неверно", "Ошибка", MessageBoxButton.OK,
+                               MessageBoxImage.Error);
+                psd.Password = "";
+            }
+
+
         }
 
         #endregion PrivateMethods
@@ -337,6 +401,8 @@ namespace WpfClient.ViewModel.FanObjectSystem
             DoorsText = new ObservableCollection<string>();
             for (int i = 0; i < 15; i++)
                 DoorsText.Add("WhiteSmoke");
+            PasswordBoxVisibilityFan1 = false;
+            PasswordBoxVisibilityFan2 = false;
         }
 
         public void Update(FanObject fanObject)
@@ -410,6 +476,10 @@ namespace WpfClient.ViewModel.FanObjectSystem
         {
             FirstFanOnOffMode = RotationV1 == true ? "Отключить" : "Включить";
             SecondFanOnOffMode = RotationV2 == true ? "Отключить" : "Включить";
+            if (PasswordBoxVisibilityFan1)
+                FirstFanOnOffMode = "ОК";
+            if (PasswordBoxVisibilityFan2)
+                SecondFanOnOffMode = "ОК";
         }
         protected void OnPropertyChanged(string name)
         {

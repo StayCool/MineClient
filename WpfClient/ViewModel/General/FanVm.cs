@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Ninject.Parameters;
 using WpfClient.Model;
+using WpfClient.Model.Concrete;
 using WpfClient.ViewModel.FanObjectSystem;
 using WpfClient.ViewModel.Plot;
 
@@ -25,7 +27,20 @@ namespace WpfClient.ViewModel.General
 
         public string FanName
         {
-            get { return string.Format("ВЕНТИЛЯТОРНАЯ УСТАНОВКА №{0}", FanObjectId); }
+            get {
+                try
+                {
+                    return string.Format("Вентиляторная установка {0}",
+                                         Config.Instance.FanObjectConfig.FansName.Split(new string[] {"!$!"},
+                                                                                        StringSplitOptions
+                                                                                            .RemoveEmptyEntries)[
+                                                                                                FanObjectId - 1]);
+                }
+                catch (Exception)
+                {
+                    return string.Format("Вентиляторная установка №{0}", FanObjectId);
+                }
+            }
         }
 
         public List<ParameterVm> Values

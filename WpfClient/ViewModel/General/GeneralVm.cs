@@ -56,6 +56,11 @@ namespace WpfClient.ViewModel.General
             }
         }
 
+        public string MineName
+        {
+            get { return Config.Instance.FanObjectConfig.MineName; }
+        }
+
         private void setParameterNames()
         {
             _signalNames = new ObservableCollection<string>();

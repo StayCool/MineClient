@@ -30,10 +30,16 @@ namespace WpfClient.Services
                 warningValue = Config.Instance.FanObjectConfig.PillowTemperature.WarningLevel;
                 dangerValue = Config.Instance.FanObjectConfig.PillowTemperature.DangerLevel;
             }
-            else if (name.Contains("Температура"))//сравнение на больше
+            else if (name.Contains("Вибрация"))//сравнение на больше
             {
                 warningValue = Config.Instance.FanObjectConfig.PillowVibration.WarningLevel;
                 dangerValue = Config.Instance.FanObjectConfig.PillowVibration.DangerLevel;
+            }
+            else if (name.Contains("Качество"))//сравнение на меньше
+            {
+                warningValue = -Config.Instance.FanObjectConfig.GprsQuality.WarningLevel;
+                dangerValue = -Config.Instance.FanObjectConfig.GprsQuality.DangerLevel;
+                value = -value;
             }
 
             if (value <= warningValue) return StateEnum.Ok;

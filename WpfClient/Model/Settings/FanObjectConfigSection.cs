@@ -12,6 +12,20 @@ namespace WpfClient.Model.Settings
             set { this["FanObjectCount"] = value; }
         }
 
+        [ConfigurationProperty("mineName")]
+        public string MineName
+        {
+            get { return (string)this["mineName"]; }
+            set { this["mineName"] = value; }
+        }
+
+        [ConfigurationProperty("fansName")]
+        public string FansName
+        {
+            get { return (string)this["fansName"]; }
+            set { this["fansName"] = value; }
+        }
+
         [ConfigurationProperty("airConsumption")]
         public RangeValueElement AirConsumption
         {

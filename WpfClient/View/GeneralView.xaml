@@ -12,6 +12,8 @@
     <Grid>
         <Grid.Resources>
             <converters:EnumToColorConverter x:Key="EnumToColor"/>
+            <Style TargetType="Border">
+            </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,7 +27,7 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
-        <Border Height="53" Grid.Row="0" Grid.Column="0" Margin="10" BorderThickness="2" BorderBrush="LightSlateGray">
+        <Border Height="55" Grid.Row="0" Grid.Column="0" Margin="10" BorderThickness="2" BorderBrush="LightSlateGray">
             <UniformGrid Rows="1" Background="LightGray">
                 <TextBox Text="{Binding DateTime.Date}" Background="Transparent" BorderThickness="0" 
                          FontSize="29" FontWeight="Bold" VerticalContentAlignment="Center"
@@ -38,9 +40,9 @@
 
 
         
-        <Border Height="53" Grid.Row="0" Grid.Column="1" Background="Beige" Grid.ColumnSpan="2" BorderThickness="1" 
+        <Border Height="55" Grid.Row="0" Grid.Column="1" Background="Beige" Grid.ColumnSpan="2" BorderThickness="1" 
                 BorderBrush="DarkGray" Margin="10">
-            <Label FontSize="29" FontWeight="Bold" Content="Название шахты" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label FontSize="29" FontWeight="Bold" Content="{Binding MineName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
         
         <ItemsControl ItemsSource="{Binding Fans}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
@@ -51,8 +53,8 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Height="53" BorderThickness="1" Background="{Binding Values[1].State, Converter={StaticResource EnumToColor}}"  BorderBrush="DarkGray" Margin="10 5 10 0">
-                        <Label VerticalAlignment="Center" FontSize="29" FontWeight="Bold" Content="{Binding FanName}" HorizontalContentAlignment="Center"/>
+                    <Border MinHeight="55" BorderThickness="1" Background="{Binding Values[1].State, Converter={StaticResource EnumToColor}}"  BorderBrush="DarkGray" Margin="10 5 10 0">
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="29" FontWeight="Bold" Text="{Binding FanName}" HorizontalAlignment="Center"/>
                         <Border.InputBindings>
                             <MouseBinding  Gesture="LeftClick" Command="{Binding FanObjectClick}"/>
                         </Border.InputBindings>
@@ -79,7 +81,7 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Height="53" BorderThickness="1" Background="{Binding State, Converter={StaticResource EnumToColor}}" 
+                                <Border Height="55" BorderThickness="1" Background="{Binding State, Converter={StaticResource EnumToColor}}" 
                                         BorderBrush="DarkGray" Margin="10 7 10 0">
                                     <Border.InputBindings>
                                         <MouseBinding  Gesture="LeftClick" 
@@ -108,7 +110,7 @@
             
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Height="53" BorderThickness="1" Background="Beige" BorderBrush="DarkGray" Margin="10 7 10 0">
+                    <Border Height="55" BorderThickness="1" Background="Beige" BorderBrush="DarkGray" Margin="10 7 10 0">
                         <Label VerticalAlignment="Center" FontSize="29" FontWeight="Bold" Content="{Binding}"  HorizontalAlignment="Center" />
                     </Border>
                 </DataTemplate>
