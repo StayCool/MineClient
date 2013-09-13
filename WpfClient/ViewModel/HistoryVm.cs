@@ -205,29 +205,31 @@ namespace WpfClient.ViewModel
             DateTime dateFrom = new DateTime(DateSelected.Year, DateSelected.Month, DateSelected.Day, DateTimeFrom.Hour, DateTimeFrom.Minute, DateTimeFrom.Second);
             DateTime dateTill = new DateTime(DateSelected.Year, DateSelected.Month, DateSelected.Day, DateTimeTill.Hour, DateTimeTill.Minute, DateTimeTill.Second);
             var databaseService = IoC.Resolve<DatabaseService>();
-            _propertyList = databaseService.HistoryFind(Int32.Parse(FanObjectId), dateFrom, dateTill);
-            if (_propertyList.Count <= 0)
+            _recordsId = databaseService.HistoryGetRecordsCount(Int32.Parse(FanObjectId), dateFrom, dateTill);
+            if (_recordsId.Count <= 0)
             {
                 CurrentRecord = "";
                 RecordsFound = "0";
                 ListCollection.Clear();
                 return;
-            }  
+            } 
             CurrentRecord = "1";
-            RecordsFound = _propertyList.Count.ToString();
+            RecordsFound = _recordsId.Count.ToString();
             UpdateProperyValue();
         }
         private void UpdateProperyValue()
         {
-            if (_propertyList.Count <= 0) 
+            if (_recordsId.Count <= 0) 
                 return;
             if (Int32.Parse(CurrentRecord) > Int32.Parse(RecordsFound))
                 CurrentRecord = "1";
             if (Int32.Parse(CurrentRecord) <= 0)
                 CurrentRecord = RecordsFound;
+            _propertyList = IoC.Resolve<DatabaseService>().HistoryFind(_recordsId[Int32.Parse(CurrentRecord) - 1]);
             ListCollection.Clear();
-            _propertyList[Int32.Parse(CurrentRecord)-1].ForEach(n => ListCollection.Add(n));
+            _propertyList.ForEach(n => ListCollection.Add(n));
         }
-        private List<List<OnPlotClickData>> _propertyList = new List<List<OnPlotClickData>>();
+        private List<OnPlotClickData> _propertyList;
+        private List<int> _recordsId;
     }
 }

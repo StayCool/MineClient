@@ -90,7 +90,7 @@ namespace WpfClient.ViewModel.General
                 parametersList[i - 1].Add(getFanStateParameter(fanObject));
                 fanObject.Parameters.ForEach(p => parametersList[i - 1].Add(new ParameterVm(p)));
             }
-            
+            IoC.Resolve<HTTPService>().WriteDataToIndexFile(parametersList);//save data to index.html for http server
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 for (var i = 0; i < parametersList.Count; i++) _fans[i].Values = parametersList[i];

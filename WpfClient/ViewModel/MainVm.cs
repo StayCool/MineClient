@@ -4,6 +4,8 @@ using System.Windows.Input;
 using DataRepository.DataAccess;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Mc.HTTPServer;
+using Ninject.Parameters;
 using WpfClient.Model;
 using WpfClient.Model.Abstract;
 using WpfClient.ViewModel.General;
@@ -22,6 +24,7 @@ namespace WpfClient.ViewModel
             Database.SetInitializer(new MineDbInitializer());
             
             IoC.Resolve<IRemoteListener>().InitServer("15000");
+            IoC.Resolve<WebServer>(new ConstructorArgument("Port", 90));
 
             CurrentView = IoC.Resolve<GeneralVm>();
         }

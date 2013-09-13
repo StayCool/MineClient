@@ -13,7 +13,8 @@ namespace WpfClient.Model.Concrete
 
         public TcpRemoteListener(IRemoteExchange remoteExchange, IDataInserter dataInserter) {
             _remoteExchange = remoteExchange;
-            _remoteExchange.ReceiveEvent += (msg, num) => RemoteService.onRecieve(msg);
+            _remoteExchange.ReceiveEvent += (msg, num) => RemoteService.onRecieve(msg);//for signal quality
+            _remoteExchange.ReceiveEvent += AnswerToClient; //remote control
             SetDataInserter(dataInserter);
         }
         private void AnswerToClient(string msg, int numClient)
@@ -36,7 +37,6 @@ namespace WpfClient.Model.Concrete
         {
             if (dataInserter == null) throw new ArgumentNullException("dataInserter");
             _remoteExchange.ReceiveEvent += (msg,num) => dataInserter.InsertData(msg);
-            _remoteExchange.ReceiveEvent +=  AnswerToClient;
         }
 
         public void RemoveDataInserter(IDataInserter dataInserter)

@@ -11,22 +11,22 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="80" />
             <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="40" />
-            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="50" />
             <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="166" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="120" />
             <ColumnDefinition Width="30" />
             <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="55"/>
-            <RowDefinition Height="22"/>
-            <RowDefinition Height="24"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
@@ -36,32 +36,32 @@
                 <Image Source="../Images/left_arrow.png" />
             </StackPanel>
         </Button>
-        <TextBox Margin="1" TextAlignment="Center" Grid.Column="7" Grid.Row="1" Text="{Binding FanObjectId}"></TextBox>    
-        <DatePicker Margin="1"
+        <TextBox FontSize="18" Margin="1" TextAlignment="Center" Grid.Column="7" Grid.Row="1" Text="{Binding FanObjectId}"></TextBox>    
+        <DatePicker FontSize="20" Margin="1"
             BorderThickness="1" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="2" Text="{Binding DateDisplay}" SelectedDate="{Binding DateSelected}"/>
         <Border Margin="2" Grid.Row="1" Grid.Column="6" Background="Beige" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <TextBlock Text="№ Вентиляторной установки:"></TextBlock>
+            <TextBlock VerticalAlignment="Center" FontSize="20" Text="№ Вентиляторной установки:"></TextBlock>
         </Border>
         <Border Margin="3" Grid.Row="2" Grid.Column="6" Background="Beige" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <TextBlock TextAlignment="Center" Text="Дата:"></TextBlock>
+            <TextBlock VerticalAlignment="Center" FontSize="20" TextAlignment="Center" Text="Дата:"></TextBlock>
         </Border>
         <Border HorizontalAlignment="Left" Margin="1" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="7" Background="White" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <xctk:TimePicker  Height="30" Width="100" Value="{Binding DateTimeFrom}"/>
+            <xctk:TimePicker FontSize="19" MinWidth="120"  Height="56" Width="100" Value="{Binding DateTimeFrom}"/>
         </Border>
         <Border Margin="3" Grid.Row="3" Grid.Column="6" Background="Beige" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="Время (от):"></TextBlock>
+            <TextBlock FontSize="20" VerticalAlignment="Center" TextAlignment="Center" Text="Время (от):"></TextBlock>
         </Border>
         <Border HorizontalAlignment="Left" Margin="1" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="7" Background="White" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <xctk:TimePicker  Height="30" Width="100" Value="{Binding DateTimeTill}"/>
+            <xctk:TimePicker FontSize="19" MinWidth="120"  Height="56" Width="100" Value="{Binding DateTimeTill}"/>
         </Border>
         <Border Margin="3" Grid.Row="4" Grid.Column="6" Background="Beige" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="Время (до):"></TextBlock>
+            <TextBlock FontSize="20" VerticalAlignment="Center" TextAlignment="Center" Text="Время (до):"></TextBlock>
         </Border>
 
 
@@ -73,31 +73,34 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button  Grid.Column="7" VerticalAlignment="Top"  Grid.Row="5" Command="{Binding FindClick}" Margin="0,10,0,0">
+        <Button FontSize="20" Height="50" Grid.Column="7" VerticalAlignment="Top"  Grid.Row="5" Command="{Binding FindClick}" Margin="0,10,0,0">
             <TextBlock Text="Поиск"></TextBlock>
         </Button>
 
         <Border Margin="3" Grid.Row="2" Grid.Column="1" Background="Beige" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="Найдено записей:"></TextBlock>
+            <TextBlock FontSize="20" VerticalAlignment="Center" TextAlignment="Center" Text="Найдено записей:"></TextBlock>
         </Border>
         <Border Margin="3" Grid.Row="2" Grid.Column="2" Background="White" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="{Binding RecordsFound}"></TextBlock>
+            <TextBlock FontSize="18" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding RecordsFound}"></TextBlock>
         </Border>
         <Border Margin="3" Grid.Row="3" Grid.Column="1" Background="Beige" BorderThickness="1" 
                 BorderBrush="DarkGray">
-            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="Текущая запись:"></TextBlock>
+            <TextBlock FontSize="20" VerticalAlignment="Center" TextAlignment="Center" Text="Текущая запись:"></TextBlock>
         </Border>
-        <TextBox Margin="1" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2" Grid.Row="3" Text="{Binding CurrentRecord}"></TextBox>
-        <Button Margin="3"  Grid.Column="3" Grid.Row="3" Command="{Binding PrevRecordClick}">
+        <Border Margin="3" Grid.Row="3" Grid.Column="2" Background="White" BorderThickness="1" 
+                BorderBrush="DarkGray">
+            <TextBlock FontSize="18" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding CurrentRecord}"></TextBlock>
+        </Border>
+        <Button Margin="3" FontSize="20"  Grid.Column="3" Grid.Row="3" Command="{Binding PrevRecordClick}">
             <TextBlock TextAlignment="Center" Text="&lt;&lt;"> </TextBlock>
         </Button>
-        <Button Margin="3"  Grid.Column="4" Grid.Row="3" Command="{Binding NextRecordClick}">
+        <Button FontSize="20" Margin="3"  Grid.Column="4" Grid.Row="3" Command="{Binding NextRecordClick}">
             <TextBlock TextAlignment="Center" Text="&gt;&gt;"></TextBlock>
         </Button>
         <Button Margin="3"  Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding ShowRecordClick}">
-            <TextBlock TextAlignment="Center" Text="Перейти"></TextBlock>
+            <TextBlock FontSize="20" TextAlignment="Center" Text="Перейти"></TextBlock>
         </Button>
     </Grid>
 </UserControl>

@@ -106,29 +106,22 @@ namespace WpfClient.Services
             return propertyList;
         }
 
-        public List<List<OnPlotClickData>> HistoryFind(int fanNum, DateTime dateFrom, DateTime dateTill)
+        public List<OnPlotClickData> HistoryFind(int fanLogId)
         {
-            var propertyList = new List<List<OnPlotClickData>>();
+            var propertyList = new List<OnPlotClickData>();
 
             try
             {
                 using (var repoUnit = new RepoUnit())
                 {
                     var fansLogRepo = repoUnit.FanLog;
-                    var fansLogId = fansLogRepo.Load().Where(n => n.FanNumber == fanNum && n.Date >= dateFrom && n.Date <= dateTill).Select(n => n.Id);
-                    int i = 0;
-                    foreach (var fanLogId in fansLogId.ToArray())
-                    {
-                        var fansLog = fansLogRepo.Find(fanLogId);
-                        propertyList.Add(new List<OnPlotClickData>());
-                        propertyList[i].Add(new OnPlotClickData { Property = "Время приема параметров", Value = fansLog.Date.ToString() });
-                        propertyList[i].Add(new OnPlotClickData { Property = "Вентилятор 1", Value = fansLog.Fan1State.State });
-                        propertyList[i].Add(new OnPlotClickData { Property = "Вентилятор 2", Value = fansLog.Fan2State.State });
+                    var fansLog = fansLogRepo.Load().FirstOrDefault(n=> n.Id == fanLogId);
+                    propertyList.Add(new OnPlotClickData { Property = "Время приема параметров", Value = fansLog.Date.ToString() });
+                    propertyList.Add(new OnPlotClickData { Property = "Вентилятор 1", Value = fansLog.Fan1State.State });
+                    propertyList.Add(new OnPlotClickData { Property = "Вентилятор 2", Value = fansLog.Fan2State.State });
 
-                        propertyList[i].AddRange(fansLog.DoorsLogs.Select(doorLog => new OnPlotClickData { Property = doorLog.DoorType.Type, Value = doorLog.DoorState.State }));
-                        propertyList[i].AddRange(fansLog.AnalogSignalLogs.Select(signal => new OnPlotClickData { Property = signal.SignalType.Type, Value = signal.SignalValue.ToString() }));
-                        i++;
-                    }
+                    propertyList.AddRange(fansLog.DoorsLogs.Select(doorLog => new OnPlotClickData { Property = doorLog.DoorType.Type, Value = doorLog.DoorState.State }));
+                    propertyList.AddRange(fansLog.AnalogSignalLogs.Select(signal => new OnPlotClickData { Property = signal.SignalType.Type, Value = signal.SignalValue.ToString() }));
                 }
             }
             catch (Exception ex)
@@ -136,6 +129,18 @@ namespace WpfClient.Services
                 //nothing in Db
             }
             return propertyList;
+        }
+        public List<int> HistoryGetRecordsCount(int fanNum, DateTime dateFrom, DateTime dateTill)
+        {
+            using (var repoUnit = new RepoUnit())
+            {
+                var fansLogRepo = repoUnit.FanLog;
+                var fansLogId =
+                    fansLogRepo.Load()
+                               .Where(n => n.FanNumber == fanNum && n.Date >= dateFrom && n.Date <= dateTill)
+                               .Select(n => n.Id);
+                return fansLogId.ToList();
+            }
         }
     }
 }

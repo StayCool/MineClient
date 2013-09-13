@@ -59,7 +59,7 @@ namespace DataRepository.DataAccess
                 new AnalogSignal {Type = "Вибрация подшипника №2 (мкм)"},
                 new AnalogSignal {Type = "Вибрация подшипника №3 (мкм)"},
                 new AnalogSignal {Type = "Вибрация подшипника №4 (мкм)"},
-                new AnalogSignal {Type = "Качество сигнала (%)"}
+                new AnalogSignal {Type = "Качество сигнала"}
             };
             analogSignalType.ForEach(s => context.AnalogSignals.Add(s));
             
